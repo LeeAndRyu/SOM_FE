@@ -1,9 +1,8 @@
 header {
   width: 100%;
-  position: fixed;
-  left: 50%;
+  position: sticky;
+  left: 0%;
   top: 0%;
-  transform: translateX(-50%);
   padding: 10px;
   & > div {
     border-radius: 10px;

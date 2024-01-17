@@ -1,16 +1,10 @@
 import Spline from '@splinetool/react-spline';
 import React from 'react';
-import styled from 'styled-components';
-const FixedWrapper = styled.div`
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 30px;
-`;
+
 const Login = () => {
   return (
     <>
-      <FixedWrapper>
+      <div id='fixedWrapper'>
         <div className='hero'>
           <div className='hero-content flex-col'>
             <div className='card shrink-0 w-full max-w-sm shadow-2xl bg-base-100'>
@@ -49,7 +43,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-      </FixedWrapper>
+      </div>
       <React.Suspense
         fallback={
           <img src='https://my.spline.design/draganddropkitchencopy-06e36551873995c01d424723c1311d27/' />

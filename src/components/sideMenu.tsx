@@ -1,13 +1,6 @@
-import { styled } from 'styled-components';
-const Wrapper = styled.div`
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 30px;
-`;
 const SideMenu = () => {
   return (
-    <Wrapper>
+    <div id='sideMenuWrapper'>
       <ul className='menu bg-base-200 w-56 rounded-box'>
         <li>
           <a>Item 1</a>
@@ -42,7 +35,7 @@ const SideMenu = () => {
           <a>Item 3</a>
         </li>
       </ul>
-    </Wrapper>
+    </div>
   );
 };
 

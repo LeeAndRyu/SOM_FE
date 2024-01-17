@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import ThemeToggle from './themeToggle';
 import SideMenu from './sideMenu';
+
 const Layout = () => {
   return (
     <>
@@ -88,7 +89,9 @@ const Layout = () => {
         </div>
       </header>
       <SideMenu />
-      <Outlet />
+      <main id='wrap'>
+        <Outlet />
+      </main>
     </>
   );
 };

@@ -4,12 +4,41 @@
 @tailwind utilities;
 header {
   width: 100%;
-  position: fixed;
-  left: 50%;
+  position: sticky;
+  left: 0%;
   top: 0%;
-  transform: translateX(-50%);
   padding: 10px;
 }
 header > div {
   border-radius: 10px;
+}
+
+main#wrap {
+  min-height: 1000px;
+}
+
+#fixedWrapper {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 30px;
+}
+
+#sideMenuWrapper {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30px;
+}
+
+#loadingWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100vw;
+}
+#loadingWrapper span {
+  font-size: 7rem;
 }
