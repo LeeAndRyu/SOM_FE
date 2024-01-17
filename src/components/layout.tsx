@@ -45,7 +45,7 @@ const Layout = () => {
             </div>
           </div>
           <div className='navbar-center'>
-            <a className='btn btn-ghost text-xl'>SOM ☁️</a>
+            <a className='btn btn-ghost text-xl'>SOM</a>
           </div>
           <div className='navbar-end'>
             <ThemeToggle />
