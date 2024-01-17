@@ -1,17 +1,18 @@
-import { useLayoutEffect, useState } from 'react';
-import './App.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from './components/protected_route';
-import Layout from './components/layout';
-import LoadingScreen from './components/loading';
-import Home from './routes/home';
-import Login from './routes/login';
+import { useLayoutEffect, useState } from 'react'
+import './App.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import ProtectedRoute from './components/protected_route'
+import Layout from './components/layout'
+import LoadingScreen from './components/loading'
+import Home from './routes/home'
+import Login from './routes/login'
+import Write from './routes/write'
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
   useLayoutEffect(() => {
-    setIsLoading(false);
-  }, []);
+    setIsLoading(false)
+  }, [])
   const router = createBrowserRouter([
     {
       path: '/',
@@ -26,8 +27,8 @@ function App() {
           element: <Home />,
         },
         {
-          path: 'profile',
-          // element: <Profile />,
+          path: 'write',
+          element: <Write />,
         },
       ],
     },
@@ -40,10 +41,10 @@ function App() {
       path: '/create-acount',
       element: <CreateAcount />,
     }, */
-  ]);
+  ])
   return (
     <>{isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}</>
-  );
+  )
 }
 
-export default App;
+export default App
