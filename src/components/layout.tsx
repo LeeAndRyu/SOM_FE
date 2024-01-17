@@ -35,10 +35,10 @@ const Layout = () => {
                   className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
                 >
                   <li>
-                    <a>Homepage</a>
+                    <a href='/login'>login(test)</a>
                   </li>
                   <li>
-                    <a>Portfolio</a>
+                    <a href='/write'>write</a>
                   </li>
                   <li>
                     <a>About</a>
@@ -47,7 +47,9 @@ const Layout = () => {
               </div>
             </div>
             <div className='navbar-center'>
-              <a className='btn btn-ghost text-xl'>SOM</a>
+              <a href='/' className='btn btn-ghost text-xl'>
+                SOM
+              </a>
             </div>
             <div className='navbar-end'>
               <ThemeToggle />
