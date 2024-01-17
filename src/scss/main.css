@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+header {
+  width: 100%;
+  position: fixed;
+  left: 50%;
+  top: 0%;
+  transform: translateX(-50%);
+  padding: 10px;
+}
+header > div {
+  border-radius: 10px;
+}
