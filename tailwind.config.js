@@ -10,9 +10,8 @@ export default {
     themes: [
       'retro',
       'cupcake',
-      
       'light',
-      'cyberpunk',
+      'autumn',
       'aqua',
       'valentine',
     ],

@@ -1,6 +1,6 @@
 const ThemeToggle = () => {
   return (
-    <div className='dropdown'>
+    <div className='dropdown dropdown-end'>
     <div tabIndex={0} role='button' className='btn m-1'>
       Theme
       <svg
@@ -49,8 +49,8 @@ const ThemeToggle = () => {
           type='radio'
           name='theme-dropdown'
           className='theme-controller btn btn-sm btn-block btn-ghost justify-start'
-          aria-label='Cyberpunk'
-          value='cyberpunk'
+          aria-label='Autumn'
+          value='autumn'
         />
       </li>
       <li>

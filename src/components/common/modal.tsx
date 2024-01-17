@@ -1,20 +1,23 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 
 const Modal = ({
   children,
   btnMessage,
+  arrow,
 }: {
-  children: React.ReactNode;
-  btnMessage: string;
+  children: React.ReactNode
+  btnMessage: string
+  arrow?: React.ReactNode
 }) => {
-  const modalRef = useRef<HTMLDialogElement | null>(null);
+  const modalRef = useRef<HTMLDialogElement | null>(null)
   return (
     <>
       <button
-        className='btn'
+        className='btn loginBtn'
         onClick={() => modalRef.current && modalRef.current.showModal()}
       >
         {btnMessage}
+        {arrow}
       </button>
       <dialog ref={modalRef} className='modal'>
         <div className='modal-box'>
@@ -27,7 +30,7 @@ const Modal = ({
         </div>
       </dialog>
     </>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

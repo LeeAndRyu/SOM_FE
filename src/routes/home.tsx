@@ -1,7 +1,11 @@
-
-
 const Home = () => {
-  return<></>
-};
+  return (
+    <>
+      <div className='test'>
+        <p>dkssud</p>
+      </div>
+    </>
+  )
+}
 
-export default Home;
+export default Home
