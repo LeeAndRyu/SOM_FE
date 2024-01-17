@@ -3,8 +3,12 @@ header {
   position: sticky;
   left: 0%;
   top: 0%;
-  padding: 10px;
-  & > div {
-    border-radius: 10px;
+  & > .headInner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 20px;
+    & > div {
+      padding: 0;
+    }
   }
 }

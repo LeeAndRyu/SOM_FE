@@ -1,5 +1,4 @@
 import { useLayoutEffect, useState } from 'react'
-import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ProtectedRoute from './components/protected_route'
 import Layout from './components/layout'
