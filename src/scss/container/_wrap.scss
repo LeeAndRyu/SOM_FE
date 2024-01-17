@@ -15,7 +15,8 @@ body {
 }
 //로그인 P 제외 (protected route Layout)
 main#wrap {
-  
   margin: 0 auto;
   max-width: var(--max-width);
+  position: relative;
+  
 }

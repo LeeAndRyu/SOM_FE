@@ -1,9 +1,10 @@
 const Home = () => {
   return (
     <>
-      <div className='test'>
-        <p>dkssud</p>
-      </div>
+  <p>랩랩</p>
+  <p>랩랩</p>
+  <p>랩랩</p>
+  <p>랩랩</p>
     </>
   )
 }

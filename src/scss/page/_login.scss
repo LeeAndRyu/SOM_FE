@@ -1,0 +1,47 @@
+#fixedWrapper {
+  position: fixed;
+  
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  .btn.loginBtn {
+    border: none;
+    background-color: #df8443db;
+    font-size: 1.5em;
+    color: #f4e0c2;
+    flex: 1;
+    width: 100%;
+    position: relative;
+    box-shadow: none;
+    padding: 20px 22px;
+    border-radius: 40px;
+    height: auto;
+    transition: all .3s;
+    // padding-bottom: 30px;
+    &:focus {
+      border: none;
+      outline: none;
+    }
+    &:hover {
+      transform: scale(1.06);
+      background-color: #df8443;
+    }
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: all 0.3s;
+      content: '';
+      display: block;
+      transform-origin: left bottom;
+      height: 2px;
+      width: 0%;
+      background-color: rgba(255, 255, 240, 0.807);
+    }
+  }
+}

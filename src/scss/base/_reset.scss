@@ -21,6 +21,11 @@
 .padding0 {
   padding: 0;
 }
+p.infoP {
+  text-align: center;
+  padding: 20px 0;
+  color: oklch(var(--nc));
+}
 html,
 body,
 div,

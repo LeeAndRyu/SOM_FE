@@ -14,6 +14,12 @@
   padding: 0;
 }
 
+p.infoP {
+  text-align: center;
+  padding: 20px 0;
+  color: oklch(var(--nc));
+}
+
 html,
 body,
 div,
@@ -184,7 +190,7 @@ a {
 
 :root {
   --side-padding: 3rem;
-  --max-width: 1100px;
+  --max-width: 1300px;
   --padding-1: 1.6rem;
   --padding-2: 1.2rem;
   --padding-3: 0.8rem;
@@ -196,19 +202,67 @@ a {
   --main-color1: rgb(80, 80, 80);
 }
 
+#fixedWrapper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 30%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+}
+#fixedWrapper .btn.loginBtn {
+  border: none;
+  background-color: rgba(223, 132, 67, 0.8588235294);
+  font-size: 1.5em;
+  color: #f4e0c2;
+  flex: 1;
+  width: 100%;
+  position: relative;
+  box-shadow: none;
+  padding: 20px 22px;
+  border-radius: 40px;
+  height: auto;
+  transition: all 0.3s;
+}
+#fixedWrapper .btn.loginBtn:focus {
+  border: none;
+  outline: none;
+}
+#fixedWrapper .btn.loginBtn:hover {
+  transform: scale(1.06);
+  background-color: #df8443;
+}
+#fixedWrapper .btn.loginBtn::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s;
+  content: "";
+  display: block;
+  transform-origin: left bottom;
+  height: 2px;
+  width: 0%;
+  background-color: rgba(255, 255, 240, 0.807);
+}
+
 header {
   width: 100%;
   position: sticky;
+  z-index: 10;
   left: 0%;
   top: 0%;
 }
 header > .headInner {
+  position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding-top: 20px;
 }
 header > .headInner > div {
   padding: 0;
+  border-radius: 10px;
 }
 
 .test {
@@ -238,25 +292,13 @@ body {
 main#wrap {
   margin: 0 auto;
   max-width: var(--max-width);
-}
-
-#fixedWrapper {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 10%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: center;
+  position: relative;
 }
 
 #sideMenuWrapper {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 30px;
+  position: absolute;
+  bottom: 0%;
+  left: 0px;
 }
 
 #loadingWrapper {
@@ -269,33 +311,4 @@ main#wrap {
 }
 #loadingWrapper span {
   font-size: 7rem;
-}
-
-.btn.loginBtn {
-  background: none;
-  border: none;
-  color: ivory;
-  font-size: 2.4em;
-  position: relative;
-  box-shadow: none;
-  padding: 0;
-}
-.btn.loginBtn:focus {
-  border: none;
-  outline: none;
-}
-.btn.loginBtn:hover::after {
-  width: 100%;
-}
-.btn.loginBtn::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transition: all 0.3s;
-  content: "";
-  display: block;
-  transform-origin: left bottom;
-  height: 2px;
-  width: 0%;
-  background-color: rgba(255, 255, 240, 0.807);
 }
