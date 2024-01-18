@@ -1,38 +1,30 @@
-import { useEffect, useState } from 'react'
 import clsx from 'clsx'
-
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
 type Formvalues = {
   name: string
   email: string
   password: string
-  confirmPwd: string
+  verifyPwd: string
 }
 const SignUpModal = () => {
-  const [isCorrect, setCorrect] = useState(false)
-  const [isTyping, setTyping] = useState(false)
-  const [finished, setFinished] = useState(false)
   const {
     register,
     getValues,
     handleSubmit,
-    watch,
     getFieldState,
-    setFocus,
     formState: { errors, isValid },
-  } = useForm<Formvalues>({ mode: 'onBlur' })
+  } = useForm<Formvalues>({ mode: 'all' })
   const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {
     console.log(e)
   }
-
-  const isItPassed = (type: keyof Formvalues) => {
-    getFieldState(type)
+  const isItValidCSS = (type: keyof Formvalues) => {
+    return !getFieldState(type).isTouched
+      ? ''
+      : getFieldState(type).invalid
+        ? 'input-error'
+        : 'input-success'
   }
-
-  useEffect(() => {
-    // console.log({ isValid } = watch('confirmPwd'))
-  }, [watch])
   return (
     <form className='card-body' onSubmit={handleSubmit(onSubmitHandler)}>
       <h2 className='text-center text-xl'>회원가입</h2>
@@ -45,13 +37,8 @@ const SignUpModal = () => {
           placeholder='name'
           {...register('name', {
             required: '필수 입력 항목입니다',
-            pattern: {
-              // input의 정규식 패턴
-              value: /^[A-za-z0-9가-힣]{3,10}$/,
-              message: '가능한 문자: 영문 대소문자, 글자 단위 한글, 숫자', // 에러 메세지
-            },
           })}
-          className='input input-bordered'
+          className={clsx(`input input-bordered mb-1.5`, isItValidCSS('name'))}
           required
         />
         {errors.name && errors.name.message && (
@@ -72,7 +59,7 @@ const SignUpModal = () => {
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
-          className='input input-bordered'
+          className={clsx(`input input-bordered mb-1.5`, isItValidCSS('email'))}
         />
         {errors.email && errors.email.message && (
           <WarningMsg message={errors.email.message} />
@@ -93,7 +80,10 @@ const SignUpModal = () => {
               message: '8-16자 이내, 영문, 숫자, 특수 문자를 포함해주세요',
             },
           })}
-          className='input input-bordered mb-1.5 info-success'
+          className={clsx(
+            `input input-bordered mb-1.5`,
+            isItValidCSS('password')
+          )}
         />
         {errors.password && errors.password.message && (
           <WarningMsg message={errors.password.message} />
@@ -105,8 +95,8 @@ const SignUpModal = () => {
         </label>
         <input
           type='password'
-          placeholder='confirm password'
-          {...register('confirmPwd', {
+          placeholder='verify password'
+          {...register('verifyPwd', {
             required: '필수 입력 항목입니다',
             validate: {
               value: (value) => {
@@ -117,17 +107,15 @@ const SignUpModal = () => {
           })}
           className={clsx(
             `input input-bordered mb-1.5`,
-            isTyping ? (isCorrect ? 'input-success' : 'input-error') : ''
+            isItValidCSS('verifyPwd')
           )}
         />
-        {errors.confirmPwd && errors.confirmPwd.message && (
-          <WarningMsg message={errors.confirmPwd.message} />
+        {errors.verifyPwd && errors.verifyPwd.message && (
+          <WarningMsg message={errors.verifyPwd.message} />
         )}
-
-        <p>{getFieldState('confirmPwd').invalid && 'touched'}</p>
       </div>
       <div className='form-control mt-6'>
-        <button disabled={!isValid} className='btn btn-primary'>
+        <button type='submit' disabled={!isValid} className='btn btn-primary'>
           Create one
         </button>
       </div>
