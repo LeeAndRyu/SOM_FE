@@ -14,9 +14,9 @@ body {
   }
 }
 //로그인 P 제외 (protected route Layout)
-main#wrap {
+#wrap {
   margin: 0 auto;
   max-width: var(--max-width);
   position: relative;
-  
+  min-height: 100dvh;
 }

@@ -20,6 +20,20 @@ p.infoP {
   color: oklch(var(--nc));
 }
 
+.warnP {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 5px;
+  justify-content: center;
+  padding: 9px 0 0;
+  color: rgb(233, 0, 0);
+}
+.warnP svg {
+  width: 15px;
+  height: 15px;
+}
+
 html,
 body,
 div,
@@ -190,7 +204,7 @@ a {
 
 :root {
   --side-padding: 3rem;
-  --max-width: 1300px;
+  --max-width: 1600px;
   --padding-1: 1.6rem;
   --padding-2: 1.2rem;
   --padding-3: 0.8rem;
@@ -288,10 +302,11 @@ body {
   height: 100%;
 }
 
-main#wrap {
+#wrap {
   margin: 0 auto;
   max-width: var(--max-width);
   position: relative;
+  min-height: 100dvh;
 }
 
 #sideMenuWrapper {

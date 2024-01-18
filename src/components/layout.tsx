@@ -4,7 +4,7 @@ import SideMenu from './sideMenu'
 
 const Layout = () => {
   return (
-    <>
+    <div id='wrap' className='bg-base-100'>
       <header id='header'>
         <div className='headInner'>
           <div className='navbar bg-base-100'>
@@ -93,10 +93,12 @@ const Layout = () => {
         </div>
       </header>
       <SideMenu />
-      <main id='wrap'>
-        <Outlet />
+      <main id='main'>
+        <div className='inner'>
+          <Outlet />
+        </div>
       </main>
-    </>
+    </div>
   )
 }
 

@@ -26,6 +26,19 @@ p.infoP {
   padding: 20px 0;
   color: oklch(var(--nc));
 }
+.warnP {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 5px;
+  justify-content: center;
+  padding: 9px 0 0;
+  color: rgb(233, 0, 0);
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
 html,
 body,
 div,
