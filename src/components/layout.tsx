@@ -30,7 +30,10 @@ const Layout = () => {
                     />
                   </svg>
                 </div>
-                <ul
+                <ul className='dropdown-content'>
+                <SideMenu />
+                </ul>
+{/*                 <ul
                   tabIndex={0}
                   className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
                 >
@@ -43,7 +46,7 @@ const Layout = () => {
                   <li>
                     <a>About</a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
             <div className='navbar-center'>
@@ -92,7 +95,7 @@ const Layout = () => {
           </div>
         </div>
       </header>
-      <SideMenu />
+      
       <main id='main'>
         <div className='inner'>
           <Outlet />

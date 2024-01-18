@@ -3,7 +3,7 @@ const SideMenu = () => {
     <div id='sideMenuWrapper'>
       <ul className='menu bg-base-200 w-56 rounded-box'>
         <li>
-          <a>Item 1</a>
+          <a href='/write'>write</a>
         </li>
         <li>
           <details open>
@@ -32,11 +32,11 @@ const SideMenu = () => {
           </details>
         </li>
         <li>
-          <a>Item 3</a>
+          <a href='/login'>login</a>
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default SideMenu;
+export default SideMenu

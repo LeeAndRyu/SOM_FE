@@ -19,4 +19,8 @@ body {
   max-width: var(--max-width);
   position: relative;
   min-height: 100dvh;
+  #main {
+    width: var(--max-inner-width);
+    margin: 0 auto;
+  }
 }
