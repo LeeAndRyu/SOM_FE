@@ -1,6 +1,7 @@
 const LoginModal = () => {
   return (
     <form className='card-body'>
+      <h2 className='text-center text-xl'>로그인</h2>
       <div className='form-control'>
         <label className='label'>
           <span className='label-text'>Email</span>
@@ -32,7 +33,7 @@ const LoginModal = () => {
         <button className='btn btn-primary'>Login</button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default LoginModal;
+export default LoginModal

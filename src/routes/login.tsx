@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react'
 import Modal from '../components/common/modal'
 import LoginModal from '../components/auth/loginModal'
+import SignUpModal from '../components/auth/signUpModal'
 
 const Spline = React.lazy(() => import('@splinetool/react-spline'))
 
@@ -19,7 +20,7 @@ const Login = () => {
           <LoginModal />
         </Modal>
         <Modal btnMessage='Sign Up'>
-          <LoginModal />
+          <SignUpModal />
         </Modal>
       </div>
       <React.Suspense fallback={<p className='infoP'>Loading...</p>}>
