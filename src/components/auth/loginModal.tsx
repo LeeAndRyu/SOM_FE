@@ -1,15 +1,32 @@
 import clsx from 'clsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
+import { useState } from 'react'
+import FindPwdModal from './findPwdModal'
 type Formvalues = {
   email: string
   password: string
 }
 
 const LoginModal = () => {
+  const [showLoginModal, setShowLoginModal] = useState(true)
+
+  return showLoginModal ? (
+    <LoginModalItem setShowLoginModal={setShowLoginModal} />
+  ) : (
+    <FindPwdModal setShowLoginModal={setShowLoginModal} />
+  )
+}
+
+export default LoginModal
+
+const LoginModalItem = ({
+  setShowLoginModal,
+}: {
+  setShowLoginModal: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   const {
     register,
-
     handleSubmit,
     getFieldState,
     formState: { errors, isValid },
@@ -66,7 +83,10 @@ const LoginModal = () => {
           <WarningMsg message={errors.password.message} />
         )}
         <label className='label'>
-          <a href='#' className='label-text-alt link link-hover'>
+          <a
+            onClick={() => setShowLoginModal((prev) => !prev)}
+            className='label-text-alt link link-hover'
+          >
             Forgot password?
           </a>
         </label>
@@ -79,5 +99,3 @@ const LoginModal = () => {
     </form>
   )
 }
-
-export default LoginModal

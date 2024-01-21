@@ -23,6 +23,7 @@ const Login = () => {
         <Modal btnMessage='sign up' arrow={<FaCircleArrowRight />}>
           <SignUpModal />
         </Modal>
+        
       </div>
       <React.Suspense fallback={<p className='infoP'>Loading...</p>}>
         <Spline

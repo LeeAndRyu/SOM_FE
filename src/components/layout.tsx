@@ -9,7 +9,7 @@ const Layout = () => {
         <div className='headInner'>
           <div className='navbar bg-base-100'>
             <div className='navbar-start'>
-              <div className='dropdown'>
+            <div className='dropdown'>
                 <div
                   tabIndex={0}
                   role='button'
@@ -31,30 +31,19 @@ const Layout = () => {
                   </svg>
                 </div>
                 <ul className='dropdown-content'>
-                <SideMenu />
+                  <SideMenu />
                 </ul>
-{/*                 <ul
-                  tabIndex={0}
-                  className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
-                >
-                  <li>
-                    <a href='/login'>login(test)</a>
-                  </li>
-                  <li>
-                    <a href='/write'>write</a>
-                  </li>
-                  <li>
-                    <a>About</a>
-                  </li>
-                </ul> */}
               </div>
-            </div>
-            <div className='navbar-center'>
               <a href='/' className='btn btn-ghost text-xl'>
-                SOM
+                S&nbsp;☻&nbsp;M
               </a>
             </div>
+            <div className='navbar-center'>
+
+            </div>
+
             <div className='navbar-end'>
+              
               <ThemeToggle />
               <button className='btn btn-ghost btn-circle'>
                 <svg
@@ -95,7 +84,7 @@ const Layout = () => {
           </div>
         </div>
       </header>
-      
+
       <main id='main'>
         <div className='inner'>
           <Outlet />

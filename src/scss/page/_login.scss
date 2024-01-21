@@ -8,18 +8,15 @@
   flex-direction: row;
   gap: 15px;
   justify-content: center;
+  flex-wrap: wrap;
   .btn.loginBtn {
     border: none;
     background-color: #df8443db;
-
     font-size: 1.5em;
     color: #f4e0c2;
-    
-    
     position: relative;
     box-shadow: none;
     padding: 20px 22px;
-
     height: auto;
     transition: all 0.3s;
     // padding-bottom: 30px;
@@ -49,5 +46,9 @@
       width: 0%;
       background-color: rgba(255, 255, 240, 0.807);
     }
+    &.homeBtn{
+      width: 100%;
+    }
   }
+  
 }
