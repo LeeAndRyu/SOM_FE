@@ -1,15 +1,16 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import ThemeToggle from './themeToggle'
 import SideMenu from './sideMenu'
-
+import { useNavigate } from 'react-router-dom'
 const Layout = () => {
+  const navigate = useNavigate()
   return (
     <div id='wrap' className='bg-base-100'>
       <header id='header'>
         <div className='headInner'>
           <div className='navbar bg-base-100'>
             <div className='navbar-start'>
-            <div className='dropdown'>
+              <div className='dropdown'>
                 <div
                   tabIndex={0}
                   role='button'
@@ -34,18 +35,15 @@ const Layout = () => {
                   <SideMenu />
                 </ul>
               </div>
-              <a href='/' className='btn btn-ghost text-xl'>
+              <Link to='/' className='btn btn-ghost text-xl'>
                 S&nbsp;☻&nbsp;M
-              </a>
+              </Link>
             </div>
-            <div className='navbar-center'>
-
-            </div>
+            <div className='navbar-center'></div>
 
             <div className='navbar-end'>
-              
               <ThemeToggle />
-              <button className='btn btn-ghost btn-circle'>
+              <button onClick={()=>navigate('/search')} className='btn nofocus btn-ghost btn-circle'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='h-5 w-5'
@@ -61,7 +59,8 @@ const Layout = () => {
                   />
                 </svg>
               </button>
-              <button className='btn btn-ghost btn-circle'>
+
+              <button className='btn btn-ghost nofocus btn-circle'>
                 <div className='indicator'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FindPwdModal from './findPwdModal'
 type Formvalues = {
   email: string
@@ -10,7 +10,9 @@ type Formvalues = {
 
 const LoginModal = () => {
   const [showLoginModal, setShowLoginModal] = useState(true)
-
+  useEffect(() => {
+    // setShowLoginModal(true)
+  }, [])
   return showLoginModal ? (
     <LoginModalItem setShowLoginModal={setShowLoginModal} />
   ) : (

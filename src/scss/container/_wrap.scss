@@ -22,5 +22,8 @@ body {
   #main {
     width: var(--max-inner-width);
     margin: 0 auto;
+    .inner{
+      margin-top: 30px;
+    }
   }
 }

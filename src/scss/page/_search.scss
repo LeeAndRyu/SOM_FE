@@ -1,0 +1,16 @@
+form:has(.searchInput) {
+  position: relative;
+  .searchInput {
+    padding-left: 60px;
+  }
+  span {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import LoadingScreen from './components/loading'
 import Home from './routes/home'
 import Login from './routes/login'
 import Write from './routes/write'
+import Search from './routes/search'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -28,6 +29,10 @@ function App() {
         {
           path: 'write',
           element: <Write />,
+        },
+        {
+          path: 'search',
+          element: <Search />,
         },
       ],
     },

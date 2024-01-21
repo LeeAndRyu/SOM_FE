@@ -204,7 +204,7 @@ a {
 
 :root {
   --side-padding: 3rem;
-  --max-width: 1600px;
+  --max-width: 1500px;
   --max-inner-width: 1200px;
   --padding-1: 1.6rem;
   --padding-2: 1.2rem;
@@ -270,6 +270,23 @@ a {
   width: 100%;
 }
 
+form:has(.searchInput) {
+  position: relative;
+}
+form:has(.searchInput) .searchInput {
+  padding-left: 60px;
+}
+form:has(.searchInput) span {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+form:has(.searchInput) span svg {
+  width: 30px;
+  height: 30px;
+}
+
 header {
   width: 100%;
   position: sticky;
@@ -322,6 +339,9 @@ body {
   width: var(--max-inner-width);
   margin: 0 auto;
 }
+#wrap #main .inner {
+  margin-top: 30px;
+}
 
 #loadingWrapper {
   height: 100vh;
@@ -333,4 +353,15 @@ body {
 }
 #loadingWrapper span {
   font-size: 7rem;
+}
+
+.nofocus {
+  border: none;
+  outline: none;
+  border: none;
+}
+.nofocus:focus {
+  border: none;
+  outline: none;
+  border: none;
 }
