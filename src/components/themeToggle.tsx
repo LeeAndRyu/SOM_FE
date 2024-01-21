@@ -1,8 +1,9 @@
+import { HiOutlineTemplate } from "react-icons/hi";
 const ThemeToggle = () => {
   return (
     <div className='dropdown dropdown-end'>
     <div tabIndex={0} role='button' className='btn m-1'>
-      Theme
+      <HiOutlineTemplate />
       <svg
         width='12px'
         height='12px'

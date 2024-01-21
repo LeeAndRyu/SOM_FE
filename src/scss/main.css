@@ -203,7 +203,7 @@ a {
 }
 
 :root {
-  --side-padding: 3rem;
+  --side-padding: 1rem;
   --max-width: 1500px;
   --max-inner-width: 1200px;
   --padding-1: 1.6rem;
@@ -298,6 +298,8 @@ header > .headInner {
   position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
+  width: 100%;
+  padding: 0 var(--side-padding);
   padding-top: 10px;
 }
 header > .headInner > div {
@@ -336,7 +338,9 @@ body {
   min-height: 100dvh;
 }
 #wrap #main {
-  width: var(--max-inner-width);
+  max-width: var(--max-inner-width);
+  width: 100%;
+  padding: 0 var(--side-padding);
   margin: 0 auto;
 }
 #wrap #main .inner {

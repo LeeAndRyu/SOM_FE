@@ -20,9 +20,11 @@ body {
   position: relative;
   min-height: 100dvh;
   #main {
-    width: var(--max-inner-width);
+    max-width: var(--max-inner-width);
+    width: 100%;
+    padding: 0 var(--side-padding);
     margin: 0 auto;
-    .inner{
+    .inner {
       margin-top: 30px;
     }
   }

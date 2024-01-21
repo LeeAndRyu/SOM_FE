@@ -11,7 +11,7 @@ const Layout = () => {
           <div className='navbar bg-base-100'>
             <div className='navbar-start'>
               <div className='dropdown'>
-                <div
+                <span
                   tabIndex={0}
                   role='button'
                   className='btn btn-ghost btn-circle'
@@ -30,7 +30,7 @@ const Layout = () => {
                       d='M4 6h16M4 12h16M4 18h7'
                     />
                   </svg>
-                </div>
+                </span>
                 <ul className='dropdown-content'>
                   <SideMenu />
                 </ul>

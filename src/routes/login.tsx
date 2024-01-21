@@ -8,6 +8,7 @@ const Spline = React.lazy(() => import('@splinetool/react-spline'))
 
 const Login = () => {
   const [isLoaded, setLoaded] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState(true)
   const onLoad = () => {
     setLoaded(true)
   }
@@ -17,13 +18,19 @@ const Login = () => {
   return (
     <>
       <div id='fixedWrapper'>
-        <Modal btnMessage='login' arrow={<FaCircleArrowRight />}>
-          <LoginModal />
+        <Modal
+          btnMessage='login'
+          setReset={setShowLoginModal}
+          arrow={<FaCircleArrowRight />}
+        >
+          <LoginModal
+            showLoginModal={showLoginModal}
+            setShowLoginModal={setShowLoginModal}
+          />
         </Modal>
         <Modal btnMessage='sign up' arrow={<FaCircleArrowRight />}>
           <SignUpModal />
         </Modal>
-        
       </div>
       <React.Suspense fallback={<p className='infoP'>Loading...</p>}>
         <Spline
