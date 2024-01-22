@@ -2,32 +2,16 @@ import clsx from 'clsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
 // import { useEffect, useState } from 'react'
-import FindPwdModal from './findPwdModal'
+import { LoginModalType } from '../../types/app'
 type Formvalues = {
   email: string
   password: string
 }
 
 const LoginModal = ({
-  showLoginModal,
-  setShowLoginModal,
+  setShowModal,
 }: {
-  showLoginModal: boolean
-  setShowLoginModal: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
-  return showLoginModal ? (
-    <LoginModalItem setShowLoginModal={setShowLoginModal} />
-  ) : (
-    <FindPwdModal setShowLoginModal={setShowLoginModal} />
-  )
-}
-
-export default LoginModal
-
-const LoginModalItem = ({
-  setShowLoginModal,
-}: {
-  setShowLoginModal: React.Dispatch<React.SetStateAction<boolean>>
+  setShowModal: React.Dispatch<React.SetStateAction<LoginModalType>>
 }) => {
   const {
     register,
@@ -88,10 +72,18 @@ const LoginModalItem = ({
         )}
         <label className='label'>
           <a
-            onClick={() => setShowLoginModal((prev) => !prev)}
+            onClick={() => setShowModal('findPwd')}
             className='label-text-alt link link-hover'
           >
-            Forgot password?
+            Forgot password? ➤
+          </a>
+        {/* </label> */}
+        {/* <label> */}
+          <a
+            onClick={() => setShowModal('signUp')}
+            className='label-text-alt link link-hover'
+          >
+            Don't hava an accout? ➤
           </a>
         </label>
       </div>
@@ -103,3 +95,4 @@ const LoginModalItem = ({
     </form>
   )
 }
+export default LoginModal

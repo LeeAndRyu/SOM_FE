@@ -7,6 +7,7 @@ import Home from './routes/home'
 import Login from './routes/login'
 import Write from './routes/write'
 import Search from './routes/search'
+import Auth from './routes/auth'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -39,6 +40,10 @@ function App() {
     {
       path: '/login',
       element: <Login />,
+    },
+    {
+      path: '/auth',
+      element: <Auth />,
     },
     /* 
     {

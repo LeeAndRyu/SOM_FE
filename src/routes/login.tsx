@@ -3,12 +3,14 @@ import Modal from '../components/common/modal'
 import LoginModal from '../components/auth/loginModal'
 import SignUpModal from '../components/auth/signUpModal'
 import { FaCircleArrowRight } from 'react-icons/fa6'
-
+import { LoginModalType } from '../types/app'
+import FindPwdModal from '../components/auth/findPwdModal'
+import SendEmail from '../components/auth/sendEmail'
 const Spline = React.lazy(() => import('@splinetool/react-spline'))
 
 const Login = () => {
   const [isLoaded, setLoaded] = useState(false)
-  const [showLoginModal, setShowLoginModal] = useState(true)
+  const [showModal, setShowModal] = useState<LoginModalType>('login')
   const onLoad = () => {
     setLoaded(true)
   }
@@ -18,19 +20,20 @@ const Login = () => {
   return (
     <>
       <div id='fixedWrapper'>
-        <Modal
-          btnMessage='login'
-          setReset={setShowLoginModal}
-          arrow={<FaCircleArrowRight />}
-        >
-          <LoginModal
-            showLoginModal={showLoginModal}
-            setShowLoginModal={setShowLoginModal}
-          />
-        </Modal>
-        <Modal btnMessage='sign up' arrow={<FaCircleArrowRight />}>
+        <div className='LoginWrapinner'>
+          {showModal === 'login' ? (
+            <LoginModal setShowModal={setShowModal} />
+          ) : showModal === 'signUp' ? (
+            // <SignUpModal setShowModal={setShowModal} />
+            <SendEmail setShowModal={setShowModal} />
+          ) : (
+            <FindPwdModal setShowModal={setShowModal} />
+          )}
+        </div>
+
+        {/*         <Modal btnMessage='sign up' arrow={<FaCircleArrowRight />}>
           <SignUpModal />
-        </Modal>
+        </Modal> */}
       </div>
       <React.Suspense fallback={<p className='infoP'>Loading...</p>}>
         <Spline

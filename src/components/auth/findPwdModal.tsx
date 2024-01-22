@@ -1,15 +1,16 @@
 import clsx from 'clsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
+import { LoginModalType } from '../../types/app'
 type Formvalues = {
   email: string
   name: string
 }
 
 const FindPwdModal = ({
-  setShowLoginModal,
+  setShowModal,
 }: {
-  setShowLoginModal: React.Dispatch<React.SetStateAction<boolean>>
+  setShowModal: React.Dispatch<React.SetStateAction<LoginModalType>>
 }) => {
   const {
     register,
@@ -60,10 +61,10 @@ const FindPwdModal = ({
       </div>
       <label className='label'>
         <a
-          onClick={() => setShowLoginModal((prev) => !prev)}
+          onClick={() => setShowModal('login')}
           className='label-text-alt link link-hover'
         >
-          Back to Login
+          Back to Login ➤
         </a>
       </label>
       <div className='form-control mt-6'>

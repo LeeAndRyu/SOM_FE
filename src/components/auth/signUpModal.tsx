@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
+import { LoginModalType } from '../../types/app'
 type Formvalues = {
   name: string
   email: string
@@ -27,7 +28,8 @@ const SignUpModal = () => {
   }
   return (
     <form className='card-body' onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2 className='text-center text-xl'>회원가입</h2>
+      
+      <h2 className='text-center text-xl'>추가 정보 입력</h2>
       <div className='form-control'>
         <label className='label'>
           <span className='label-text'>Name</span>

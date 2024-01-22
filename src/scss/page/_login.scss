@@ -1,14 +1,17 @@
+@use '../theme/theme' as *;
 #fixedWrapper {
   position: fixed;
   left: 50%;
-  transform: translateX(-50%);
-  top: 30%;
+  transform: translate(-50%, -50%);
+  top: 40%;
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 15px;
   justify-content: center;
   flex-wrap: wrap;
+  width: 100%;
+
   .btn.loginBtn {
     border: none;
     background-color: #df8443db;
@@ -46,9 +49,19 @@
       width: 0%;
       background-color: rgba(255, 255, 240, 0.807);
     }
-    &.homeBtn{
+    &.homeBtn {
       width: 100%;
     }
   }
-  
+  .LoginWrapinner {
+    background-color: #ffffff20;
+    backdrop-filter: blur(6px);
+    width: 50%;
+    max-width: 400px;
+    border-radius: 20px;
+    @include mobile {
+      width: 95%;
+      
+    }
+  }
 }
