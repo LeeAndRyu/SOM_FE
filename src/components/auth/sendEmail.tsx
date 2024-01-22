@@ -16,10 +16,12 @@ const SendEmail = ({
     register,
     handleSubmit,
     getFieldState,
+    setError,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
   const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {
     console.log(e)
+    // setError('email',{message:'중복된 이메일입니다'})
   }
   return (
     <>
