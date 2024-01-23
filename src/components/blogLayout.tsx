@@ -2,7 +2,7 @@ import { Outlet, Link, useParams } from 'react-router-dom'
 import ThemeToggle from './themeToggle'
 import SideMenu from './sideMenu'
 import { useNavigate } from 'react-router-dom'
-import { IoCloudSharp } from 'react-icons/io5'
+import { IoCloudSharp } from "react-icons/io5";
 const BlogLayout = () => {
   const navigate = useNavigate()
   const params = useParams()

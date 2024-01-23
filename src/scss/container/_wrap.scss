@@ -25,7 +25,9 @@ body {
     width: 100%;
     padding: 0 var(--side-padding);
     margin: 0 auto 60px;
-
+    @include mobile {
+      padding: 0 10px;
+    }
     .inner {
       margin-top: 30px;
     }

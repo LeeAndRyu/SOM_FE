@@ -214,6 +214,10 @@ a {
   height: 17px;
 }
 
+.tab {
+  transition: all 0.1s;
+}
+
 :root {
   --side-padding: 1rem;
   --max-width: 1400px;
@@ -348,6 +352,9 @@ form:has(.searchInput) span svg {
   margin: 0 auto;
   position: relative;
 }
+#blog > div form .input {
+  width: fit-content;
+}
 #blog > div form svg {
   position: absolute;
   z-index: 1;
@@ -449,7 +456,7 @@ form:has(.searchInput) span svg {
   min-height: 50vh;
 }
 #content_sec .sec_inner {
-  padding: 40px;
+  padding: 30px 0;
   display: flex;
 }
 #content_sec .sec_inner .cont_left {
@@ -585,6 +592,11 @@ body {
   width: 100%;
   padding: 0 var(--side-padding);
   margin: 0 auto 60px;
+}
+@media (max-width: 767px) {
+  #wrap #main {
+    padding: 0 10px;
+  }
 }
 #wrap #main .inner {
   margin-top: 30px;
