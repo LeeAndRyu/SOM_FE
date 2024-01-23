@@ -1,27 +1,30 @@
 import { MouseEventHandler, useState } from 'react'
 import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
-
+import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
+import { HiMiniFire } from 'react-icons/hi2'
 const Home = () => {
   const tabs = [
     {
       id: 0,
-      title: 'Popular',
+      title: 'Hot',
+      icon: <HiMiniFire />,
     },
     {
       id: 1,
       title: 'New',
+      icon: <MdOutlineRssFeed />,
     },
     {
       id: 2,
       title: 'Feed',
+      icon: <MdPerson />,
     },
   ]
   const [tab, setTab] = useState<number>(0)
   const tabClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
     if ((e.target as HTMLElement).nodeName !== 'A') return
     console.log((e.target as HTMLElement).dataset.idx)
-
     setTab(+(e.target as HTMLElement).dataset.idx!)
   }
   return (
@@ -35,9 +38,11 @@ const Home = () => {
           <a
             key={item.id}
             role='tab'
-            className={clsx('tab', item.id === tab && 'tab-active')}
+            className={clsx('tab font-semibold hasSvg', item.id === tab && 'tab-active')}
             data-idx={item.id}
           >
+            {item.icon}
+            &nbsp;
             {item.title}
           </a>
         ))}

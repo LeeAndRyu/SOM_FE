@@ -1,3 +1,4 @@
+@use '../theme/theme' as *;
 html,
 body {
   width: 100%;
@@ -22,8 +23,9 @@ body {
   #main {
     max-width: var(--max-inner-width);
     width: 100%;
-    // padding: 0 var(--side-padding);
+    padding: 0 var(--side-padding);
     margin: 0 auto 60px;
+
     .inner {
       margin-top: 30px;
     }

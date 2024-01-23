@@ -11,6 +11,7 @@ import BasicRoute from './components/basicRoute'
 import BlogRoute from './components/blogRoute'
 import BlogLayout from './components/blogLayout'
 import Post from './routes/post'
+import Blog from './routes/blog'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -49,7 +50,7 @@ function App() {
       element: <Auth />,
     },
     {
-      path: 'blog/:id',
+      path: 'blog',
       element: (
         <BlogRoute>
           <BlogLayout />
@@ -57,7 +58,11 @@ function App() {
       ),
       children: [
         {
-          path: ':post',
+          path: '/blog/:id',
+          element: <Blog />,
+        },
+        {
+          path: '/blog/:id/:post',
           element: <Post />,
         },
       ],

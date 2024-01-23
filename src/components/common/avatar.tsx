@@ -1,10 +1,17 @@
-
+import { useRecoilState } from 'recoil'
 import Image from '../../assets/userProfile.png'
+import { UserInfoState } from '../../store/user'
+import { useEffect } from 'react'
 interface Prop {
   src?: string
+  logged?: boolean
   size?: number
 }
-const Avatar = ({ src, size }: Prop) => {
+const Avatar = ({ src, size, logged }: Prop) => {
+  const [user, _] = useRecoilState(UserInfoState)
+  useEffect(() => {
+    logged === true && console.log(user)
+  }, [])
   return (
     <div
       className='avatar'
@@ -12,18 +19,17 @@ const Avatar = ({ src, size }: Prop) => {
         width: size ? size : 100,
         height: size ? size : 100,
         borderRadius: '50%',
-        overflow: 'hidden',
       }}
     >
       <img
         style={{
           width: '100%',
           height: '100%',
-
+          borderRadius: '50%',
           objectFit: 'cover',
           display: 'block',
         }}
-        src={src ? src : Image}
+        src={logged ? user.member.profileImage : src ? src : Image}
       />
     </div>
   )

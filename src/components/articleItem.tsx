@@ -1,11 +1,11 @@
-
 import Article from '../assets/background.png'
 import Avatar from './common/avatar'
-import { FaCommentDots } from 'react-icons/fa6'
+// import { FaCommentDots } from 'react-icons/fa6'
 import { FaRegHeart } from 'react-icons/fa'
+import { IoBarChart } from 'react-icons/io5'
 const ArticleItem = () => {
   return (
-    <li>
+    <li className='articleItem'>
       <div className='top_section'>
         <div>
           <img src={Article} />
@@ -21,6 +21,14 @@ const ArticleItem = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque ut
           ipsum neque praesentium ipsam{' '}
         </p>
+        <p className='tags'>
+          <span>개발</span>
+          <span>React</span>
+          <span>트러블슈팅</span>
+          <span>일기</span>
+
+          <span className='moreTags'>+9개</span>
+        </p>
         <p className='info'>
           <span>
             by <strong>nara</strong>{' '}
@@ -31,8 +39,8 @@ const ArticleItem = () => {
       <div className='icon_section'>
         <Avatar size={40} />
         <p>
-          <span>10</span>
-          <FaCommentDots />
+          <span>13</span>
+          <IoBarChart />
         </p>
         <p>
           <FaRegHeart />
