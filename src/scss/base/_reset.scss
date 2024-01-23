@@ -126,6 +126,7 @@ video {
   font-size: 100%;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -173,18 +174,18 @@ a {
   color: inherit;
 }
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #2f3542;
+  background-color: oklch(var(--p));
   border-radius: 10px;
   background-clip: padding-box;
   // border: 2px solid transparent;
 }
 ::-webkit-scrollbar-track {
-  background-color: var(--text-color-3);
+  background-color: oklch(var(--b1));
   border-radius: 10px;
-  box-shadow: inset 0px 0px 5px white;
+  box-shadow: inset 0px 0px 5px rgba(255, 255, 255, 0.62);
 }
 
 .sr-only {
@@ -198,7 +199,7 @@ a {
   clip: rect(0, 0, 0, 0);
 }
 
-.bgImg{
+.bgImg {
   display: block;
   width: 100%;
   height: 100%;

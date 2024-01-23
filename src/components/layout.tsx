@@ -8,7 +8,7 @@ const Layout = () => {
     <div id='wrap' className='bg-base-100'>
       <header id='header'>
         <div className='headInner'>
-          <div className='navbar bg-base-100'>
+          <div className='navbar'>
             <div className='navbar-start'>
               <div className='dropdown'>
                 <span
@@ -43,7 +43,10 @@ const Layout = () => {
 
             <div className='navbar-end'>
               <ThemeToggle />
-              <button onClick={()=>navigate('/search')} className='btn nofocus btn-ghost btn-circle'>
+              <button
+                onClick={() => navigate('/search')}
+                className='btn nofocus btn-ghost btn-circle'
+              >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='h-5 w-5'

@@ -5,7 +5,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import clsx from 'clsx'
 import WarningMsg from '../components/common/warningMsg'
 type Formvalues = {
-  name: string
+  accountName: string
+  nickname: string
+  introduction: string
   password: string
   verifyPwd: string
 }
@@ -43,27 +45,67 @@ const Auth = () => {
             <h2 className='text-center text-xl'>추가 정보 입력</h2>
             <div className='form-control'>
               <label className='label'>
-                <span className='label-text'>Name</span>
+                <span className='label-text'>계정명</span>
               </label>
               <input
                 type='text'
-                placeholder='name'
-                {...register('name', {
+                placeholder='accountName'
+                {...register('accountName', {
                   required: '필수 입력 항목입니다',
                 })}
                 className={clsx(
                   `input input-bordered mb-1.5`,
-                  isItValidCSS('name')
+                  isItValidCSS('accountName')
                 )}
                 required
               />
-              {errors.name && errors.name.message && (
-                <WarningMsg message={errors.name.message} />
+              {errors.accountName && errors.accountName.message && (
+                <WarningMsg message={errors.accountName.message} />
               )}
             </div>
             <div className='form-control'>
               <label className='label'>
-                <span className='label-text'>Email</span>
+                <span className='label-text'>이름</span>
+              </label>
+              <input
+                type='text'
+                placeholder='nickname'
+                {...register('nickname', {
+                  required: '필수 입력 항목입니다',
+                })}
+                className={clsx(
+                  `input input-bordered mb-1.5`,
+                  isItValidCSS('nickname')
+                )}
+                required
+              />
+              {errors.nickname && errors.nickname.message && (
+                <WarningMsg message={errors.nickname.message} />
+              )}
+            </div>
+            <div className='form-control'>
+              <label className='label'>
+                <span className='label-text'>한 줄 소개</span>
+              </label>
+              <input
+                type='text'
+                placeholder='introduction'
+                {...register('introduction', {
+                  required: '필수 입력 항목입니다',
+                })}
+                className={clsx(
+                  `input input-bordered mb-1.5`,
+                  isItValidCSS('introduction')
+                )}
+                required
+              />
+              {errors.introduction && errors.introduction.message && (
+                <WarningMsg message={errors.introduction.message} />
+              )}
+            </div>
+            <div className='form-control'>
+              <label className='label'>
+                <span className='label-text'>이메일</span>
               </label>
               <input
                 type='email'
@@ -75,7 +117,7 @@ const Auth = () => {
             </div>
             <div className='form-control'>
               <label className='label'>
-                <span className='label-text'>Password</span>
+                <span className='label-text'>비밀번호</span>
               </label>
               <input
                 type='password'
@@ -100,7 +142,7 @@ const Auth = () => {
             </div>
             <div className='form-control'>
               <label className='label'>
-                <span className='label-text'>Confirm Password</span>
+                <span className='label-text'>비밀번호 확인</span>
               </label>
               <input
                 type='password'

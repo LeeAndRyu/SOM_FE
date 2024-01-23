@@ -22,8 +22,8 @@ body {
   #main {
     max-width: var(--max-inner-width);
     width: 100%;
-    padding: 0 var(--side-padding);
-    margin: 0 auto;
+    // padding: 0 var(--side-padding);
+    margin: 0 auto 60px;
     .inner {
       margin-top: 30px;
     }
