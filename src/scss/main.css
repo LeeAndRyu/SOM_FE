@@ -344,10 +344,20 @@ form:has(.searchInput) span svg {
   --main-color1: rgb(80, 80, 80);
 }
 
-#user_sec {
-  border-radius: 20px;
+#blog > div form {
+  margin: 0 auto;
   position: relative;
-  overflow: visible;
+}
+#blog > div form svg {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+}
+
+#user_sec {
+  position: relative;
   padding: 50px 0 25px;
   background-color: oklch(var(--b2));
 }
@@ -369,13 +379,12 @@ form:has(.searchInput) span svg {
   position: absolute;
   background-color: oklch(var(--b1));
   width: 100%;
-  height: 50px;
   z-index: 0;
   bottom: 0;
   left: 0;
 }
 #user_sec .sec_inner {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
   display: flex;
   position: relative;
@@ -392,8 +401,8 @@ form:has(.searchInput) span svg {
 #user_sec .sec_inner .avatar {
   background-color: oklch(var(--b1));
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.0470588235);
-  width: 190px !important;
-  height: 190px !important;
+  width: 160px !important;
+  height: 160px !important;
 }
 #user_sec .sec_inner .info {
   display: flex;
@@ -436,34 +445,39 @@ form:has(.searchInput) span svg {
 }
 
 #content_sec {
+  margin-top: 30px;
+  min-height: 50vh;
+}
+#content_sec .sec_inner {
+  padding: 40px;
   display: flex;
 }
-#content_sec .cont_left {
+#content_sec .sec_inner .cont_left {
   width: 20%;
   padding-right: 100px;
 }
-#content_sec .cont_left h4 {
+#content_sec .sec_inner .cont_left h4 {
   font-weight: 500;
   border-bottom: 1px solid oklch(var(--bc));
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
-#content_sec .cont_left ul li {
+#content_sec .sec_inner .cont_left ul li {
   display: flex;
   gap: 5px;
   font-size: 13px;
 }
-#content_sec .cont_right {
+#content_sec .sec_inner .cont_right {
   width: 80%;
 }
-#content_sec .cont_right .tab_sec {
+#content_sec .sec_inner .cont_right .tab_sec {
   display: flex;
 }
-#content_sec .cont_right .tab_sec div {
+#content_sec .sec_inner .cont_right .tab_sec div {
   display: flex;
   gap: 13px;
 }
-#content_sec .cont_right .tab_sec div a {
+#content_sec .sec_inner .cont_right .tab_sec div a {
   font-size: 15px;
   padding: 10px 18px;
   border-radius: 30px;
@@ -476,7 +490,7 @@ form:has(.searchInput) span svg {
   position: relative;
   transition: all 0.1s;
 }
-#content_sec .cont_right .tab_sec div a svg {
+#content_sec .sec_inner .cont_right .tab_sec div a svg {
   width: 16px;
   height: 16px;
   opacity: 0;
@@ -485,13 +499,13 @@ form:has(.searchInput) span svg {
   top: 50%;
   transform: translateY(-50%);
 }
-#content_sec .cont_right .tab_sec div a.active {
+#content_sec .sec_inner .cont_right .tab_sec div a.active {
   padding: 10px 35px 10px 18px;
   background-color: oklch(var(--ac));
   color: oklch(var(--a));
   gap: 5px;
 }
-#content_sec .cont_right .tab_sec div a.active svg {
+#content_sec .sec_inner .cont_right .tab_sec div a.active svg {
   opacity: 1;
 }
 
