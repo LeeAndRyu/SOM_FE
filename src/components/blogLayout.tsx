@@ -1,9 +1,11 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useParams } from 'react-router-dom'
 import ThemeToggle from './themeToggle'
 import SideMenu from './sideMenu'
 import { useNavigate } from 'react-router-dom'
-const Layout = () => {
+import { IoCloudSharp } from 'react-icons/io5'
+const BlogLayout = () => {
   const navigate = useNavigate()
+  const params = useParams()
   return (
     <div id='wrap' className='bg-base-100'>
       <header id='header'>
@@ -36,7 +38,8 @@ const Layout = () => {
                 </ul>
               </div>
               <Link to='/' className='btn btn-ghost text-xl'>
-                S&nbsp;☻&nbsp;M
+                <IoCloudSharp />
+                {params.id}
               </Link>
             </div>
             <div className='navbar-center'></div>
@@ -96,4 +99,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default BlogLayout

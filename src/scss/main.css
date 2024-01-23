@@ -443,8 +443,10 @@ ul.articleWrap li {
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.137254902);
   position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: oklch(var(--b2));
 }
 @media (min-width: 768px) and (max-width: 1203px) {
   ul.articleWrap li {
@@ -459,10 +461,15 @@ ul.articleWrap li {
 ul.articleWrap li:not(:has(.top_section img)) {
   flex-direction: column-reverse;
 }
+ul.articleWrap li:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.137254902);
+}
 ul.articleWrap li div {
   width: 100%;
 }
 ul.articleWrap li div.top_section {
+  transition: all 0.2s;
   position: relative;
 }
 ul.articleWrap li div.top_section::after {
@@ -474,10 +481,6 @@ ul.articleWrap li div.top_section div {
   display: block;
   width: 100%;
   height: 100%;
-  transition: all 0.1s;
-}
-ul.articleWrap li div.top_section div:hover {
-  opacity: 0.9;
 }
 ul.articleWrap li div.top_section div img {
   position: absolute;
@@ -486,12 +489,12 @@ ul.articleWrap li div.top_section div img {
   object-fit: cover;
 }
 ul.articleWrap li div.middle_section {
-  background-color: oklch(var(--b1));
   bottom: 0;
   padding: 20px 25px;
   display: flex;
   flex-direction: column;
   gap: 7px;
+  transition: all 0.2s;
 }
 ul.articleWrap li div.middle_section p.title {
   font-size: 14px;
@@ -531,10 +534,14 @@ ul.articleWrap li div.icon_section {
   gap: 5px;
 }
 ul.articleWrap li div.icon_section > * {
+  background-color: oklch(var(--p));
   cursor: pointer;
 }
 ul.articleWrap li div.icon_section > *:hover {
-  filter: brightness(0.96);
+  background-color: oklch(var(--s));
+}
+ul.articleWrap li div.icon_section > *:hover svg {
+  color: oklch(var(--sc));
 }
 ul.articleWrap li div.icon_section > *:nth-child(1) {
   transition: transform 0.4s;
@@ -555,8 +562,6 @@ ul.articleWrap li div.icon_section > p {
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  background-color: oklch(var(--b1));
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.0941176471);
 }
 ul.articleWrap li div.icon_section > p:has(span) {
   position: relative;
@@ -575,11 +580,13 @@ ul.articleWrap li div.icon_section > p:has(span) span {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.1s;
 }
 ul.articleWrap li div.icon_section > p svg {
+  transition: all 0.1s;
   width: 20px;
   height: 20px;
-  color: oklch(var(--bc));
+  color: oklch(var(--pc));
 }
 ul.articleWrap li:hover > .icon_section {
   opacity: 1;

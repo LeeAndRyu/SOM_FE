@@ -1,14 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-const Blog = () => {
+
+const Post = () => {
   const params = useParams()
   return (
-    <>
-      <section id='userSec'>
-    
-      </section>
-    </>
+    <div>
+      {params.id}
+      <div>{params.post}</div>
+    </div>
   )
 }
 
-export default Blog
+export default Post

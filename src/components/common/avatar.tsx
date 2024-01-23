@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from '../../assets/basicProfile.png'
+import Image from '../../assets/userProfile.png'
 interface Prop {
   src?: string
   size?: number

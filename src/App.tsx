@@ -1,7 +1,5 @@
 import { useLayoutEffect, useState } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import ProtectedRoute from './components/protected_route'
-import Layout from './components/layout'
 import LoadingScreen from './components/loading'
 import Home from './routes/home'
 import Login from './routes/login'
@@ -9,6 +7,11 @@ import Write from './routes/write'
 import Search from './routes/search'
 import Auth from './routes/auth'
 import Blog from './routes/blog'
+import BasicLayout from './components/BasicLayout'
+import BasicRoute from './components/BasicRoute'
+import BlogRoute from './components/blogRoute'
+import BlogLayout from './components/blogLayout'
+import Post from './routes/post'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -19,9 +22,9 @@ function App() {
     {
       path: '/',
       element: (
-        <ProtectedRoute>
-          <Layout />
-        </ProtectedRoute>
+        <BasicRoute>
+          <BasicLayout />
+        </BasicRoute>
       ),
       children: [
         {
@@ -36,10 +39,6 @@ function App() {
           path: 'search',
           element: <Search />,
         },
-        {
-          path: 'blog/:id',
-          element: <Blog />,
-        },
       ],
     },
     {
@@ -49,6 +48,20 @@ function App() {
     {
       path: '/auth',
       element: <Auth />,
+    },
+    {
+      path: 'blog/:id',
+      element: (
+        <BlogRoute>
+          <BlogLayout />
+        </BlogRoute>
+      ),
+      children: [
+        {
+          path: ':post',
+          element: <Post />,
+        },
+      ],
     },
     /* 
     {
