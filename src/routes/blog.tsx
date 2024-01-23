@@ -1,11 +1,11 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+
+// import { useParams } from 'react-router-dom'
 const Blog = () => {
-  const params = useParams()
+  // const params = useParams()
   return (
     <>
       <section id='userSec'>
-    
+
       </section>
     </>
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Bgimg from '../assets/emoji.png'
 import { useSearchParams } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -12,8 +12,8 @@ type Formvalues = {
   verifyPwd: string
 }
 const Auth = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [code, setCode] = useState<null | string>(null)
+  const [searchParams, _setSearchParams] = useSearchParams()
+  const [_code, setCode] = useState<null | string>(null)
   const [email, setEmail] = useState<null | string>(null)
   const {
     register,

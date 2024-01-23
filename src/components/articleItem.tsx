@@ -1,8 +1,8 @@
-import React from 'react'
+
 import Article from '../assets/background.png'
 import Avatar from './common/avatar'
 import { FaCommentDots } from 'react-icons/fa6'
-import { FaRegHeart, FaHeart } from 'react-icons/fa'
+import { FaRegHeart } from 'react-icons/fa'
 const ArticleItem = () => {
   return (
     <li>

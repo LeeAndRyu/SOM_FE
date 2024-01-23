@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react'
-import Modal from '../components/common/modal'
+
 import LoginModal from '../components/auth/loginModal'
-import { FaCircleArrowRight } from 'react-icons/fa6'
+
 import { LoginModalType } from '../types/app'
 import FindPwdModal from '../components/auth/findPwdModal'
 import SendEmail from '../components/auth/sendEmail'

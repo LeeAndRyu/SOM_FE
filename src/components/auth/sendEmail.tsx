@@ -11,12 +11,12 @@ const SendEmail = ({
 }: {
   setShowModal: React.Dispatch<React.SetStateAction<LoginModalType>>
 }) => {
-  const [sendingEmail, setSendingEmail] = useState(false)
+  const [sendingEmail, _setSendingEmail] = useState(false)
   const {
     register,
     handleSubmit,
-    getFieldState,
-    setError,
+    
+    
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
   const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {

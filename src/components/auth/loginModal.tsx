@@ -16,7 +16,7 @@ const LoginModal = ({
   const {
     register,
     handleSubmit,
-    setError,
+    
     getFieldState,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
