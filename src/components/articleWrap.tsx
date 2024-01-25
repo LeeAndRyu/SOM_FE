@@ -5,7 +5,7 @@ interface Prop {
   type?: string
   list?: any
 }
-const ArticleWrap = ({ type, list }: Prop) => {
+const ArticleWrap = ({ type }: Prop) => {
   return (
     <>
       <ul className={clsx('articleWrap', getClassNames(type!))}>
