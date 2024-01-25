@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Avatar from './common/avatar'
 const SideMenu = () => {
   const [isItLogged, _setLogged] = useState(true)
+  const navigate = useNavigate()
   return (
     <div id='sideMenuWrapper'>
       <ul className='menu bg-base-200 w-56 rounded-box'>
@@ -15,7 +16,9 @@ const SideMenu = () => {
                 </summary>
                 <ul>
                   <li>
-                    <Link to={'/blog/nara'}>내 블로그</Link>
+                    <button onClick={() => navigate('/blog/nara')}>
+                      내 블로그
+                    </button>
                   </li>
                   <li>
                     <Link to={'/write'}>글쓰기</Link>
