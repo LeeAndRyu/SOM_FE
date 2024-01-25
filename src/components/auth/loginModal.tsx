@@ -4,7 +4,7 @@ import WarningMsg from '../common/warningMsg'
 import { LoginModalType } from '../../types/app'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../lib/axios'
-import { LoginSuccess } from '../../lib/loginSuccess'
+import { LoginSuccess } from '../../lib/auth'
 type Formvalues = {
   email: string
   password: string

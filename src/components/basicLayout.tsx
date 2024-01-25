@@ -2,8 +2,6 @@ import { Outlet, Link } from 'react-router-dom'
 import ThemeToggle from './themeToggle'
 import SideMenu from './sideMenu'
 import { useNavigate } from 'react-router-dom'
-import RecoilRootWrapper from './recoilRootWrapper'
-import { ToastContainer } from 'react-toastify'
 const BasicLayout = () => {
   const navigate = useNavigate()
   return (

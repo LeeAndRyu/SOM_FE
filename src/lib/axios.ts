@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { tokenRefresh } from './auth'
+import { getLocalStorage } from './localStorage'
 const errorCodes: string[] = [
   'EMAIL_ALREADY_EXISTS',
   'MEMBER_PASSWORD_INCORRECT',
@@ -18,6 +20,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken')
     if (!!accessToken) config.headers['Authorization'] = `Bearer ${accessToken}`
+    config.headers['Content-Type'] = 'application/json'
     return config
   },
   (error) => {
@@ -28,9 +31,17 @@ axiosInstance.interceptors.response.use(
   (response) => {
     return response
   },
-  (error) => {
+  async (error) => {
     if (errorCodes.includes(error.response.data.errorCode)) {
       toast.error(error.response?.data.errorMessage)
+    }
+    // 토큰 만료 시 처리
+    if (error.response.data.errorCode === 'TOKEN_TIME_OUT') {
+      await tokenRefresh()
+      const TOKEN = getLocalStorage('accessToken')
+      if (!!TOKEN) error.config.headers['Authorization'] = `Bearer ${TOKEN}`
+      const response = await axios.request(error.config)
+      return response
     }
     return Promise.reject(error)
   }
