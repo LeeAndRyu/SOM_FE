@@ -1,20 +1,6 @@
 @use '../theme/theme' as *;
 #blog {
   & > div {
-    form {
-      margin: 0 auto;
-      position: relative;
-      .input {
-        width: fit-content;
-      }
-      svg {
-        position: absolute;
-        z-index: 1;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 10px;
-      }
-    }
   }
 }
 #user_sec {
@@ -106,8 +92,8 @@
     padding: 30px 0;
     display: flex;
     .cont_left {
-      width: 20%;
-      padding-right: 100px;
+      width: 25%;
+      padding-right: 70px;
       h4 {
         font-weight: 500;
         border-bottom: 1px solid oklch(var(--bc));
@@ -123,9 +109,10 @@
       }
     }
     .cont_right {
+      width: 75%;
       .tab_sec {
         display: flex;
-
+        justify-content: space-between;
         div {
           display: flex;
           gap: 13px;
@@ -161,8 +148,25 @@
             }
           }
         }
+        form {
+          position: relative;
+          input {
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid;
+
+            padding: 7px 0px 7px 30px;
+          }
+          svg {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+          }
+        }
       }
-      width: 80%;
+
     }
   }
 }

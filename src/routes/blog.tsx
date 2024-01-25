@@ -1,9 +1,10 @@
 // import { useParams } from 'react-router-dom'
 import Avatar from '../components/common/avatar'
-
 import { FaCircleCheck } from 'react-icons/fa6'
 import { MouseEventHandler, useState } from 'react'
 import clsx from 'clsx'
+import { IoSearchOutline } from 'react-icons/io5'
+import ArticleWrap from '../components/articleWrap'
 const Blog = () => {
   const tabs = [
     {
@@ -25,7 +26,7 @@ const Blog = () => {
   return (
     <>
       <div id='blog' className='mockup-browser border bg-base-100'>
-        <div className=''>
+        <div>
           <section id='user_sec'>
             <div className='sec_inner'>
               <Avatar />
@@ -70,12 +71,18 @@ const Blog = () => {
                       </a>
                     ))}
                   </div>
+                  <form>
+                    <input type='text' placeholder='search' />
+                    <IoSearchOutline />
+                  </form>
                 </div>
-                {tab === 0 ? <p>0</p> : <p>1</p>}
-
-                <ul>
-                  <li></li>
-                </ul>
+                <div className='result_sec'>
+                  <p className='resultP'>
+                    🔍 총 <span>8개</span>의 포스트를 찾았습니다.
+                  </p>
+                  {/* <p className='resultP'>❌ 검색 결과가 없습니다</p> */}
+                  <ArticleWrap type='blog' />
+                </div>
               </div>
             </div>
           </section>

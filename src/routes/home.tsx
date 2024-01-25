@@ -38,7 +38,10 @@ const Home = () => {
           <a
             key={item.id}
             role='tab'
-            className={clsx('tab font-semibold hasSvg', item.id === tab && 'tab-active')}
+            className={clsx(
+              'tab font-semibold hasSvg',
+              item.id === tab && 'tab-active'
+            )}
             data-idx={item.id}
           >
             {item.icon}
@@ -47,7 +50,13 @@ const Home = () => {
           </a>
         ))}
       </div>
-      {tab === 0 ? <ArticleWrap /> : tab === 1 ? <p>11</p> : <p>2</p>}
+      {tab === 0 ? (
+        <ArticleWrap type='home' />
+      ) : tab === 1 ? (
+        <p>11</p>
+      ) : (
+        <p>2</p>
+      )}
     </>
   )
 }

@@ -1,10 +1,14 @@
-
+import clsx from 'clsx'
 import ArticleItem from './articleItem'
-
-const ArticleWrap = () => {
+import { getClassNames } from '../lib/getClassNames'
+interface Prop {
+  type?: string
+  list?: any
+}
+const ArticleWrap = ({ type, list }: Prop) => {
   return (
     <>
-      <ul className='articleWrap'>
+      <ul className={clsx('articleWrap', getClassNames(type!))}>
         <ArticleItem />
         <ArticleItem />
         <ArticleItem />

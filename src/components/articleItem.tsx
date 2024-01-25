@@ -30,8 +30,11 @@ const ArticleItem = () => {
           <span className='moreTags'>+9개</span>
         </p>
         <p className='info'>
-          <span>
+          <span className='infoUser'>
             by <strong>nara</strong>{' '}
+          </span>
+          <span>
+          <strong>0</strong>개의 댓글
           </span>
           <span>2024.01.14</span>
         </p>
