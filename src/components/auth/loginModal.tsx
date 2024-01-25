@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
-// import { useEffect, useState } from 'react'
 import { LoginModalType } from '../../types/app'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { axiosInstance } from '../../lib/axios'
+import { LoginSuccess } from '../../lib/loginSuccess'
 type Formvalues = {
   email: string
   password: string
@@ -26,16 +26,13 @@ const LoginModal = ({
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     console.log(e)
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACK_SERVER}/login`,
-        e
-      )
+      const res = await axiosInstance.post(`/login`, e)
       if (res.status === 200) {
-        
+        await LoginSuccess(res.data)
         navigate('/')
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
   return (

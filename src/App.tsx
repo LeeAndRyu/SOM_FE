@@ -12,6 +12,8 @@ import BlogRoute from './components/blogRoute'
 import BlogLayout from './components/blogLayout'
 import Post from './routes/post'
 import Blog from './routes/blog'
+import { ToastContainer } from 'react-toastify'
+import RecoilRootWrapper from './components/recoilRootWrapper'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -74,7 +76,18 @@ function App() {
     }, */
   ])
   return (
-    <>{isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}</>
+    <>
+      {' '}
+      <RecoilRootWrapper>
+        <ToastContainer
+          style={{ zIndex: 200 }}
+          hideProgressBar={false}
+          position='top-center'
+          // theme='dark'
+        />
+        {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      </RecoilRootWrapper>
+    </>
   )
 }
 
