@@ -503,6 +503,21 @@ form:has(.searchInput) span svg {
   left: 10px;
 }
 
+:root {
+  --side-padding: 1rem;
+  --max-width: 1400px;
+  --max-inner-width: 1400px;
+  --padding-1: 1.6rem;
+  --padding-2: 1.2rem;
+  --padding-3: 0.8rem;
+  --padding-4: 0.4rem;
+  --margin-1: 1.6rem;
+  --margin-2: 1.2rem;
+  --margin-3: 0.8rem;
+  --margin-4: 0.4rem;
+  --main-color1: rgb(80, 80, 80);
+}
+
 header {
   width: 100%;
   position: sticky;
@@ -587,6 +602,67 @@ body {
 }
 #wrap #main .inner {
   margin-top: 30px;
+}
+
+:root {
+  --side-padding: 1rem;
+  --max-width: 1400px;
+  --max-inner-width: 1400px;
+  --padding-1: 1.6rem;
+  --padding-2: 1.2rem;
+  --padding-3: 0.8rem;
+  --padding-4: 0.4rem;
+  --margin-1: 1.6rem;
+  --margin-2: 1.2rem;
+  --margin-3: 0.8rem;
+  --margin-4: 0.4rem;
+  --main-color1: rgb(80, 80, 80);
+}
+
+.mobHam {
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobHam {
+    display: block;
+  }
+}
+
+.mobAside {
+  display: none;
+}
+@media (max-width: 767px) {
+  .mobAside {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100dvh;
+    width: 70%;
+    z-index: 100;
+  }
+  .mobAside > svg {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 25px;
+    height: 25px;
+  }
+  .mobAside ul {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mobAside ul li a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .dropdown {
+    display: none;
+  }
 }
 
 #loadingWrapper {
