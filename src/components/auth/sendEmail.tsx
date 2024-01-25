@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
 import { LoginModalType } from '../../types/app'
+import axios from 'axios'
 type Formvalues = {
   email: string
 }
@@ -11,16 +12,25 @@ const SendEmail = ({
 }: {
   setShowModal: React.Dispatch<React.SetStateAction<LoginModalType>>
 }) => {
-  const [sendingEmail, _setSendingEmail] = useState(false)
+  const [sendingEmail, setSendingEmail] = useState(false)
   const {
     register,
     handleSubmit,
-    
-    
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
-  const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {
+  const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     console.log(e)
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACK_SERVER}/register/check-email`,
+        e
+      )
+      if (res.status === 200) {
+        setSendingEmail(true)
+      }
+    } catch (error) {
+      console.log(error)
+    }
     // setError('email',{message:'중복된 이메일입니다'})
   }
   return (
@@ -38,7 +48,7 @@ const SendEmail = ({
               {...register('email', {
                 required: '필수 입력 항목입니다',
                 pattern: {
-                  value: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i,
+                  value: /^[a-zA-Z0-9._%+-]+@[a-z]+\.[a-z]{2,3}$/i,
                   message: '유효한 이메일 형식이 아닙니다',
                 },
               })}
@@ -57,7 +67,11 @@ const SendEmail = ({
             </a>
           </label>
           <div className='form-control mt-6'>
-            <button disabled={!isValid} className='btn btn-primary'>
+            <button
+              type='submit'
+              disabled={!isValid}
+              className='btn btn-primary'
+            >
               Send
             </button>
           </div>

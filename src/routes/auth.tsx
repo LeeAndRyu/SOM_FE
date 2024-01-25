@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import Bgimg from '../assets/emoji.png'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import clsx from 'clsx'
 import WarningMsg from '../components/common/warningMsg'
+import axios, { AxiosError } from 'axios'
 type Formvalues = {
   accountName: string
   nickname: string
@@ -13,17 +14,44 @@ type Formvalues = {
 }
 const Auth = () => {
   const [searchParams, _setSearchParams] = useSearchParams()
-  const [_code, setCode] = useState<null | string>(null)
+  const navigate = useNavigate()
+  const [code, setCode] = useState<null | string>(null)
   const [email, setEmail] = useState<null | string>(null)
   const {
     register,
     getValues,
     handleSubmit,
+    setError,
     getFieldState,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
-  const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {
+  const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
+    if (!code) return
     console.log(e)
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACK_SERVER}/register?code=${code}`,
+        {
+          accountName: e.accountName,
+          introduction: e.introduction,
+          nickname: e.nickname,
+          password: e.password,
+        }
+      )
+
+      if (res.status === 200) {
+        if (confirm('회원가입 성공! 로그인 하시겠습니까?')) {
+          navigate('/login')
+        }
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        
+        error.response?.status === 409 &&
+          setError('accountName', { message: '중복된 계정명입니다' })
+      }
+      console.log(error)
+    }
   }
   const isItValidCSS = (type: keyof Formvalues) => {
     return !getFieldState(type).isTouched
@@ -42,7 +70,7 @@ const Auth = () => {
       <div id='fixedWrapper'>
         <div className='LoginWrapinner'>
           <form className='card-body' onSubmit={handleSubmit(onSubmitHandler)}>
-            <h2 className='text-center text-xl'>추가 정보 입력</h2>
+            <h2 className='text-center text-xl'>회원가입</h2>
             <div className='form-control'>
               <label className='label'>
                 <span className='label-text'>계정명</span>

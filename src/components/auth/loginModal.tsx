@@ -3,6 +3,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
 // import { useEffect, useState } from 'react'
 import { LoginModalType } from '../../types/app'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 type Formvalues = {
   email: string
   password: string
@@ -16,12 +18,25 @@ const LoginModal = ({
   const {
     register,
     handleSubmit,
-    
+
     getFieldState,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
-  const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {
+  const navigate = useNavigate()
+  const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     console.log(e)
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACK_SERVER}/login`,
+        e
+      )
+      if (res.status === 200) {
+        
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
   return (
     <form className='card-body' onSubmit={handleSubmit(onSubmitHandler)}>
@@ -36,7 +51,7 @@ const LoginModal = ({
           {...register('email', {
             required: '필수 입력 항목입니다',
             pattern: {
-              value: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i,
+              value: /^[a-zA-Z0-9._%+-]+@[a-z]+\.[a-z]{2,3}$/i,
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
@@ -78,8 +93,8 @@ const LoginModal = ({
           >
             Forgot password? ➤
           </a>
-        {/* </label> */}
-        {/* <label> */}
+          {/* </label> */}
+          {/* <label> */}
           <a
             onClick={() => setShowModal('signUp')}
             className='label-text-alt link link-hover'

@@ -49,7 +49,7 @@ const FindPwdModal = ({
           {...register('email', {
             required: '필수 입력 항목입니다',
             pattern: {
-              value: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i,
+              value: /^[a-zA-Z0-9._%+-]+@[a-z]+\.[a-z]{2,3}$/i,
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
