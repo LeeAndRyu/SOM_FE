@@ -82,7 +82,6 @@ const Layout = () => {
               </div>
               <div className='navbar-center'></div>
               <div className='navbar-end'>
-                <ThemeToggle />
                 <button
                   onClick={() => navigate('/search')}
                   className='btn nofocus btn-ghost btn-circle'
@@ -121,6 +120,7 @@ const Layout = () => {
                     <span className='badge badge-xs badge-primary indicator-item'></span>
                   </div>
                 </button>
+                <ThemeToggle />
               </div>
             </div>
           </div>

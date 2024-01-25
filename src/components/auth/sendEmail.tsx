@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import WarningMsg from '../common/warningMsg'
 import { LoginModalType } from '../../types/app'
-import axios from 'axios'
+import { axiosInstance } from '../../lib/axios'
 type Formvalues = {
   email: string
 }
@@ -21,7 +21,7 @@ const SendEmail = ({
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     console.log(e)
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         `${import.meta.env.VITE_BACK_SERVER}/register/check-email`,
         e
       )
