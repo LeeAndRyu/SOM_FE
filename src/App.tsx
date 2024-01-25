@@ -1,33 +1,101 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useLayoutEffect, useState } from 'react'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import LoadingScreen from './components/loading'
+import Home from './routes/home'
+import Login from './routes/login'
+import Write from './routes/write'
+import Search from './routes/search'
+import Auth from './routes/auth'
+import Layout from './components/layout'
+import BasicRoute from './components/basicRoute'
+import BlogRoute from './components/blogRoute'
+import BlogLayout from './components/blogLayout'
+import Post from './routes/post'
+import Blog from './routes/blog'
+import { ToastContainer } from 'react-toastify'
+import RecoilRootWrapper from './components/recoilRootWrapper'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+  useLayoutEffect(() => {
+    setIsLoading(false)
+  }, [])
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: (
+        <BasicRoute>
+          <Layout />
+        </BasicRoute>
+      ),
+      children: [
+        {
+          path: '',
+          element: <Home />,
+        },
+        {
+          path: 'write',
+          element: <Write />,
+        },
+        {
+          path: 'search',
+          element: <Search />,
+        },
+        {
+          path: '/blog/:id',
+          element: <Blog />,
+        },
+        {
+          path: '/blog/:id/:post',
+          element: <Post />,
+        },
+      ],
+    },
+    {
+      path: 'blog',
+      element: (
+        <BlogRoute>
+          <BlogLayout />
+        </BlogRoute>
+      ),
+      children: [
+        {
+          path: '/blog/:id',
+          element: <Blog />,
+        },
+        {
+          path: '/blog/:id/:post',
+          element: <Post />,
+        },
+      ],
+    },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+    {
+      path: '/auth',
+      element: <Auth />,
+    },
 
+    /* 
+    {
+      path: '/create-acount',
+      element: <CreateAcount />,
+    }, */
+  ])
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {' '}
+      <RecoilRootWrapper>
+        <ToastContainer
+          style={{ zIndex: 200 }}
+          hideProgressBar={false}
+          position='top-center'
+          // theme='dark'
+        />
+        {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      </RecoilRootWrapper>
     </>
   )
 }
