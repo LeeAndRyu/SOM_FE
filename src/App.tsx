@@ -6,7 +6,7 @@ import Login from './routes/login'
 import Write from './routes/write'
 import Search from './routes/search'
 import Auth from './routes/auth'
-import BasicLayout from './components/basicLayout'
+import Layout from './components/layout'
 import BasicRoute from './components/basicRoute'
 import BlogRoute from './components/blogRoute'
 import BlogLayout from './components/blogLayout'
@@ -25,7 +25,7 @@ function App() {
       path: '/',
       element: (
         <BasicRoute>
-          <BasicLayout />
+          <Layout />
         </BasicRoute>
       ),
       children: [
@@ -41,15 +41,15 @@ function App() {
           path: 'search',
           element: <Search />,
         },
+        {
+          path: '/blog/:id',
+          element: <Blog />,
+        },
+        {
+          path: '/blog/:id/:post',
+          element: <Post />,
+        },
       ],
-    },
-    {
-      path: '/login',
-      element: <Login />,
-    },
-    {
-      path: '/auth',
-      element: <Auth />,
     },
     {
       path: 'blog',
@@ -69,6 +69,15 @@ function App() {
         },
       ],
     },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+    {
+      path: '/auth',
+      element: <Auth />,
+    },
+
     /* 
     {
       path: '/create-acount',

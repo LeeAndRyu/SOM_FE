@@ -10,7 +10,7 @@ interface Prop {
 const Avatar = ({ src, size, logged }: Prop) => {
   const [user, _] = useRecoilState(UserInfoState)
   useEffect(() => {
-    logged === true && console.log(user)
+    // logged === true && console.log(user)
   }, [])
   return (
     <div

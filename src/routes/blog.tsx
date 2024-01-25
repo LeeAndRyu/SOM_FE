@@ -16,7 +16,6 @@ const Blog = () => {
       title: '조회순',
     },
   ]
-  // const params = useParams()
   const [tab, setTab] = useState<number>(0)
   const tabClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
     if ((e.target as HTMLElement).nodeName !== 'A') return

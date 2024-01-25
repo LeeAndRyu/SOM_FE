@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import clsx from 'clsx'
 import WarningMsg from '../components/common/warningMsg'
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 type Formvalues = {
   accountName: string
   nickname: string

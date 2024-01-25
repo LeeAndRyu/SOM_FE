@@ -40,8 +40,14 @@ const BlogLayout = () => {
                   </ul>
                 </div>
                 <Link to='/' className='btn btn-ghost text-xl'>
-                  <IoCloudSharp />
-                  {params.id}
+                  {params.id ? (
+                    <>
+                      <IoCloudSharp />
+                      {params.id}
+                    </>
+                  ) : (
+                    <>S&nbsp;☻&nbsp;M</>
+                  )}
                 </Link>
               </div>
               <div className='navbar-center'></div>

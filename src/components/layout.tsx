@@ -1,9 +1,12 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useParams } from 'react-router-dom'
 import ThemeToggle from './themeToggle'
 import SideMenu from './sideMenu'
 import { useNavigate } from 'react-router-dom'
-const BasicLayout = () => {
+import { IoCloudSharp } from 'react-icons/io5'
+import 'react-toastify/dist/ReactToastify.css'
+const Layout = () => {
   const navigate = useNavigate()
+  const params = useParams()
   return (
     <>
       <div id='wrap' className='bg-base-100'>
@@ -37,7 +40,14 @@ const BasicLayout = () => {
                   </ul>
                 </div>
                 <Link to='/' className='btn btn-ghost text-xl'>
-                  S&nbsp;☻&nbsp;M
+                  {params.id ? (
+                    <>
+                      <IoCloudSharp />
+                      {params.id}
+                    </>
+                  ) : (
+                    <>S&nbsp;☻&nbsp;M</>
+                  )}
                 </Link>
               </div>
               <div className='navbar-center'></div>
@@ -87,7 +97,6 @@ const BasicLayout = () => {
             </div>
           </div>
         </header>
-
         <main id='main'>
           <div className='inner'>
             <Outlet />
@@ -98,4 +107,4 @@ const BasicLayout = () => {
   )
 }
 
-export default BasicLayout
+export default Layout

@@ -1,5 +1,24 @@
 import { HiOutlineTemplate } from 'react-icons/hi'
+import { useRecoilState } from 'recoil'
+import { ThemeState } from '../store/app'
+import { MouseEventHandler, useEffect } from 'react'
+import { getLocalStorage, setLocalStorage } from '../lib/localStorage'
 const ThemeToggle = () => {
+  const [theme, setTheme] = useRecoilState(ThemeState)
+  const onClickHandler: MouseEventHandler = (e) => {
+    if ((e.target as HTMLElement).nodeName !== 'INPUT') return
+    setTheme((e.target as HTMLInputElement).value)
+    setLocalStorage('theme', (e.target as HTMLInputElement).value)
+  }
+  useEffect(() => {
+    const THEME = JSON.parse(getLocalStorage('theme')!)
+    if (THEME) {
+      setTheme(THEME)
+    }
+  }, [])
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+  }, [theme])
   return (
     <div className='dropdown dropdown-end'>
       <div tabIndex={0} role='button' className='btn m-1 p-3'>
@@ -17,6 +36,7 @@ const ThemeToggle = () => {
       <ul
         tabIndex={0}
         className='dropdown-content z-[1] p-2 shadow-2xl bg-base-300 rounded-box w-52'
+        onClick={onClickHandler}
       >
         <li>
           <input
