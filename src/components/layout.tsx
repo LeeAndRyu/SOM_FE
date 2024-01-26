@@ -4,9 +4,21 @@ import SideMenu from './sideMenu'
 import { useNavigate } from 'react-router-dom'
 import { IoCloudSharp } from 'react-icons/io5'
 import 'react-toastify/dist/ReactToastify.css'
+import MobAside from './mobAside'
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { UserInfoState } from '../store/user'
+import { getLocalStorage } from '../lib/localStorage'
+
 const Layout = () => {
   const navigate = useNavigate()
+  const [moAsideToggle, setMoAsideToggle] = useState(false)
   const params = useParams()
+  const [_, setUser] = useRecoilState(UserInfoState)
+  useEffect(() => {
+    const userInfo = JSON.parse(getLocalStorage('user')!)
+    userInfo && setUser(userInfo)
+  }, [])
   return (
     <>
       <div id='wrap' className='bg-base-100'>
@@ -14,6 +26,33 @@ const Layout = () => {
           <div className='headInner'>
             <div className='navbar'>
               <div className='navbar-start'>
+                <div className='mobHam' onClick={() => setMoAsideToggle(true)}>
+                  {' '}
+                  <span
+                    tabIndex={0}
+                    role='button'
+                    className='btn btn-ghost btn-circle'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-5 w-5'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M4 6h16M4 12h16M4 18h7'
+                      />
+                    </svg>
+                  </span>
+                </div>
+
+                {moAsideToggle && (
+                  <MobAside setMoAsideToggle={setMoAsideToggle} />
+                )}
                 <div className='dropdown'>
                   <span
                     tabIndex={0}
@@ -51,9 +90,7 @@ const Layout = () => {
                 </Link>
               </div>
               <div className='navbar-center'></div>
-
               <div className='navbar-end'>
-                <ThemeToggle />
                 <button
                   onClick={() => navigate('/search')}
                   className='btn nofocus btn-ghost btn-circle'
@@ -73,7 +110,6 @@ const Layout = () => {
                     />
                   </svg>
                 </button>
-
                 <button className='btn btn-ghost nofocus btn-circle'>
                   <div className='indicator'>
                     <svg
@@ -93,6 +129,7 @@ const Layout = () => {
                     <span className='badge badge-xs badge-primary indicator-item'></span>
                   </div>
                 </button>
+                <ThemeToggle />
               </div>
             </div>
           </div>

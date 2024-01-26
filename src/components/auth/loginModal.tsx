@@ -5,6 +5,8 @@ import { LoginModalType } from '../../types/app'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../lib/axios'
 import { LoginSuccess } from '../../lib/auth'
+import { useRecoilState } from 'recoil'
+import { UserInfoState, UserTokenState } from '../../store/user'
 type Formvalues = {
   email: string
   password: string
@@ -15,24 +17,27 @@ const LoginModal = ({
 }: {
   setShowModal: React.Dispatch<React.SetStateAction<LoginModalType>>
 }) => {
+  const [_1, setUser] = useRecoilState(UserInfoState)
+  const [_2, setToken] = useRecoilState(UserTokenState)
   const {
     register,
     handleSubmit,
-
     getFieldState,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
   const navigate = useNavigate()
+
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
-    console.log(e)
     try {
       const res = await axiosInstance.post(`/login`, e)
       if (res.status === 200) {
+        setToken(res.data.tokenResponse)
+        setUser(res.data.member)
         await LoginSuccess(res.data)
         navigate('/')
       }
     } catch (error) {
-      // console.log(error)
+      console.log(error)
     }
   }
   return (

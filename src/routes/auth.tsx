@@ -46,7 +46,6 @@ const Auth = () => {
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        
         error.response?.status === 409 &&
           setError('accountName', { message: '중복된 계정명입니다' })
       }

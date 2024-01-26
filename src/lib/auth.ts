@@ -1,15 +1,27 @@
 import axios from 'axios'
-import { UserDetail } from '../types/api'
+import { UserResponse } from '../types/api'
 import {
   getLocalStorage,
   setAccessToken,
   setLocalStorage,
+  setRefreshToken,
 } from './localStorage'
+import { axiosInstance } from './axios'
 
-export const LoginSuccess = async (res: UserDetail) => {
+export const LoginSuccess = async (res: UserResponse) => {
   setAccessToken(res.tokenResponse.accessToken)
   setLocalStorage('user', res.member)
-  setLocalStorage('refreshToken', res.tokenResponse.refreshToken)
+  setRefreshToken(res.tokenResponse.refreshToken)
+}
+export const LogoutFun = async () => {
+  try {
+    const res = await axiosInstance.post('logout')
+    if (res.status === 200) {
+      localStorage.clear()
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const tokenRefresh = async () => {
@@ -21,7 +33,7 @@ export const tokenRefresh = async () => {
       },
     })
     if (res.status === 200) {
-      setAccessToken((res.data as UserDetail).tokenResponse.accessToken)
+      setAccessToken((res.data as UserResponse).tokenResponse.accessToken)
     }
   } catch (error) {
     console.log(error)

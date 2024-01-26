@@ -34,7 +34,7 @@ const ArticleItem = () => {
             by <strong>nara</strong>{' '}
           </span>
           <span>
-          <strong>0</strong>개의 댓글
+            <strong>0</strong>개의 댓글
           </span>
           <span>2024.01.14</span>
         </p>

@@ -9,16 +9,14 @@ ul.articleWrap {
     }
   }
   &.blogArticle {
-    
     flex-direction: column;
     @include mobile {
       // gap: 30px 0;
     }
   }
 }
-.articleItem {
-  
-  &:is(.homeArticle > .articleItem) {
+ul.articleWrap > li {
+  &:is(.homeArticle > li) {
     @include tablet {
       width: calc((100% - 20px) / 2);
     }
@@ -208,7 +206,7 @@ ul.articleWrap {
     cursor: pointer;
     padding: 40px 0;
     margin: 20px 0 0;
-    border-bottom: 1px solid oklch(var(--b3));;
+    border-bottom: 1px solid oklch(var(--b3));
     .icon_section {
       display: none;
     }
