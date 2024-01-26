@@ -15,9 +15,10 @@ const Layout = () => {
   const [moAsideToggle, setMoAsideToggle] = useState(false)
   const params = useParams()
   const [_, setUser] = useRecoilState(UserInfoState)
+  const userInfo = JSON.parse(getLocalStorage('user')!)
   useEffect(() => {
-    const userInfo = JSON.parse(getLocalStorage('user')!)
-    userInfo && setUser(userInfo)
+    console.log(userInfo)
+    userInfo!==null && setUser(() => userInfo)
   }, [])
   return (
     <>
