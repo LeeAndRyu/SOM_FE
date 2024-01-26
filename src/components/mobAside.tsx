@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Avatar from './common/avatar'
 import { IoMdClose } from 'react-icons/io'
 import { LogoutFun } from '../lib/auth'
-import { useResetRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserInfoState, UserTokenState } from '../store/user'
 import { toast } from 'react-toastify'
 import { getLocalStorage } from '../lib/localStorage'
@@ -12,7 +12,8 @@ interface Prop {
 }
 const MobAside = ({ setMoAsideToggle }: Prop) => {
   const navigate = useNavigate()
-  const user = getLocalStorage('user')
+  const saveduser = getLocalStorage('user')
+  const [user, _] = useRecoilState(UserInfoState)
   const resetUser = useResetRecoilState(UserInfoState)
   const resetToken = useResetRecoilState(UserTokenState)
   const LinkClickHandler: MouseEventHandler = (e) => {
@@ -31,7 +32,7 @@ const MobAside = ({ setMoAsideToggle }: Prop) => {
     <div className='mobAside bg-base-200'>
       <IoMdClose onClick={() => setMoAsideToggle(false)} />
       <ul onClick={LinkClickHandler}>
-        {user ? (
+        {saveduser ? (
           <>
             <li className='avatarLi'>
               <Avatar size={33} logged={true} />
@@ -40,7 +41,7 @@ const MobAside = ({ setMoAsideToggle }: Prop) => {
               <Link to={'/write'}>글쓰기</Link>
             </li>
             <li>
-              <Link to={'/blog/nara'}>내 블로그</Link>
+              <Link to={`/blog/${user.accountName}`}>내 블로그</Link>
             </li>
             <li>
               <Link to={'/mypage'}>내 정보 수정</Link>
