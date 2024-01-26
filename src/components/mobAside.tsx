@@ -1,39 +1,63 @@
-import React, { MouseEventHandler, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { MouseEventHandler } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Avatar from './common/avatar'
 import { IoMdClose } from 'react-icons/io'
+import { LogoutFun } from '../lib/auth'
+import { useResetRecoilState } from 'recoil'
+import { UserInfoState, UserTokenState } from '../store/user'
+import { toast } from 'react-toastify'
+import { getLocalStorage } from '../lib/localStorage'
 interface Prop {
   setMoAsideToggle: React.Dispatch<React.SetStateAction<boolean>>
 }
 const MobAside = ({ setMoAsideToggle }: Prop) => {
-  const [isItLogged, _setLogged] = useState(true)
+  const navigate = useNavigate()
+  const user = getLocalStorage('user')
+  const resetUser = useResetRecoilState(UserInfoState)
+  const resetToken = useResetRecoilState(UserTokenState)
   const LinkClickHandler: MouseEventHandler = (e) => {
     if ((e.target as HTMLElement).nodeName !== 'A') return
     setMoAsideToggle(false)
+  }
+  const LogoutHandler = async () => {
+    await LogoutFun().then(() => {
+      resetUser()
+      resetToken()
+      toast.success('로그아웃되었습니다!')
+      navigate('/')
+    })
   }
   return (
     <div className='mobAside bg-base-200'>
       <IoMdClose onClick={() => setMoAsideToggle(false)} />
       <ul onClick={LinkClickHandler}>
-        {isItLogged ? (
+        {user ? (
           <>
             <li className='avatarLi'>
-              <Avatar size={23} logged={true} />
-            </li>
-            <li>
-              <Link to={'/blog/nara'}>내 블로그</Link>
+              <Avatar size={33} logged={true} />
             </li>
             <li>
               <Link to={'/write'}>글쓰기</Link>
             </li>
             <li>
-              <Link to={'/login'}>로그아웃</Link>
+              <Link to={'/blog/nara'}>내 블로그</Link>
+            </li>
+            <li>
+              <Link to={'/mypage'}>내 정보 수정</Link>
+            </li>
+            <li>
+              <Link to={'/mypage'}>알림 내역</Link>
+            </li>
+            <li>
+              <a href='#none' onClick={LogoutHandler}>
+                로그아웃
+              </a>
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link to={'/login'}>홈</Link>
+              <Link to={'/'}>홈</Link>
             </li>
             <li>
               <Link to={'/login'}>로그인</Link>

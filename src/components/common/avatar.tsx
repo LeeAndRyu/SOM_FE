@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil'
-import Image from '../../assets/userProfile.png'
+import Image from '../../assets/basicProfile.png'
 import { UserInfoState } from '../../store/user'
 import { useEffect } from 'react'
 interface Prop {
@@ -29,7 +29,15 @@ const Avatar = ({ src, size, logged }: Prop) => {
           objectFit: 'cover',
           display: 'block',
         }}
-        src={logged ? user.member.profileImage : src ? src : Image}
+        src={
+          logged
+            ? user.profileImage
+              ? user.profileImage
+              : Image
+            : src
+              ? src
+              : Image
+        }
       />
     </div>
   )

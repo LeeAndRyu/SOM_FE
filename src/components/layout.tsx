@@ -5,11 +5,20 @@ import { useNavigate } from 'react-router-dom'
 import { IoCloudSharp } from 'react-icons/io5'
 import 'react-toastify/dist/ReactToastify.css'
 import MobAside from './mobAside'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { UserInfoState } from '../store/user'
+import { getLocalStorage } from '../lib/localStorage'
+
 const Layout = () => {
   const navigate = useNavigate()
   const [moAsideToggle, setMoAsideToggle] = useState(false)
   const params = useParams()
+  const [_, setUser] = useRecoilState(UserInfoState)
+  useEffect(() => {
+    const userInfo = JSON.parse(getLocalStorage('user')!)
+    userInfo && setUser(userInfo)
+  }, [])
   return (
     <>
       <div id='wrap' className='bg-base-100'>

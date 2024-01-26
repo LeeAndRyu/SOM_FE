@@ -8,12 +8,11 @@ import Search from './routes/search'
 import Auth from './routes/auth'
 import Layout from './components/layout'
 import BasicRoute from './components/basicRoute'
-import BlogRoute from './components/blogRoute'
-import BlogLayout from './components/blogLayout'
 import Post from './routes/post'
 import Blog from './routes/blog'
 import { ToastContainer } from 'react-toastify'
 import RecoilRootWrapper from './components/recoilRootWrapper'
+import Mypage from './routes/mypage'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -42,23 +41,9 @@ function App() {
           element: <Search />,
         },
         {
-          path: '/blog/:id',
-          element: <Blog />,
+          path: 'mypage',
+          element: <Mypage />,
         },
-        {
-          path: '/blog/:id/:post',
-          element: <Post />,
-        },
-      ],
-    },
-    {
-      path: 'blog',
-      element: (
-        <BlogRoute>
-          <BlogLayout />
-        </BlogRoute>
-      ),
-      children: [
         {
           path: '/blog/:id',
           element: <Blog />,
