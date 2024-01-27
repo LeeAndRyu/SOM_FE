@@ -334,7 +334,7 @@ form:has(.searchInput) span svg {
 
 #user_sec {
   position: relative;
-  padding: 50px 0 25px;
+  padding: 30px 0 25px;
   border-radius: 14px;
   background-color: oklch(var(--b2));
 }
