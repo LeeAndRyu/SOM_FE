@@ -1,0 +1,1 @@
+export type LoginModalType = 'login' | 'findPwd' | 'signUp'
