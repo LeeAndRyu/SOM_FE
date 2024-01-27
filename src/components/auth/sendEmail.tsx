@@ -22,7 +22,7 @@ const SendEmail = ({
     console.log(e)
     try {
       const res = await axiosInstance.post(
-        `${import.meta.env.PUBLIC_BACK_SERVER}/register/check-email`,
+        `${import.meta.env.VITE_PUBLIC_BACK_SERVER}/register/check-email`,
         e
       )
       if (res.status === 200) {

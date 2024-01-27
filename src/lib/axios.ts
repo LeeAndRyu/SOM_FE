@@ -14,7 +14,7 @@ const errorCodes: string[] = [
   'INTERNAL_SERVER_ERROR',
 ]
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.PUBLIC_BACK_SERVER,
+  baseURL: import.meta.env.VITE_PUBLIC_BACK_SERVER,
 })
 axiosInstance.interceptors.request.use(
   (config) => {

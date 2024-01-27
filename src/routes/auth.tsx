@@ -29,7 +29,7 @@ const Auth = () => {
     console.log(e)
     try {
       const res = await axios.post(
-        `${import.meta.env.PUBLIC_BACK_SERVER}/register?code=${code}`,
+        `${import.meta.env.VITE_PUBLIC_BACK_SERVER}/register?code=${code}`,
         {
           accountName: e.accountName,
           introduction: e.introduction,
