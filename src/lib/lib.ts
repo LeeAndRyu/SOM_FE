@@ -1,3 +1,5 @@
+import React from "react"
+
 export const getClassNames = (type: string) => {
   switch (type) {
     case 'home':

@@ -1,11 +1,26 @@
-// import { useParams } from 'react-router-dom'
 import Avatar from '../components/common/avatar'
 import { FaCircleCheck } from 'react-icons/fa6'
-import { MouseEventHandler, useState } from 'react'
+import { MouseEventHandler, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { IoSearchOutline } from 'react-icons/io5'
 import ArticleWrap from '../components/articleWrap'
+import { useQuery } from '@tanstack/react-query'
+import { useParams } from 'react-router-dom'
+import { getBlog } from '../lib/api/getBlog'
+import { BlogMember } from '../types/api'
+import { useRecoilState } from 'recoil'
+import { HeadLinkState } from '../store/app'
 const Blog = () => {
+  const [_link, setLink] = useRecoilState(HeadLinkState)
+  const params = useParams()
+  const { data } = useQuery<BlogMember>({
+    queryKey: ['blog', params.id],
+    queryFn: getBlog,
+    // enabled: memberId !== undefined,
+  })
+  useEffect(() => {
+    setLink({ path: `/blog/${params.id}`, content: data?.blogName || 'S ☻ M' })
+  }, [data])
   const tabs = [
     {
       id: 0,
@@ -28,18 +43,16 @@ const Blog = () => {
         <div>
           <section id='user_sec'>
             <div className='sec_inner'>
-              <Avatar />
+              <Avatar src={data?.profileImage} />
               <div className='info'>
-                <p className='username text-lg'>나라</p>
-                <p className='content text-base'>
-                  한 줄 소개 영역입니다 한 줄 소개 영역입니다{' '}
-                </p>
+                <p className='username text-lg'>{data?.nickname}</p>
+                <p className='content text-base'>{data?.introduction}</p>
                 <p className='follow'>
                   <span>
-                    <strong>10</strong>팔로잉
+                    <strong>{data?.followingCount}</strong>팔로잉
                   </span>
                   <span>
-                    <strong>5</strong>팔로워
+                    <strong>{data?.followerCount}</strong>팔로워
                   </span>
                 </p>
               </div>

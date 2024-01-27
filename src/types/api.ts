@@ -18,3 +18,13 @@ export interface UserToken {
   refreshToken: string
   tokenType: string
 }
+
+export interface BlogMember {
+  blogName: string
+  followerCount: number
+  followingCount: number
+  introduction: string
+  loginMemberFollowStatus: string
+  nickname: string
+  profileImage: string
+}

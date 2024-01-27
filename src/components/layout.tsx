@@ -1,4 +1,4 @@
-import { Outlet, Link, useParams } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import ThemeToggle from './themeToggle'
 import SideMenu from './sideMenu'
 import { useNavigate } from 'react-router-dom'
@@ -6,21 +6,31 @@ import { IoCloudSharp } from 'react-icons/io5'
 import 'react-toastify/dist/ReactToastify.css'
 import MobAside from './mobAside'
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserInfoState } from '../store/user'
 import { getLocalStorage } from '../lib/localStorage'
+import RQProvider from './rqProvider'
+import { HeadLinkState } from '../store/app'
 
 const Layout = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const [alink, _] = useRecoilState(HeadLinkState)
+  const resetAlink = useResetRecoilState(HeadLinkState)
   const [moAsideToggle, setMoAsideToggle] = useState(false)
-  const params = useParams()
-  const [_, setUser] = useRecoilState(UserInfoState)
+  const [_2, setUser] = useRecoilState(UserInfoState)
+  const userInfo = JSON.parse(getLocalStorage('user')!)
   useEffect(() => {
-    const userInfo = JSON.parse(getLocalStorage('user')!)
-    userInfo && setUser(userInfo)
+    console.log(userInfo)
+    userInfo !== null && setUser(() => userInfo)
   }, [])
+  useEffect(() => {
+    if (!location.pathname.includes('blog')) {
+      resetAlink()
+    }
+  }, [location.pathname])
   return (
-    <>
+    <RQProvider>
       <div id='wrap' className='bg-base-100'>
         <header id='header'>
           <div className='headInner'>
@@ -78,16 +88,12 @@ const Layout = () => {
                     <SideMenu />
                   </ul>
                 </div>
-                <Link to='/' className='btn btn-ghost text-xl'>
-                  {params.id ? (
-                    <>
-                      <IoCloudSharp />
-                      {params.id}
-                    </>
-                  ) : (
-                    <>S&nbsp;☻&nbsp;M</>
-                  )}
-                </Link>
+                <>
+                  <Link to={alink.path} className='btn btn-ghost text-xl'>
+                    {alink.path !== '/' && <IoCloudSharp />}
+                    {alink.content}
+                  </Link>
+                </>
               </div>
               <div className='navbar-center'></div>
               <div className='navbar-end'>
@@ -140,7 +146,7 @@ const Layout = () => {
           </div>
         </main>
       </div>
-    </>
+    </RQProvider>
   )
 }
 

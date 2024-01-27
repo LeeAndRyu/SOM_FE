@@ -3,11 +3,12 @@ import Avatar from './common/avatar'
 import { getLocalStorage } from '../lib/localStorage'
 import { LogoutFun } from '../lib/auth'
 import { UserInfoState, UserTokenState } from '../store/user'
-import { useResetRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { toast } from 'react-toastify'
 const SideMenu = () => {
-  const user = getLocalStorage('user')
+  const savedUser = getLocalStorage('user')
   const navigate = useNavigate()
+  const [user, _] = useRecoilState(UserInfoState)
   const resetUser = useResetRecoilState(UserInfoState)
   const resetToken = useResetRecoilState(UserTokenState)
   const LogoutHandler = async () => {
@@ -21,7 +22,7 @@ const SideMenu = () => {
   return (
     <div id='sideMenuWrapper'>
       <ul className='menu bg-base-200 w-56 rounded-box'>
-        {user ? (
+        {savedUser ? (
           <>
             <li>
               <details open>
@@ -30,9 +31,10 @@ const SideMenu = () => {
                 </summary>
                 <ul>
                   <li>
-                    <button onClick={() => navigate('/blog/nara')}>
-                      내 블로그
-                    </button>
+                    <Link to={'/'}>홈</Link>
+                  </li>
+                  <li>
+                    <Link to={`/blog/${user.accountName}`}>내 블로그</Link>
                   </li>
                   <li>
                     <Link to={'/write'}>글쓰기</Link>
@@ -54,7 +56,9 @@ const SideMenu = () => {
               </details>
             </li>
             <li>
-              <Link to={'#none'} onClick={LogoutHandler}>로그아웃</Link>
+              <Link to={'#none'} onClick={LogoutHandler}>
+                로그아웃
+              </Link>
             </li>
           </>
         ) : (

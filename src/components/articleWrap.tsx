@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import ArticleItem from './articleItem'
-import { getClassNames } from '../lib/getClassNames'
+import { getClassNames } from '../lib/lib'
 import Skeleton from './common/skeleton'
 import { Suspense } from 'react'
 interface Prop {
