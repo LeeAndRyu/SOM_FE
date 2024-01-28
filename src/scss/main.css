@@ -317,6 +317,12 @@ form:has(.searchInput) span svg {
   height: 30px;
 }
 
+.search_sec {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 :root {
   --side-padding: 1rem;
   --max-width: 1400px;
@@ -586,6 +592,10 @@ form:has(.searchInput) span svg {
 }
 .mypage .editPwd_sec form div:last-child button {
   width: fit-content;
+}
+
+#write_sec .quill .ql-container {
+  height: 60dvh;
 }
 
 :root {
