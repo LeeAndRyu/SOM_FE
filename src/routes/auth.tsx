@@ -29,7 +29,7 @@ const Auth = () => {
     console.log(e)
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BACK_SERVER}/register?code=${code}`,
+        `https://118.67.142.194.nip.io/register?code=${code}`,
         {
           accountName: e.accountName,
           introduction: e.introduction,

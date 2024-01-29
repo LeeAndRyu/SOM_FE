@@ -5,7 +5,7 @@ interface Prop {
   type?: 'button' | 'submit' | 'reset' | undefined
   onClick?: () => void
 }
-/* TYPE
+/* btnClass
 info
 success
 warning

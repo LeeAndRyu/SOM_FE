@@ -29,10 +29,6 @@ const Login = () => {
             <FindPwdModal setShowModal={setShowModal} />
           )}
         </div>
-
-        {/*         <Modal btnMessage='sign up' arrow={<FaCircleArrowRight />}>
-          <SignUpModal />
-        </Modal> */}
       </div>
       <React.Suspense fallback={<p className='infoP'>Loading...</p>}>
         <Spline

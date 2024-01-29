@@ -1,5 +1,5 @@
 import { FormEventHandler, useEffect, useRef, useState } from 'react'
-import Image from '../assets/basicProfile.png'
+import Image from '../assets/avatar-1.jpg'
 import Button from '../components/common/button'
 import { toast } from 'react-toastify'
 import { axiosInstance } from '../lib/axios'
@@ -141,7 +141,6 @@ const Mypage = () => {
               className={clsx(`input input-bordered mb-1.5`)}
               required
             />
-
           </div>
           <div>
             <label htmlFor='introduction'>한 줄 소개</label>
@@ -154,7 +153,6 @@ const Mypage = () => {
               className={clsx(`input input-bordered mb-1.5`)}
               required
             />
-
           </div>
           <div>
             <Button btnClass='secondary' type='submit'>

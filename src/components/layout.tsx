@@ -21,7 +21,7 @@ const Layout = () => {
   const [_2, setUser] = useRecoilState(UserInfoState)
   const userInfo = JSON.parse(getLocalStorage('user')!)
   useEffect(() => {
-    console.log(userInfo)
+    
     userInfo !== null && setUser(() => userInfo)
   }, [])
   useEffect(() => {

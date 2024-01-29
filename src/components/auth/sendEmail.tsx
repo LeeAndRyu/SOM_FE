@@ -21,10 +21,7 @@ const SendEmail = ({
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     console.log(e)
     try {
-      const res = await axiosInstance.post(
-        `${import.meta.env.VITE_BACK_SERVER}/register/check-email`,
-        e
-      )
+      const res = await axiosInstance.post(`/register/check-email`, e)
       if (res.status === 200) {
         setSendingEmail(true)
       }

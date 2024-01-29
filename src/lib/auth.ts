@@ -15,7 +15,7 @@ export const LoginSuccess = async (res: UserResponse) => {
 }
 export const LogoutFun = async () => {
   try {
-    const res = await axiosInstance.post('logout')
+    const res = await axiosInstance.post('/logout')
     if (res.status === 200) {
       localStorage.clear()
     }
@@ -27,7 +27,7 @@ export const LogoutFun = async () => {
 export const tokenRefresh = async () => {
   const token = getLocalStorage('refreshToken')
   try {
-    const res = await axios.get('/reissue', {
+    const res = await axios.get('https://118.67.142.194.nip.io/reissue', {
       headers: {
         RefreshToken: `Bearer ${token}`,
       },

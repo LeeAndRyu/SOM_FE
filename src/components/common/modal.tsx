@@ -4,7 +4,6 @@ const Modal = ({
   children,
   btnMessage,
   arrow,
-  setReset,
 }: {
   children: React.ReactNode
   btnMessage: string
@@ -15,6 +14,7 @@ const Modal = ({
   return (
     <>
       <button
+        type='button'
         className='btn loginBtn'
         onClick={() => modalRef.current && modalRef.current.showModal()}
       >
@@ -25,7 +25,8 @@ const Modal = ({
         <div className='modal-box'>
           <form method='dialog'>
             <button
-              onClick={() => setReset && setReset(true)}
+              
+              // onClick={() => setReset && setReset(false)}
               className='btn btn-sm nofocus btn-circle btn-ghost absolute right-2 top-2'
             >
               ✕

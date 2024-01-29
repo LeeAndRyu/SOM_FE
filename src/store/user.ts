@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import Image from '../assets/basicProfile.png'
+import Image from '../assets/avatar-1.jpg'
 export const UserInfoState = atom({
   key: 'userInfoState',
   default: {

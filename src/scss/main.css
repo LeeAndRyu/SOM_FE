@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -118,7 +119,6 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   vertical-align: baseline;
 }
 
@@ -317,6 +317,12 @@ form:has(.searchInput) span svg {
   height: 30px;
 }
 
+.search_sec {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 :root {
   --side-padding: 1rem;
   --max-width: 1400px;
@@ -334,7 +340,7 @@ form:has(.searchInput) span svg {
 
 #user_sec {
   position: relative;
-  padding: 50px 0 25px;
+  padding: 30px 0 25px;
   border-radius: 14px;
   background-color: oklch(var(--b2));
 }
@@ -586,6 +592,106 @@ form:has(.searchInput) span svg {
 }
 .mypage .editPwd_sec form div:last-child button {
   width: fit-content;
+}
+
+#write_sec form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#write_sec form input.titleInput {
+  font-size: 30px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+#write_sec form input.titleInput:focus {
+  outline: none;
+  border: none;
+}
+#write_sec form input.tagInput {
+  border: none;
+  outline: none;
+  width: fit-content;
+}
+#write_sec form input.tagInput:focus {
+  outline: none;
+  border: none;
+}
+#write_sec form .tag_sec {
+  display: flex;
+}
+#write_sec form .tag_sec ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#write_sec form .tag_sec ul li {
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 20px;
+  transition: all 0.1s;
+}
+#write_sec form .tag_sec ul li:hover {
+  opacity: 0.8;
+}
+#write_sec .quill .ql-container {
+  height: 60dvh;
+}
+#write_sec #postModal {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#write_sec #postModal h4 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+#write_sec #postModal .thumb_sec {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#write_sec #postModal .thumb_sec .alert {
+  position: absolute;
+  top: 10px;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#write_sec #postModal .thumb_sec img {
+  width: 100%;
+  display: block;
+  height: 200px;
+  object-fit: cover;
+  opacity: 0.7;
+  border-radius: 10px;
+}
+#write_sec #postModal .thumb_sec img.noimg {
+  opacity: 0.3;
+}
+
+#view.ql-snow .ql-editor ul {
+  list-style: initial;
+  list-style-position: inside;
+}
+#view.ql-snow .ql-editor ol {
+  list-style: auto;
+  list-style-position: inside;
+}
+#view.ql-snow .ql-editor pre {
+  font-family: "Source Code Pro", monospace;
+  padding: 10px 14px;
+}
+#view.ql-snow .ql-editor blockquote {
+  margin: 0;
+  border-color: oklch(var(--a));
 }
 
 :root {

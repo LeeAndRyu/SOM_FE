@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil'
-import Image from '../../assets/basicProfile.png'
+import Image from '../../assets/avatar-1.jpg'
 import { UserInfoState } from '../../store/user'
 import { useEffect } from 'react'
 interface Prop {
