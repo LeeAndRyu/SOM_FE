@@ -1,0 +1,22 @@
+#view.ql-snow {
+  .ql-editor {
+    ul {
+      list-style: initial;
+      list-style-position: inside;
+    }
+    ol {
+      list-style: auto;
+      list-style-position: inside;
+    }
+    pre {
+      font-family: 'Source Code Pro', monospace;
+      // background-color: oklch(var(--b3));
+      padding: 10px 14px;
+      // color: oklch(var(--bc))
+    }
+    blockquote {
+      margin: 0;
+      border-color: oklch(var(--a));
+    }
+  }
+}
