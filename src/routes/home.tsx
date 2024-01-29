@@ -1,8 +1,12 @@
-import { MouseEventHandler, useState } from 'react'
+import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
 import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
 import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
 import { HiMiniFire } from 'react-icons/hi2'
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import { useInView } from 'react-intersection-observer'
+import { PostRes } from '../types/api'
+import { getHomeList } from '../lib/useQuery/getHome'
 const Home = () => {
   const tabs = [
     {
@@ -27,6 +31,32 @@ const Home = () => {
     console.log((e.target as HTMLElement).dataset.idx)
     setTab(+(e.target as HTMLElement).dataset.idx!)
   }
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
+    PostRes,
+    Object,
+    InfiniteData<PostRes>,
+    [_1: string, _2: number],
+    number
+  >({
+    queryKey: ['home', tab],
+    queryFn: getHomeList,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.pageDto.totalPages === 0 ||
+        lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
+        ? undefined
+        : lastPage.pageDto.currentPage + 1
+    },
+  })
+  const { ref, inView } = useInView({
+    threshold: 0,
+    delay: 0,
+  })
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage()
+    }
+  }, [inView, isFetching, hasNextPage, fetchNextPage])
   return (
     <>
       <div
@@ -50,13 +80,20 @@ const Home = () => {
           </a>
         ))}
       </div>
-      {tab === 0 ? (
-        <ArticleWrap type='home' />
-      ) : tab === 1 ? (
-        <p>11</p>
-      ) : (
-        <p>2</p>
-      )}
+      <div>
+        {data?.pages.map((page, itemIdx: number) => (
+          <Fragment key={itemIdx}>
+            {page.postList.length < 1 ? (
+              <p className='resultP'>❌</p>
+            ) : (
+              <>
+                <ArticleWrap type='home' list={page.postList} />
+              </>
+            )}
+          </Fragment>
+        ))}
+        <div ref={ref} style={{ height: 50 }} />
+      </div>
     </>
   )
 }

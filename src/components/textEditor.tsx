@@ -1,7 +1,6 @@
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import Quill from 'quill'
-import DOMPurify from 'isomorphic-dompurify'
 import { ImageActions } from '@xeger/quill-image-actions'
 import { ImageFormats } from '@xeger/quill-image-formats'
 import React, { useEffect, useRef, useState } from 'react'
@@ -59,9 +58,7 @@ const TextEditor = () => {
   const [tagInput, setTagInput] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [thumbnail, setThumb] = useState('')
-
   const quillRef = useRef<any>(null)
-
   const ImageHandler = () => {
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
@@ -155,6 +152,7 @@ const TextEditor = () => {
   }, [thumbnail])
   //게시글 최종 POST submit
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
+    if (e.title === '' || !e.introduction) return
     try {
       const res = await axiosInstance.post(`/post`, {
         content,
@@ -212,7 +210,7 @@ const TextEditor = () => {
           formats={formats}
         />
 
-        <Modal btnMessage='제출'>
+        <Modal btnMessage='작성 완료 📝'>
           <div id='postModal'>
             <h4>썸네일 및 소개글</h4>
             <div className='thumb_sec'>
@@ -234,6 +232,7 @@ const TextEditor = () => {
             <div className='intro_sec'>
               <textarea
                 className='textarea textarea-bordered w-full'
+                required
                 placeholder='간략한 소개글을 작성해보세요'
                 {...register('introduction', {
                   required: '필수 입력 항목입니다',
@@ -241,19 +240,11 @@ const TextEditor = () => {
               ></textarea>
             </div>
             <Button type='submit' btnClass='primary'>
-              작성하기
+              업로드하기
             </Button>
           </div>
         </Modal>
       </form>
-      <div id='view' className='ql-snow'>
-        {/* <ReactQuill readOnly value={content} /> */}
-        {/* const clean = DOMPurify.sanitize(content); */}
-        <div
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
-          className='ql-editor'
-        />
-      </div>
     </div>
   )
 }

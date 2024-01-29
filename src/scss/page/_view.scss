@@ -1,5 +1,10 @@
 #view.ql-snow {
+  cursor: default;
+  & * {
+    cursor: default;
+  }
   .ql-editor {
+    padding: 0;
     ul {
       list-style: initial;
       list-style-position: inside;

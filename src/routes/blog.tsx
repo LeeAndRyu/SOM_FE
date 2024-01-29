@@ -1,13 +1,14 @@
 import Avatar from '../components/common/avatar'
 import { FaCircleCheck } from 'react-icons/fa6'
-import { MouseEventHandler, useEffect, useState } from 'react'
+import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { IoSearchOutline } from 'react-icons/io5'
 import ArticleWrap from '../components/articleWrap'
-import { useQuery } from '@tanstack/react-query'
+import { InfiniteData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { getBlog } from '../lib/useQuery/getBlog'
-import { BlogMember } from '../types/api'
+import { useInView } from 'react-intersection-observer'
+import { getBlogList, getBlogMember } from '../lib/useQuery/getBlog'
+import { BlogMember, PostRes } from '../types/api'
 import { useRecoilState } from 'recoil'
 import { HeadLinkState } from '../store/app'
 const Blog = () => {
@@ -15,9 +16,42 @@ const Blog = () => {
   const params = useParams()
   const { data } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
-    queryFn: getBlog,
+    queryFn: getBlogMember,
     // enabled: memberId !== undefined,
   })
+  const {
+    data: posts,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  } = useInfiniteQuery<
+    PostRes,
+    Object,
+    InfiniteData<PostRes>,
+    [_1: string, _2: string, _3: string],
+    number
+  >({
+    queryKey: ['blog', params.id!, 'posts'],
+    queryFn: getBlogList,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.pageDto.totalPages === 0 ||
+        lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
+        ? undefined
+        : lastPage.pageDto.currentPage + 1
+    },
+    // staleTime: 60 * 1000,
+    // gcTime: 300 * 1000,
+  })
+  const { ref, inView } = useInView({
+    threshold: 0,
+    delay: 0,
+  })
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage()
+    }
+  }, [inView, isFetching, hasNextPage, fetchNextPage])
   useEffect(() => {
     setLink({ path: `/blog/${params.id}`, content: data?.blogName || 'S ☻ M' })
   }, [data])
@@ -42,7 +76,7 @@ const Blog = () => {
       <div id='blog' className='mockup-browser border bg-base-100'>
         <div>
           <section id='user_sec'>
-            <div className='sec_inner'>
+            <div className='sec_inner userInfoSec'>
               <Avatar src={data?.profileImage} />
               <div className='info'>
                 <p className='username text-lg'>{data?.nickname}</p>
@@ -89,11 +123,23 @@ const Blog = () => {
                   </form>
                 </div>
                 <div className='result_sec'>
-                  <p className='resultP'>
-                    🔍 총 <span>8개</span>의 포스트를 찾았습니다.
-                  </p>
-                  {/* <p className='resultP'>❌ 검색 결과가 없습니다</p> */}
-                  <ArticleWrap type='blog' />
+                  {posts?.pages.map((page, itemIdx: number) => (
+                    <Fragment key={itemIdx}>
+                      {page.postList.length < 1 ? (
+                        <p className='resultP'>❌ 검색 결과가 없습니다</p>
+                      ) : (
+                        <>
+                          <p className='resultP'>
+                            🔍 총 <span>{page.pageDto.totalElement}개</span>의
+                            포스트를 찾았습니다.
+                          </p>
+                          <ArticleWrap type='blog' list={page.postList} />
+                        </>
+                      )}
+                    </Fragment>
+                  ))}
+
+                  <div ref={ref} style={{ height: 50 }} />
                 </div>
               </div>
             </div>

@@ -30,59 +30,61 @@
   .sec_inner {
     width: 60%;
     margin: 0 auto;
+  }
+}
+
+.userInfoSec {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  gap: 30px;
+  @include mobile {
+    gap: 20px;
+    flex-direction: column;
+  }
+  .avatar:is(.sec_inner.userInfoSec > .avatar) {
+    background-color: oklch(var(--b1));
+    box-shadow: 0 10px 20px 0 #0000000c;
+    width: 160px !important;
+    height: 160px !important;
+  }
+  .info {
     display: flex;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-    gap: 30px;
+    flex-direction: column;
+    gap: 15px;
     @include mobile {
-      gap: 20px;
-      flex-direction: column;
+      gap: 10px;
     }
-    .avatar {
-      background-color: oklch(var(--b1));
-      box-shadow: 0 10px 20px 0 #0000000c;
-      width: 160px !important;
-      height: 160px !important;
-    }
-    .info {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+    p {
       @include mobile {
-        gap: 10px;
+        text-align: center;
       }
-      p {
-        @include mobile {
-          text-align: center;
-        }
+    }
+    p.username {
+      font-size: 25px;
+      font-weight: 600;
+    }
+    p.follow {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-start;
+      align-items: baseline;
+      @include mobile {
+        justify-content: center;
+        align-items: center;
       }
-      p.username {
-        font-size: 25px;
-        font-weight: 600;
-      }
-      p.follow {
+      span {
         display: flex;
-        gap: 10px;
-        justify-content: flex-start;
-        align-items: baseline;
-        @include mobile {
-          justify-content: center;
-          align-items: center;
-        }
-        span {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          strong {
-            font-weight: bolder;
-          }
+        align-items: center;
+        gap: 4px;
+        strong {
+          font-weight: bolder;
         }
       }
     }
   }
 }
-
 #content_sec {
   margin-top: 30px;
   min-height: 50vh;

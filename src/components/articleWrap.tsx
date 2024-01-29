@@ -3,34 +3,27 @@ import ArticleItem from './articleItem'
 import { getClassNames } from '../lib/lib'
 import Skeleton from './common/skeleton'
 import { Suspense } from 'react'
+import { PostItem } from '../types/api'
 interface Prop {
   type?: string
-  list?: any
+  list?: PostItem[]
 }
-const ArticleWrap = ({ type }: Prop) => {
+const ArticleWrap = ({ type, list }: Prop) => {
   return (
     <>
       <ul className={clsx('articleWrap', getClassNames(type!))}>
-        <Suspense
-          fallback={
-            <li>
-              <Skeleton width={'100%'} height={'100%'} />
-            </li>
-          }
-        >
-          <ArticleItem />
-        </Suspense>
-
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
-        <ArticleItem />
+        {list &&
+          list.map((item) => (
+            <Suspense
+              fallback={
+                <li>
+                  <Skeleton width={'100%'} height={'100%'} />
+                </li>
+              }
+            >
+              <ArticleItem item={item} />
+            </Suspense>
+          ))}
       </ul>
     </>
   )

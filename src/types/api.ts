@@ -28,3 +28,41 @@ export interface BlogMember {
   nickname: string
   profileImage: string
 }
+
+export interface PostRes {
+  pageDto: {
+    currentElements: number
+    currentPage: number
+    pageSize: number
+    totalElement: number
+    totalPages: number
+  }
+  postList: PostItem[]
+}
+export interface PostItem {
+  accountName: string
+  introduction: string
+  likes: number
+  memberId: number
+  postId: number
+  registeredAt: Date
+  tags: string[]
+  thumbnail: string
+  title: string
+  views: number
+}
+
+export interface PostDetail {
+  accountName: string
+  content: string
+  introduction: string
+  lastModifiedAt: Date
+  likes: number
+  memberId: number
+  postId: number
+  registeredAt: Date
+  tags: string[]
+  thumbnail: string
+  title: string
+  views: number
+}
