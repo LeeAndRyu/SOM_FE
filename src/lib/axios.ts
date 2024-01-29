@@ -14,7 +14,7 @@ const errorCodes: string[] = [
   'INTERNAL_SERVER_ERROR',
 ]
 export const axiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://118.67.142.194:8080',
 })
 axiosInstance.interceptors.request.use(
   (config) => {

@@ -15,7 +15,7 @@ export const LoginSuccess = async (res: UserResponse) => {
 }
 export const LogoutFun = async () => {
   try {
-    const res = await axiosInstance.post('logout')
+    const res = await axiosInstance.post('/logout')
     if (res.status === 200) {
       localStorage.clear()
     }

@@ -141,7 +141,6 @@ const Mypage = () => {
               className={clsx(`input input-bordered mb-1.5`)}
               required
             />
-
           </div>
           <div>
             <label htmlFor='introduction'>한 줄 소개</label>
@@ -154,7 +153,6 @@ const Mypage = () => {
               className={clsx(`input input-bordered mb-1.5`)}
               required
             />
-
           </div>
           <div>
             <Button btnClass='secondary' type='submit'>

@@ -28,7 +28,7 @@ const Auth = () => {
     if (!code) return
     console.log(e)
     try {
-      const res = await axios.post(`/api/register?code=${code}`, {
+      const res = await axios.post(`http://118.67.142.194:8080/register?code=${code}`, {
         accountName: e.accountName,
         introduction: e.introduction,
         nickname: e.nickname,
