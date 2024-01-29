@@ -46,9 +46,8 @@ const formats = [
 const TextEditor = () => {
   const {
     register,
-    
+
     handleSubmit,
-    
   } = useForm<Formvalues>({
     mode: 'all',
   })
@@ -56,7 +55,7 @@ const TextEditor = () => {
   // const [title, setTitle] = useState('')
   const [tagInput, setTagInput] = useState('')
   const [tags, setTags] = useState<string[]>([])
-/*   const [thumbnail, setThumb] = useState('')
+  /*   const [thumbnail, setThumb] = useState('')
   const [intro, setIntro] = useState('')
   const [showStep2, setShotStep2] = useState(false) */
   const quillRef = useRef<any>(null)
@@ -136,9 +135,7 @@ const TextEditor = () => {
       setTagInput('')
     }
   }
-  const getThumbnail = () => {
-    
-  }
+  const getThumbnail = () => {}
   //게시글 최종 POST submit
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     try {
@@ -204,6 +201,13 @@ const TextEditor = () => {
             id='profileImage'
             onChange={getThumbnail}
             className='file-input file-input-bordered w-full max-w-xs'
+          />
+          <input
+            type='text'
+            placeholder='소개글'
+            {...register('introduction', {
+              required: '필수 입력 항목입니다',
+            })}
           />
         </Modal>
       </form>
