@@ -38,7 +38,7 @@ const Post = () => {
   return (
     <div id='post'>
       <div id='post_nav'>
-        <ul>ㅊ포ㅡ스턴</ul>
+        <ul>좋아요기능등등추가할거임</ul>
       </div>
       <div id='post_cont'>
         <div className='top_sec'>
