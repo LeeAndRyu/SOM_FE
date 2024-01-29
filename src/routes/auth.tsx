@@ -28,12 +28,15 @@ const Auth = () => {
     if (!code) return
     console.log(e)
     try {
-      const res = await axios.post(`/server/register?code=${code}`, {
-        accountName: e.accountName,
-        introduction: e.introduction,
-        nickname: e.nickname,
-        password: e.password,
-      })
+      const res = await axios.post(
+        `https://118.67.142.194.nip.io/register?code=${code}`,
+        {
+          accountName: e.accountName,
+          introduction: e.introduction,
+          nickname: e.nickname,
+          password: e.password,
+        }
+      )
 
       if (res.status === 200) {
         if (confirm('회원가입 성공! 로그인 하시겠습니까?')) {
