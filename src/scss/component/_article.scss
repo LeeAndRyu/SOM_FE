@@ -26,6 +26,13 @@ ul.articleWrap > li {
     }
     &:not(:has(.top_section img)) {
       flex-direction: column-reverse;
+      @include mobile {
+        .top_section {
+          &::after {
+            padding-bottom: 10%;
+          }
+        }
+      }
     }
     width: calc((100% - 60px) / 4);
     display: flex;

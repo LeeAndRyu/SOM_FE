@@ -77,6 +77,11 @@ function App() {
           style={{ zIndex: 200 }}
           hideProgressBar={false}
           position='top-center'
+          newestOnTop={true}
+          closeOnClick
+          draggable
+          pauseOnHover={false}
+          autoClose={2000}
           // theme='dark'
         />
         {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}

@@ -101,6 +101,26 @@ const Blog = () => {
                     <p>전체보기</p>
                     <span>(20)</span>
                   </li>
+                  <li>
+                    <p>react</p>
+                    <span>(20)</span>
+                  </li>
+                  <li>
+                    <p>next.js</p>
+                    <span>(20)</span>
+                  </li>
+                  <li>
+                    <p>프론트엔드</p>
+                    <span>(20)</span>
+                  </li>
+                  <li>
+                    <p>트러블슈팅</p>
+                    <span>(20)</span>
+                  </li>
+                  <li>
+                    <p>트러블슈팅222</p>
+                    <span>(20)</span>
+                  </li>
                 </ul>
               </div>
               <div className='cont_right'>

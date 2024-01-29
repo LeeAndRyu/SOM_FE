@@ -46,11 +46,7 @@ const formats = [
   'h2',
 ]
 const TextEditor = () => {
-  const {
-    register,
-
-    handleSubmit,
-  } = useForm<Formvalues>({
+  const { register, handleSubmit } = useForm<Formvalues>({
     mode: 'all',
   })
   const navigate = useNavigate()
@@ -150,6 +146,7 @@ const TextEditor = () => {
   useEffect(() => {
     console.log(thumbnail)
   }, [thumbnail])
+
   //게시글 최종 POST submit
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     if (e.title === '' || !e.introduction) return
@@ -171,41 +168,41 @@ const TextEditor = () => {
   }
   return (
     <div id='write_sec'>
-      <form onSubmit={handleSubmit(onSubmitHandler)}>
+      <input
+        type='text'
+        placeholder='제목을 입력하세요'
+        {...register('title', {
+          required: '필수 입력 항목입니다',
+        })}
+        className={`input titleInput`}
+        required
+      />
+      <div className='tag_sec'>
         <input
           type='text'
-          placeholder='제목을 입력하세요'
-          {...register('title', {
-            required: '필수 입력 항목입니다',
-          })}
-          className={`input titleInput`}
-          required
+          placeholder='태그 입력'
+          className={`input tagInput`}
+          value={tagInput}
+          onChange={(e) => setTagInput(e.target.value)}
+          onKeyUp={handleOnKeyPress}
         />
-        <div className='tag_sec'>
-          <input
-            type='text'
-            placeholder='태그 입력'
-            className={`input tagInput`}
-            value={tagInput}
-            onChange={(e) => setTagInput(e.target.value)}
-            onKeyUp={handleOnKeyPress}
-          />
-          <ul>
-            {tags.map((tag, idx) => (
-              <li
-                onClick={deleteTag}
-                className='bg-primary text-primary-content'
-                key={tag + idx}
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul>
+          {tags.map((tag, idx) => (
+            <li
+              onClick={deleteTag}
+              className='bg-primary text-primary-content'
+              key={tag + idx}
+            >
+              {tag}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <form onSubmit={handleSubmit(onSubmitHandler)}>
         <ReactQuill
           ref={quillRef}
           modules={modules}
-          onChange={setContent}
+          onChange={(value)=>setContent(value)}
           theme='snow'
           formats={formats}
         />
