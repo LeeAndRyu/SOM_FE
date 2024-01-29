@@ -27,7 +27,7 @@ export const LogoutFun = async () => {
 export const tokenRefresh = async () => {
   const token = getLocalStorage('refreshToken')
   try {
-    const res = await axios.get('/reissue', {
+    const res = await axios.get('/server/reissue', {
       headers: {
         RefreshToken: `Bearer ${token}`,
       },

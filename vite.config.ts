@@ -5,10 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
-        target: 'http://118.67.142.194:8080',
+      '/server': {
+        target: 'https://118.67.142.194.nip.io',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/server/, ''),
         secure: false,
         ws: true,
       },

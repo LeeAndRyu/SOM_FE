@@ -594,6 +594,49 @@ form:has(.searchInput) span svg {
   width: fit-content;
 }
 
+#write_sec form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#write_sec form input.titleInput {
+  font-size: 30px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+#write_sec form input.titleInput:focus {
+  outline: none;
+  border: none;
+}
+#write_sec form input.tagInput {
+  border: none;
+  outline: none;
+  width: fit-content;
+}
+#write_sec form input.tagInput:focus {
+  outline: none;
+  border: none;
+}
+#write_sec form .tag_sec {
+  display: flex;
+}
+#write_sec form .tag_sec ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#write_sec form .tag_sec ul li {
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 20px;
+  transition: all 0.1s;
+}
+#write_sec form .tag_sec ul li:hover {
+  opacity: 0.8;
+}
 #write_sec .quill .ql-container {
   height: 60dvh;
 }
