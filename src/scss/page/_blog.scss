@@ -31,8 +31,9 @@
     width: 60%;
     margin: 0 auto;
     @include mobile {
-      gap: 20px;
-      flex-direction: column;
+      // gap: 20px;
+      // flex-direction: column;
+      width: 90%;
     }
   }
 }
@@ -59,7 +60,7 @@
     }
     p:is(.sec_inner .info p) {
       @include mobile {
-        text-align: center;
+        // text-align: center;
       }
     }
     p.username {
@@ -89,6 +90,9 @@
 #content_sec {
   margin-top: 30px;
   min-height: 50vh;
+  @include mobile{
+    margin-top: 10px;
+  }
   .sec_inner {
     padding: 30px 0;
     display: flex;

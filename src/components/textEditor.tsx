@@ -59,7 +59,7 @@ const TextEditor = () => {
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
     input.setAttribute('accept', 'image/*')
-    input.click() // 에디터 이미지버튼을 클릭하면 이 input이 클릭된다.
+    input.click() 
     input.addEventListener('change', async () => {
       if (!input.files) return
       const file = input.files[0]
@@ -97,8 +97,6 @@ const TextEditor = () => {
           [
             { list: 'ordered' },
             { list: 'bullet' },
-            // { indent: '-1' },
-            // { indent: '+1' },
           ],
           [{ align: [] }, { color: [] }, { background: [] }],
           ['blockquote', 'link', 'code-block', 'image'],

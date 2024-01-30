@@ -7,18 +7,31 @@ import ArticleWrap from '../components/articleWrap'
 import { InfiniteData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
-import { getBlogList, getBlogMember } from '../lib/useQuery/getBlog'
-import { BlogMember, PostRes } from '../types/api'
+import {
+  getBlogList,
+  getBlogMember,
+  getBlogTags,
+} from '../lib/useQuery/getBlog'
+import { BlogMember, BlogTags, PostRes, TagItem } from '../types/api'
 import { useRecoilState } from 'recoil'
 import { HeadLinkState } from '../store/app'
 const Blog = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
   const params = useParams()
+  const [tagList, setTagList] = useState<TagItem[]>([])
   const { data } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
     queryFn: getBlogMember,
     // enabled: memberId !== undefined,
   })
+  const { data: tags } = useQuery<BlogTags>({
+    queryKey: ['blog', params.id, 'tags'],
+    queryFn: getBlogTags,
+    // enabled: memberId !== undefined,
+  })
+  useEffect(() => {
+    tags && setTagList(tags.tagList)
+  }, [tags])
   const {
     data: posts,
     fetchNextPage,
@@ -99,28 +112,14 @@ const Blog = () => {
                 <ul>
                   <li>
                     <p>전체보기</p>
-                    <span>(20)</span>
+                    <span>({tags?.totalPostCount})</span>
                   </li>
-                  <li>
-                    <p>react</p>
-                    <span>(20)</span>
-                  </li>
-                  <li>
-                    <p>next.js</p>
-                    <span>(20)</span>
-                  </li>
-                  <li>
-                    <p>프론트엔드</p>
-                    <span>(20)</span>
-                  </li>
-                  <li>
-                    <p>트러블슈팅</p>
-                    <span>(20)</span>
-                  </li>
-                  <li>
-                    <p>트러블슈팅222</p>
-                    <span>(20)</span>
-                  </li>
+                  {tagList.map((tag) => (
+                    <li key={tag.tagId}>
+                      <p>{tag.tagName}</p>
+                      <span>({tag.tagCount})</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className='cont_right'>

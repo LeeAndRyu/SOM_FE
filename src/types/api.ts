@@ -29,6 +29,17 @@ export interface BlogMember {
   profileImage: string
 }
 
+export interface BlogTags {
+  tagList: TagItem[]
+  totalPostCount: number
+}
+
+export interface TagItem {
+  tagCount: number
+  tagId: number
+  tagName: string
+}
+
 export interface PostRes {
   pageDto: {
     currentElements: number
@@ -45,6 +56,7 @@ export interface PostItem {
   likes: number
   memberId: number
   postId: number
+  profileImage: string
   registeredAt: Date
   tags: string[]
   thumbnail: string

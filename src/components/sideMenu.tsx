@@ -68,7 +68,7 @@ const SideMenu = () => {
                 <summary>☁️</summary>
                 <ul>
                   <li>
-                    <Link to={'/login'}>홈</Link>
+                    <Link to={'/'}>홈</Link>
                   </li>
                   <li>
                     <Link to={'/login'}>로그인</Link>

@@ -16,7 +16,7 @@ const ArticleWrap = ({ type, list }: Prop) => {
           list.map((item) => (
             <Suspense
               fallback={
-                <li>
+                <li key={item.postId}>
                   <Skeleton width={'100%'} height={'100%'} />
                 </li>
               }

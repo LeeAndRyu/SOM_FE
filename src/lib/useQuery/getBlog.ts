@@ -14,3 +14,11 @@ export function getBlogList({ queryKey }: any) {
     .then((res) => res.data)
   return res
 }
+
+export function getBlogTags({ queryKey }: any) {
+  const [_1, accountName, _3] = queryKey
+  const res = axiosInstance
+    .get(`/blog/${accountName}/tags`)
+    .then((res) => res.data)
+  return res
+}
