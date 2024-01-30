@@ -7,16 +7,20 @@ export function getBlogMember({ queryKey }: any) {
   return res
 }
 
-export function getBlogList({ queryKey }: any) {
-  const [_1, accountName, _3] = queryKey
+export function getBlogList({ queryKey, pageParam }: any) {
+  const [_1, accountName, _3, searchParams] = queryKey
+  const urlSearchParams = new URLSearchParams(searchParams)
   const res = axiosInstance
-    .get(`/blog/${accountName}/posts`)
+    .get(
+      `/blog/${accountName}/posts?p=${pageParam}&${urlSearchParams.toString()}`
+    )
     .then((res) => res.data)
   return res
 }
 
 export function getBlogTags({ queryKey }: any) {
   const [_1, accountName, _3] = queryKey
+
   const res = axiosInstance
     .get(`/blog/${accountName}/tags`)
     .then((res) => res.data)

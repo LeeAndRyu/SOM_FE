@@ -33,7 +33,7 @@ const ArticleItem = ({ item }: { item: PostItem }) => {
           <p className='tags'>
             {item?.tags.map((tag, idx) => {
               if (idx > 3) return <></>
-              return <span>{tag}</span>
+              return <span key={idx}>{tag}</span>
             })}
             {item.tags.length > 3 && (
               <span className='moreTags'>+{item.tags.length - 3}개</span>

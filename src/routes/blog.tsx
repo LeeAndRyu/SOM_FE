@@ -1,11 +1,11 @@
 import Avatar from '../components/common/avatar'
 import { FaCircleCheck } from 'react-icons/fa6'
-import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
-import clsx from 'clsx'
+import { Fragment, useEffect, useState } from 'react'
+
 import { IoSearchOutline } from 'react-icons/io5'
 import ArticleWrap from '../components/articleWrap'
 import { InfiniteData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
 import {
   getBlogList,
@@ -15,19 +15,22 @@ import {
 import { BlogMember, BlogTags, PostRes, TagItem } from '../types/api'
 import { useRecoilState } from 'recoil'
 import { HeadLinkState } from '../store/app'
+import clsx from 'clsx'
+
 const Blog = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
   const params = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
+  // const [filter, setFilter] = useState({})
   const [tagList, setTagList] = useState<TagItem[]>([])
+  const [sort, setSort] = useState('latest')
   const { data } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
     queryFn: getBlogMember,
-    // enabled: memberId !== undefined,
   })
   const { data: tags } = useQuery<BlogTags>({
     queryKey: ['blog', params.id, 'tags'],
     queryFn: getBlogTags,
-    // enabled: memberId !== undefined,
   })
   useEffect(() => {
     tags && setTagList(tags.tagList)
@@ -41,10 +44,10 @@ const Blog = () => {
     PostRes,
     Object,
     InfiniteData<PostRes>,
-    [_1: string, _2: string, _3: string],
+    [_1: string, _2: string, _3: string, _4: URLSearchParams],
     number
   >({
-    queryKey: ['blog', params.id!, 'posts'],
+    queryKey: ['blog', params.id!, 'posts', searchParams],
     queryFn: getBlogList,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
@@ -53,8 +56,6 @@ const Blog = () => {
         ? undefined
         : lastPage.pageDto.currentPage + 1
     },
-    // staleTime: 60 * 1000,
-    // gcTime: 300 * 1000,
   })
   const { ref, inView } = useInView({
     threshold: 0,
@@ -66,24 +67,15 @@ const Blog = () => {
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage])
   useEffect(() => {
+    console.dir(searchParams.toString())
+  }, [searchParams])
+  useEffect(() => {
     setLink({ path: `/blog/${params.id}`, content: data?.blogName || 'S ☻ M' })
   }, [data])
-  const tabs = [
-    {
-      id: 0,
-      title: '최신순',
-    },
-    {
-      id: 1,
-      title: '조회순',
-    },
-  ]
-  const [tab, setTab] = useState<number>(0)
-  const tabClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
-    if ((e.target as HTMLElement).nodeName !== 'A') return
-    console.log((e.target as HTMLElement).dataset.idx)
-    setTab(+(e.target as HTMLElement).dataset.idx!)
-  }
+  useEffect(() => {
+    console.log(sort)
+    setSearchParams({ sort: sort })
+  }, [sort])
   return (
     <>
       <div id='blog' className='mockup-browser border bg-base-100'>
@@ -110,12 +102,15 @@ const Blog = () => {
               <div className='cont_left'>
                 <h4>태그 목록</h4>
                 <ul>
-                  <li>
+                  <li onClick={() => setSearchParams({})}>
                     <p>전체보기</p>
                     <span>({tags?.totalPostCount})</span>
                   </li>
                   {tagList.map((tag) => (
-                    <li key={tag.tagId}>
+                    <li
+                      key={tag.tagId}
+                      onClick={() => setSearchParams({ tag: tag.tagName })}
+                    >
                       <p>{tag.tagName}</p>
                       <span>({tag.tagCount})</span>
                     </li>
@@ -123,18 +118,52 @@ const Blog = () => {
                 </ul>
               </div>
               <div className='cont_right'>
-                <div className='tab_sec' onClick={tabClickHandler}>
+                <div className='tab_sec'>
                   <div className='tabWrap'>
-                    {tabs.map((item) => (
+                    {/*                     {tabs.map((item) => (
                       <a
                         key={item.id}
                         className={clsx(item.id === tab && 'active')}
                         data-idx={item.id}
+                        onClick={() => setSearchParams({ sort: item.title })}
                       >
                         {item.title}
                         <FaCircleCheck />
                       </a>
-                    ))}
+                    ))} */}
+                    <div
+                      className={clsx(
+                        'sortItem',
+                        sort === 'latest' && 'active'
+                      )}
+                    >
+                      <input
+                        type='radio'
+                        name='sort'
+                        id='latest'
+                        defaultChecked
+                        onChange={(e) => {
+                          if (e.target.checked) setSort(() => 'latest')
+                        }}
+                      />
+                      <label htmlFor='latest'>latest</label>
+                      <FaCircleCheck />
+                    </div>
+                    <div
+                      className={clsx('sortItem', sort === 'hot' && 'active')}
+                    >
+                      <input
+                        type='radio'
+                        name='sort'
+                        id='hot'
+                        // defaultChecked={sort === 'hot'}
+                        onChange={(e) => {
+                          if (e.target.checked) setSort(() => 'hot')
+                        }}
+                      />
+                      <label htmlFor='hot'>hot</label>
+                      <FaCircleCheck />
+                    </div>
                   </div>
                   <form>
                     <input type='text' placeholder='search' />

@@ -13,15 +13,15 @@ const ArticleWrap = ({ type, list }: Prop) => {
     <>
       <ul className={clsx('articleWrap', getClassNames(type!))}>
         {list &&
-          list.map((item) => (
-            <Suspense
+          list.map((item, idx) => (
+            <Suspense key={idx}
               fallback={
-                <li key={item.postId}>
+                <li key={idx}>
                   <Skeleton width={'100%'} height={'100%'} />
                 </li>
               }
             >
-              <ArticleItem item={item} />
+              <ArticleItem item={item} key={item.postId} />
             </Suspense>
           ))}
       </ul>
