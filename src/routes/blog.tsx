@@ -188,10 +188,12 @@ const Blog = () => {
                       </Fragment>
                     ))
                   ) : (
-                    <ul className='argicleWrap blogArticle'>
-                      <br />
-                      <Skeleton height={'300px'} /> <br />
-                      <Skeleton height={'300px'} />
+                    <ul className='articleWrap blogArticle'>
+                      {new Array(10).fill('').map(() => (
+                        <>
+                          <Skeleton height={'300px'} /> <br />
+                        </>
+                      ))}
                     </ul>
                   )}
                   <div ref={ref} style={{ height: 50 }} />

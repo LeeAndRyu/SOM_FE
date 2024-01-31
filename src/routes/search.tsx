@@ -1,4 +1,3 @@
-
 import { IoMdSearch } from 'react-icons/io'
 import ArticleWrap from '../components/articleWrap'
 import { FormEventHandler, Fragment, useEffect, useState } from 'react'
@@ -14,25 +13,32 @@ const Search = () => {
   const [searchType, setType] = useState<SearchType>('title')
 
   const [isTouched, setTouched] = useState(false)
-  const { data, fetchNextPage, hasNextPage, isSuccess, isFetching, isFetched } =
-    useInfiniteQuery<
-      PostRes,
-      Object,
-      InfiniteData<PostRes>,
-      [_1: string, _2: string, _3: string],
-      number
-    >({
-      queryKey: ['home', searchType, searchValue],
-      queryFn: getSearchList,
-      initialPageParam: 1,
-      getNextPageParam: (lastPage) => {
-        return lastPage.pageDto.totalPages === 0 ||
-          lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
-          ? undefined
-          : lastPage.pageDto.currentPage + 1
-      },
-      enabled: !!isTouched,
-    })
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isSuccess,
+    isError,
+    isFetching,
+    isFetched,
+  } = useInfiniteQuery<
+    PostRes,
+    Object,
+    InfiniteData<PostRes>,
+    [_1: string, _2: string, _3: string],
+    number
+  >({
+    queryKey: ['home', searchType, searchValue],
+    queryFn: getSearchList,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.pageDto.totalPages === 0 ||
+        lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
+        ? undefined
+        : lastPage.pageDto.currentPage + 1
+    },
+    enabled: !!isTouched,
+  })
   const { ref, inView } = useInView({
     threshold: 0,
     delay: 0,
@@ -106,27 +112,33 @@ const Search = () => {
       </div>
 
       {isFetched && isSuccess ? (
-        <>
-          <div>
-            <p className='resultP'>
-              🔍 총 <span>{data.pages[0].pageDto.totalElement}</span>건이
-              검색되었습니다
-            </p>
-            {data?.pages.map((page, itemIdx: number) => (
-              <Fragment key={itemIdx}>
-                {page.postList.length < 1 ? (
-                  <p className='resultP'>❌</p>
-                ) : (
-                  <>
-                    <ArticleWrap type='home' list={page.postList} />
-                  </>
-                )}
-              </Fragment>
-            ))}
-            <div ref={ref} style={{ height: 50 }} />
-          </div>
-        </>
-      ) : (
+        data && data.pages[0].pageDto.totalElement === 0 ? (
+          // 검색 결과가 0일 때
+          <p className='warnResultP'>⚠️ 검색 결과가 없습니다 ⚠️</p>
+        ) : (
+          <>
+            <div>
+              <p className='resultP'>
+                🔍 총 <span>{data.pages[0].pageDto.totalElement}</span>건이
+                검색되었습니다
+              </p>
+              {data?.pages.map((page, itemIdx: number) => (
+                <Fragment key={itemIdx}>
+                  {page.postList.length < 1 ? (
+                    <p className='resultP'>❌</p>
+                  ) : (
+                    <>
+                      <ArticleWrap type='home' list={page.postList} />
+                    </>
+                  )}
+                </Fragment>
+              ))}
+              <div ref={ref} style={{ height: 50 }} />
+            </div>
+          </>
+        )
+      ) : isFetching || isError ? (
+        // 아직 fetching 중이거나 에러 발생 시
         <>
           <ul className='articleWrap homeArticle'>
             <Skeleton height={'300px'} />
@@ -139,6 +151,9 @@ const Search = () => {
             <Skeleton height={'300px'} />
           </ul>{' '}
         </>
+      ) : (
+        // fetching 전
+        <></>
       )}
     </>
   )

@@ -4,7 +4,7 @@ interface Prop {
   height?: string | number
 }
 const Skeleton = ({ width, height }: Prop) => {
-  return <li className='skeleton' style={{ width, height }}></li>
+  return <li className='skeleton bg-base-200' style={{ width, height }}></li>
 }
 
 export default Skeleton

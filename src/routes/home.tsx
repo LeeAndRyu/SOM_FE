@@ -1,10 +1,4 @@
-import {
-  Fragment,
-  MouseEventHandler,
-  
-  useEffect,
-  useState,
-} from 'react'
+import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
 import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
 import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
@@ -39,30 +33,24 @@ const Home = () => {
     console.log((e.target as HTMLElement).dataset.idx)
     setTab(+(e.target as HTMLElement).dataset.idx!)
   }
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isSuccess,
-    isFetching,
-    isFetched,
-  } = useInfiniteQuery<
-    PostRes,
-    Object,
-    InfiniteData<PostRes>,
-    [_1: string, _2: number],
-    number
-  >({
-    queryKey: ['home', tab],
-    queryFn: getHomeList,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      return lastPage.pageDto.totalPages === 0 ||
-        lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
-        ? undefined
-        : lastPage.pageDto.currentPage + 1
-    },
-  })
+  const { data, fetchNextPage, hasNextPage, isSuccess, isFetching, isFetched } =
+    useInfiniteQuery<
+      PostRes,
+      Object,
+      InfiniteData<PostRes>,
+      [_1: string, _2: number],
+      number
+    >({
+      queryKey: ['home', tab],
+      queryFn: getHomeList,
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => {
+        return lastPage.pageDto.totalPages === 0 ||
+          lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
+          ? undefined
+          : lastPage.pageDto.currentPage + 1
+      },
+    })
   const { ref, inView } = useInView({
     threshold: 0,
     delay: 0,
@@ -114,14 +102,9 @@ const Home = () => {
       ) : (
         <>
           <ul className='articleWrap homeArticle'>
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
+            {new Array(12).fill('').map(() => (
+              <Skeleton height={'300px'} />
+            ))}
           </ul>{' '}
         </>
       )}

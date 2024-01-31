@@ -8,7 +8,15 @@ p.resultP {
     font-weight: 800;
   }
 }
-
+p.warnResultP {
+  font-family: 'Noto Sans KR';
+  
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 60px;
+  
+}
 .bgImg {
   display: block;
   width: 100%;
@@ -24,4 +32,3 @@ p.resultP {
 .tab {
   transition: all 0.1s;
 }
-
