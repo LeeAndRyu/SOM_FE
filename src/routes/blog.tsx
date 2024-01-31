@@ -21,9 +21,8 @@ import Skeleton from '../components/common/skeleton'
 const Blog = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
   const params = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
-  // const [filter, setFilter] = useState({})
-
+  const [_searchParams, setSearchParams] = useSearchParams()
+  const [searchQ, setQ] = useState('')
   const [tagList, setTagList] = useState<TagItem[]>([])
   const [sort, setSort] = useState('latest')
   const { data } = useQuery<BlogMember>({
@@ -71,13 +70,9 @@ const Blog = () => {
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage])
   useEffect(() => {
-    console.dir(searchParams.toString())
-  }, [searchParams])
-  useEffect(() => {
     setLink({ path: `/blog/${params.id}`, content: data?.blogName || 'S ☻ M' })
   }, [data])
   useEffect(() => {
-    console.log(sort)
     setSearchParams({ sort: sort })
   }, [sort])
   return (
@@ -158,8 +153,19 @@ const Blog = () => {
                       <FaCircleCheck />
                     </div>
                   </div>
-                  <form>
-                    <input type='text' placeholder='search' />
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      setSearchParams({ q: searchQ })
+                      setQ('')
+                    }}
+                  >
+                    <input
+                      type='text'
+                      placeholder='search'
+                      value={searchQ}
+                      onChange={(e) => setQ(e.target.value)}
+                    />
                     <IoSearchOutline />
                   </form>
                 </div>

@@ -13,6 +13,7 @@ import Blog from './routes/blog'
 import { ToastContainer } from 'react-toastify'
 import RecoilRootWrapper from './components/recoilRootWrapper'
 import Mypage from './routes/mypage'
+import Edit from './routes/edit'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -37,6 +38,10 @@ function App() {
           element: <Write />,
         },
         {
+          path: 'edit/:post',
+          element: <Edit />,
+        },
+        {
           path: 'search',
           element: <Search />,
         },
@@ -45,11 +50,11 @@ function App() {
           element: <Mypage />,
         },
         {
-          path: '/blog/:id',
+          path: 'blog/:id',
           element: <Blog />,
         },
         {
-          path: '/blog/:id/:post',
+          path: 'blog/:id/:post',
           element: <Post />,
         },
       ],

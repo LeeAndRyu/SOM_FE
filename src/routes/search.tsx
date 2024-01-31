@@ -1,15 +1,58 @@
-// import { useState } from 'react'
+
 import { IoMdSearch } from 'react-icons/io'
 import ArticleWrap from '../components/articleWrap'
-import { useState } from 'react'
+import { FormEventHandler, Fragment, useEffect, useState } from 'react'
+import { PostRes } from '../types/api'
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import { useInView } from 'react-intersection-observer'
+import { getSearchList } from '../lib/useQuery/getSearch'
+import Skeleton from '../components/common/skeleton'
+import { toast } from 'react-toastify'
 type SearchType = 'title' | 'content' | 'tag'
 const Search = () => {
   const [searchValue, setSearchValue] = useState('')
   const [searchType, setType] = useState<SearchType>('title')
 
+  const [isTouched, setTouched] = useState(false)
+  const { data, fetchNextPage, hasNextPage, isSuccess, isFetching, isFetched } =
+    useInfiniteQuery<
+      PostRes,
+      Object,
+      InfiniteData<PostRes>,
+      [_1: string, _2: string, _3: string],
+      number
+    >({
+      queryKey: ['home', searchType, searchValue],
+      queryFn: getSearchList,
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => {
+        return lastPage.pageDto.totalPages === 0 ||
+          lastPage.pageDto.totalPages === lastPage.pageDto.currentPage
+          ? undefined
+          : lastPage.pageDto.currentPage + 1
+      },
+      enabled: !!isTouched,
+    })
+  const { ref, inView } = useInView({
+    threshold: 0,
+    delay: 0,
+  })
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage()
+    }
+  }, [inView, isFetching, hasNextPage, fetchNextPage])
+  const onSubmitHandler: FormEventHandler = async (e) => {
+    e.preventDefault()
+    if (searchValue === '') {
+      toast.warn('검색어를 입력해주세요')
+      return
+    }
+    setTouched(true)
+  }
   return (
     <>
-      <form>
+      <form onSubmit={onSubmitHandler}>
         <span>
           <IoMdSearch />
         </span>
@@ -21,7 +64,6 @@ const Search = () => {
           className=' bg-base-200 border-none outline-neutral text-neutral searchInput input input-bordered input-lg w-full'
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        
       </form>
       <div className='typeSec'>
         <p>
@@ -60,11 +102,44 @@ const Search = () => {
         </p>
       </div>
       <div className='search_sec'>
-        <p className='resultP'>
-          🔍 총 <span>98</span>건이 검색되었습니다
-        </p>
         <ArticleWrap />
       </div>
+
+      {isFetched && isSuccess ? (
+        <>
+          <div>
+            <p className='resultP'>
+              🔍 총 <span>{data.pages[0].pageDto.totalElement}</span>건이
+              검색되었습니다
+            </p>
+            {data?.pages.map((page, itemIdx: number) => (
+              <Fragment key={itemIdx}>
+                {page.postList.length < 1 ? (
+                  <p className='resultP'>❌</p>
+                ) : (
+                  <>
+                    <ArticleWrap type='home' list={page.postList} />
+                  </>
+                )}
+              </Fragment>
+            ))}
+            <div ref={ref} style={{ height: 50 }} />
+          </div>
+        </>
+      ) : (
+        <>
+          <ul className='articleWrap homeArticle'>
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+          </ul>{' '}
+        </>
+      )}
     </>
   )
 }

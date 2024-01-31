@@ -45,7 +45,16 @@ const formats = [
   'h1',
   'h2',
 ]
-const TextEditor = () => {
+interface EditProp {
+  postItem?: {
+    content?: string
+    introduction?: string
+    tags?: string[]
+    thumbnail?: string
+    title?: string
+  }
+}
+const TextEditor = ({ postItem }: EditProp) => {
   const { register, handleSubmit } = useForm<Formvalues>({
     mode: 'all',
   })
@@ -55,11 +64,17 @@ const TextEditor = () => {
   const [tags, setTags] = useState<string[]>([])
   const [thumbnail, setThumb] = useState('')
   const quillRef = useRef<any>(null)
+  useEffect(() => {
+    if (!postItem) return
+    postItem.content && setContent(postItem.content)
+    postItem.tags && setTags(postItem.tags)
+    postItem.thumbnail && setThumb(postItem.thumbnail)
+  }, [])
   const ImageHandler = () => {
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
     input.setAttribute('accept', 'image/*')
-    input.click() 
+    input.click()
     input.addEventListener('change', async () => {
       if (!input.files) return
       const file = input.files[0]
@@ -94,10 +109,7 @@ const TextEditor = () => {
           [{ header: [1, 2, 3, false] }],
           [{ header: 1 }, { header: 2 }],
           ['bold', 'underline', 'strike'],
-          [
-            { list: 'ordered' },
-            { list: 'bullet' },
-          ],
+          [{ list: 'ordered' }, { list: 'bullet' }],
           [{ align: [] }, { color: [] }, { background: [] }],
           ['blockquote', 'link', 'code-block', 'image'],
           ['clean'],
@@ -173,6 +185,7 @@ const TextEditor = () => {
           required: '필수 입력 항목입니다',
         })}
         className={`input titleInput`}
+        defaultValue={postItem && postItem.title ? postItem.title : ''}
         required
       />
       <div className='tag_sec'>
@@ -200,7 +213,7 @@ const TextEditor = () => {
         <ReactQuill
           ref={quillRef}
           modules={modules}
-          onChange={(value)=>setContent(value)}
+          onChange={(value) => setContent(value)}
           theme='snow'
           formats={formats}
         />
@@ -229,6 +242,9 @@ const TextEditor = () => {
                 className='textarea textarea-bordered w-full'
                 required
                 placeholder='간략한 소개글을 작성해보세요'
+                defaultValue={
+                  postItem && postItem.introduction ? postItem.introduction : ''
+                }
                 {...register('introduction', {
                   required: '필수 입력 항목입니다',
                 })}

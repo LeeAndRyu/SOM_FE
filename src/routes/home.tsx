@@ -46,7 +46,6 @@ const Home = () => {
     isSuccess,
     isFetching,
     isFetched,
-
   } = useInfiniteQuery<
     PostRes,
     Object,

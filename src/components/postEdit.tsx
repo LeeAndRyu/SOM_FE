@@ -23,7 +23,7 @@ const PostEdit = ({
   }
   return (
     <div className='postEditWrap'>
-      <a className='link'>수정</a>
+      <a className='link' onClick={()=>navigate(`/edit/${accountName}/${postId}`)}>수정</a>
       <a className='link' onClick={deletePost}>삭제</a>
     </div>
   )
