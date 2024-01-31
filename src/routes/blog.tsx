@@ -22,6 +22,7 @@ const Blog = () => {
   const params = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   // const [filter, setFilter] = useState({})
+  
   const [tagList, setTagList] = useState<TagItem[]>([])
   const [sort, setSort] = useState('latest')
   const { data } = useQuery<BlogMember>({
@@ -44,10 +45,10 @@ const Blog = () => {
     PostRes,
     Object,
     InfiniteData<PostRes>,
-    [_1: string, _2: string, _3: string, _4: URLSearchParams],
+    [_1: string, _2: string, _3: string, _4: string],
     number
   >({
-    queryKey: ['blog', params.id!, 'posts', searchParams],
+    queryKey: ['blog', params.id!, 'posts', location.search],
     queryFn: getBlogList,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
