@@ -11,7 +11,6 @@ type SearchType = 'title' | 'content' | 'tag'
 const Search = () => {
   const [searchValue, setSearchValue] = useState('')
   const [searchType, setType] = useState<SearchType>('title')
-
   const [isTouched, setTouched] = useState(false)
   const {
     data,
