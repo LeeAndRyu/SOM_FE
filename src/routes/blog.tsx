@@ -16,13 +16,14 @@ import { BlogMember, BlogTags, PostRes, TagItem } from '../types/api'
 import { useRecoilState } from 'recoil'
 import { HeadLinkState } from '../store/app'
 import clsx from 'clsx'
+import Skeleton from '../components/common/skeleton'
 
 const Blog = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
   const params = useParams()
   const [searchParams, setSearchParams] = useSearchParams()
   // const [filter, setFilter] = useState({})
-  
+
   const [tagList, setTagList] = useState<TagItem[]>([])
   const [sort, setSort] = useState('latest')
   const { data } = useQuery<BlogMember>({
@@ -41,6 +42,8 @@ const Blog = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
+    isSuccess,
+    isFetched,
   } = useInfiniteQuery<
     PostRes,
     Object,
@@ -121,17 +124,6 @@ const Blog = () => {
               <div className='cont_right'>
                 <div className='tab_sec'>
                   <div className='tabWrap'>
-                    {/*                     {tabs.map((item) => (
-                      <a
-                        key={item.id}
-                        className={clsx(item.id === tab && 'active')}
-                        data-idx={item.id}
-                        onClick={() => setSearchParams({ sort: item.title })}
-                      >
-                        {item.title}
-                        <FaCircleCheck />
-                      </a>
-                    ))} */}
                     <div
                       className={clsx(
                         'sortItem',
@@ -171,23 +163,31 @@ const Blog = () => {
                     <IoSearchOutline />
                   </form>
                 </div>
-                <div className='result_sec'>
-                  {posts?.pages.map((page, itemIdx: number) => (
-                    <Fragment key={itemIdx}>
-                      {page.postList.length < 1 ? (
-                        <p className='resultP'>❌ 검색 결과가 없습니다</p>
-                      ) : (
-                        <>
-                          <p className='resultP'>
-                            🔍 총 <span>{page.pageDto.totalElement}개</span>의
-                            포스트를 찾았습니다.
-                          </p>
-                          <ArticleWrap type='blog' list={page.postList} />
-                        </>
-                      )}
-                    </Fragment>
-                  ))}
 
+                <div className='result_sec'>
+                  {isFetched && isSuccess ? (
+                    posts?.pages.map((page, itemIdx: number) => (
+                      <Fragment key={itemIdx}>
+                        {page.postList.length < 1 ? (
+                          <p className='resultP'>❌ 검색 결과가 없습니다</p>
+                        ) : (
+                          <>
+                            <p className='resultP'>
+                              🔍 총 <span>{page.pageDto.totalElement}개</span>의
+                              포스트를 찾았습니다.
+                            </p>
+                            <ArticleWrap type='blog' list={page.postList} />
+                          </>
+                        )}
+                      </Fragment>
+                    ))
+                  ) : (
+                    <ul className='argicleWrap blogArticle'>
+                      <br />
+                      <Skeleton height={'300px'} /> <br />
+                      <Skeleton height={'300px'} />
+                    </ul>
+                  )}
                   <div ref={ref} style={{ height: 50 }} />
                 </div>
               </div>

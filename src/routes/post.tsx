@@ -12,6 +12,7 @@ import { useRecoilState } from 'recoil'
 import { UserInfoState } from '../store/user'
 import PostEdit from '../components/postEdit'
 import { HeadLinkState } from '../store/app'
+import LikeAndShare from '../components/likeAndShare'
 
 const Post = () => {
   const [user, _] = useRecoilState(UserInfoState)
@@ -38,7 +39,7 @@ const Post = () => {
   return (
     <div id='post'>
       <div id='post_nav'>
-        <ul>좋아요기능등등추가할거임</ul>
+        <LikeAndShare />
       </div>
       <div id='post_cont'>
         <div className='top_sec'>

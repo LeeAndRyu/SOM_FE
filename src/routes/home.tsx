@@ -1,4 +1,10 @@
-import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
+import {
+  Fragment,
+  MouseEventHandler,
+  
+  useEffect,
+  useState,
+} from 'react'
 import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
 import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
@@ -7,6 +13,8 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { PostRes } from '../types/api'
 import { getHomeList } from '../lib/useQuery/getHome'
+import Skeleton from '../components/common/skeleton'
+
 const Home = () => {
   const tabs = [
     {
@@ -31,7 +39,15 @@ const Home = () => {
     console.log((e.target as HTMLElement).dataset.idx)
     setTab(+(e.target as HTMLElement).dataset.idx!)
   }
-  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isSuccess,
+    isFetching,
+    isFetched,
+
+  } = useInfiniteQuery<
     PostRes,
     Object,
     InfiniteData<PostRes>,
@@ -80,20 +96,36 @@ const Home = () => {
           </a>
         ))}
       </div>
-      <div>
-        {data?.pages.map((page, itemIdx: number) => (
-          <Fragment key={itemIdx}>
-            {page.postList.length < 1 ? (
-              <p className='resultP'>❌</p>
-            ) : (
-              <>
-                <ArticleWrap type='home' list={page.postList} />
-              </>
-            )}
-          </Fragment>
-        ))}
-        <div ref={ref} style={{ height: 50 }} />
-      </div>
+
+      {isFetched && isSuccess ? (
+        <div>
+          {data?.pages.map((page, itemIdx: number) => (
+            <Fragment key={itemIdx}>
+              {page.postList.length < 1 ? (
+                <p className='resultP'>❌</p>
+              ) : (
+                <>
+                  <ArticleWrap type='home' list={page.postList} />
+                </>
+              )}
+            </Fragment>
+          ))}
+          <div ref={ref} style={{ height: 50 }} />
+        </div>
+      ) : (
+        <>
+          <ul className='articleWrap homeArticle'>
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+            <Skeleton height={'300px'} />
+          </ul>{' '}
+        </>
+      )}
     </>
   )
 }

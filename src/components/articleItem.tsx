@@ -6,13 +6,12 @@ import Avatar from './common/avatar'
 // import { FaCommentDots } from 'react-icons/fa6'
 import { FaRegHeart } from 'react-icons/fa'
 import { IoBarChart } from 'react-icons/io5'
-import { Suspense } from 'react'
-import Skeleton from './common/skeleton'
+
 
 const ArticleItem = ({ item }: { item: PostItem }) => {
   const navigate = useNavigate()
   return (
-    <Suspense fallback={<Skeleton width={'100%'} height={'100%'} />}>
+    <>
       <li
         className='articleItem'
         onClick={() => navigate(`/blog/${item?.accountName}/${item?.postId}`)}
@@ -60,7 +59,7 @@ const ArticleItem = ({ item }: { item: PostItem }) => {
           </p>
         </div>
       </li>
-    </Suspense>
+    </>
   )
 }
 
