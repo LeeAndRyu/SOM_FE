@@ -560,7 +560,7 @@ form:has(.searchInput) span svg {
 .userInfoSec .info {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 13px;
 }
 @media (max-width: 767px) {
   .userInfoSec .info {
@@ -575,7 +575,7 @@ form:has(.searchInput) span svg {
   display: flex;
   gap: 10px;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: end;
 }
 @media (max-width: 767px) {
   .userInfoSec .info p.follow {
@@ -587,9 +587,28 @@ form:has(.searchInput) span svg {
   display: flex;
   align-items: center;
   gap: 4px;
+  font-size: 13px;
 }
 .userInfoSec .info p.follow span strong {
   font-weight: bolder;
+}
+.userInfoSec .info .followController {
+  background-color: oklch(var(--a));
+  width: fit-content;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  padding: 7px 10px;
+}
+.userInfoSec .info .followController span {
+  font-size: 12px;
+  font-weight: 500;
+}
+.userInfoSec .info .followController svg {
+  width: 14px;
+  height: 14px;
 }
 
 #content_sec {
@@ -686,11 +705,7 @@ form:has(.searchInput) span svg {
 }
 #content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem {
   font-size: 15px;
-  padding: 10px 18px;
-  border-radius: 30px;
   display: block;
-  background-color: oklch(var(--a));
-  color: oklch(var(--ac));
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -700,7 +715,15 @@ form:has(.searchInput) span svg {
 #content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem input {
   display: none;
 }
-#content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem svg {
+#content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem label {
+  cursor: pointer;
+  border-radius: 30px;
+  color: oklch(var(--ac));
+  background-color: oklch(var(--a));
+  transition: all 0.1s;
+  padding: 10px 18px;
+}
+#content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem label svg {
   width: 16px;
   height: 16px;
   opacity: 0;
@@ -711,12 +734,14 @@ form:has(.searchInput) span svg {
   transform: translateY(-50%);
 }
 #content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem.active {
-  padding: 10px 35px 10px 18px;
-  background-color: oklch(var(--ac));
-  color: oklch(var(--a));
   gap: 5px;
 }
-#content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem.active svg {
+#content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem.active label {
+  color: oklch(var(--a));
+  background-color: oklch(var(--ac));
+  padding: 10px 35px 10px 18px;
+}
+#content_sec .sec_inner .cont_right .tab_sec .tabWrap .sortItem.active label svg {
   opacity: 1;
 }
 #content_sec .sec_inner .cont_right .tab_sec form {
@@ -1471,6 +1496,15 @@ p.warnResultP {
 
 .tab {
   transition: all 0.1s;
+}
+
+.hoverAct {
+  transform: scale(1);
+  transition: all 0.1s;
+  cursor: pointer;
+}
+.hoverAct:hover {
+  transform: scale(1.06);
 }
 
 #title {

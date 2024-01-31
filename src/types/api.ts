@@ -1,3 +1,5 @@
+import { FollowStatus } from "./app"
+
 export interface UserResponse {
   member: UserDetail
   tokenResponse: UserToken
@@ -24,7 +26,7 @@ export interface BlogMember {
   followerCount: number
   followingCount: number
   introduction: string
-  loginMemberFollowStatus: string
+  loginMemberFollowStatus: FollowStatus
   nickname: string
   profileImage: string
 }

@@ -17,6 +17,8 @@ import { useRecoilState } from 'recoil'
 import { HeadLinkState } from '../store/app'
 import clsx from 'clsx'
 import Skeleton from '../components/common/skeleton'
+import { FollowStatus } from '../types/app'
+import FollowController from '../components/follow'
 
 const Blog = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
@@ -25,6 +27,7 @@ const Blog = () => {
   const [searchQ, setQ] = useState('')
   const [tagList, setTagList] = useState<TagItem[]>([])
   const [sort, setSort] = useState('latest')
+  const [followStatus, setFollow] = useState<FollowStatus>(null)
   const { data } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
     queryFn: getBlogMember,
@@ -70,7 +73,11 @@ const Blog = () => {
     }
   }, [inView, isFetching, hasNextPage, fetchNextPage])
   useEffect(() => {
-    setLink({ path: `/blog/${params.id}`, content: data?.blogName || 'S ☻ M' })
+    setLink({
+      path: `/blog/${params.id}`,
+      content: data?.blogName || 'S ☻ M',
+    })
+    setFollow(data?.loginMemberFollowStatus!)
   }, [data])
   useEffect(() => {
     setSearchParams({ sort: sort })
@@ -83,16 +90,23 @@ const Blog = () => {
             <div className='sec_inner userInfoSec'>
               <Avatar src={data?.profileImage} />
               <div className='info'>
-                <p className='username text-lg'>{data?.nickname}</p>
-                <p className='content text-base'>{data?.introduction}</p>
+                <p className='username text-lg'>{data?.nickname || 'user'}</p>
+                <p className='content text-base'>
+                  {data?.introduction || 'introduction'}
+                </p>
                 <p className='follow'>
                   <span>
-                    <strong>{data?.followingCount}</strong>팔로잉
+                    <strong>{data?.followingCount || 0}</strong>팔로잉
                   </span>
                   <span>
-                    <strong>{data?.followerCount}</strong>팔로워
+                    <strong>{data?.followerCount || 0}</strong>팔로워
                   </span>
                 </p>
+                  <FollowController
+                    accountName={params.id!}
+                    followStatus={followStatus}
+                    setFollow={setFollow}
+                  />
               </div>
             </div>
           </section>
@@ -134,8 +148,9 @@ const Blog = () => {
                           if (e.target.checked) setSort(() => 'latest')
                         }}
                       />
-                      <label htmlFor='latest'>latest</label>
-                      <FaCircleCheck />
+                      <label htmlFor='latest'>
+                        latest <FaCircleCheck />
+                      </label>
                     </div>
                     <div
                       className={clsx('sortItem', sort === 'hot' && 'active')}
@@ -144,13 +159,13 @@ const Blog = () => {
                         type='radio'
                         name='sort'
                         id='hot'
-                        // defaultChecked={sort === 'hot'}
                         onChange={(e) => {
                           if (e.target.checked) setSort(() => 'hot')
                         }}
                       />
-                      <label htmlFor='hot'>hot</label>
-                      <FaCircleCheck />
+                      <label htmlFor='hot'>
+                        hot <FaCircleCheck />
+                      </label>
                     </div>
                   </div>
                   <form
@@ -172,21 +187,23 @@ const Blog = () => {
 
                 <div className='result_sec'>
                   {isFetched && isSuccess ? (
-                    posts?.pages.map((page, itemIdx: number) => (
-                      <Fragment key={itemIdx}>
-                        {page.postList.length < 1 ? (
-                          <p className='resultP'>❌ 검색 결과가 없습니다</p>
-                        ) : (
-                          <>
-                            <p className='resultP'>
-                              🔍 총 <span>{page.pageDto.totalElement}개</span>의
-                              포스트를 찾았습니다.
-                            </p>
+                    posts.pages[0].pageDto.totalElement === 0 ? (
+                      <p className='resultP'>❌ 검색 결과가 없습니다</p>
+                    ) : (
+                      <>
+                        <p className='resultP'>
+                          🔍 총{' '}
+                          <span>{posts.pages[0].pageDto.totalElement}개</span>의
+                          포스트를 찾았습니다.
+                        </p>
+                        {posts?.pages.map((page, itemIdx: number) => (
+                          <Fragment key={itemIdx}>
                             <ArticleWrap type='blog' list={page.postList} />
-                          </>
-                        )}
-                      </Fragment>
-                    ))
+                          </Fragment>
+                        ))}
+                        <div ref={ref} style={{ height: 50 }} />
+                      </>
+                    )
                   ) : (
                     <ul className='articleWrap blogArticle'>
                       {new Array(10).fill('').map(() => (
@@ -196,7 +213,28 @@ const Blog = () => {
                       ))}
                     </ul>
                   )}
-                  <div ref={ref} style={{ height: 50 }} />
+                  {/*                   {isFetched && isSuccess ? (
+                    <>
+                      <p className='resultP'>
+                        🔍 총{' '}
+                        <span>{posts.pages[0].pageDto.totalElement}개</span>의
+                        포스트를 찾았습니다.
+                      </p>
+                      {posts?.pages.map((page, itemIdx: number) => (
+                        <Fragment key={itemIdx}>
+                          <ArticleWrap type='blog' list={page.postList} />
+                        </Fragment>
+                      ))}
+                    </>
+                  ) : (
+                    <ul className='articleWrap blogArticle'>
+                      {new Array(10).fill('').map(() => (
+                        <>
+                          <Skeleton height={'300px'} /> <br />
+                        </>
+                      ))}
+                    </ul>
+                  )} */}
                 </div>
               </div>
             </div>
