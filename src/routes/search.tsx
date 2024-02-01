@@ -9,9 +9,10 @@ import Skeleton from '../components/common/skeleton'
 import { toast } from 'react-toastify'
 type SearchType = 'title' | 'content' | 'tag'
 const Search = () => {
-  const [searchValue, setSearchValue] = useState('')
+  const [inputValue, setInputValue] = useState('')
   const [searchType, setType] = useState<SearchType>('title')
   const [isTouched, setTouched] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
   const {
     data,
     fetchNextPage,
@@ -27,7 +28,7 @@ const Search = () => {
     [_1: string, _2: string, _3: string],
     number
   >({
-    queryKey: ['home', searchType, searchValue],
+    queryKey: ['search', searchType, searchValue],
     queryFn: getSearchList,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
@@ -36,7 +37,7 @@ const Search = () => {
         ? undefined
         : lastPage.pageDto.currentPage + 1
     },
-    enabled: !!isTouched,
+    enabled: !!isTouched && searchValue !== '',
   })
   const { ref, inView } = useInView({
     threshold: 0,
@@ -49,10 +50,11 @@ const Search = () => {
   }, [inView, isFetching, hasNextPage, fetchNextPage])
   const onSubmitHandler: FormEventHandler = async (e) => {
     e.preventDefault()
-    if (searchValue === '') {
+    if (inputValue === '') {
       toast.warn('검색어를 입력해주세요')
       return
     }
+    setSearchValue(inputValue)
     setTouched(true)
   }
   return (
@@ -64,10 +66,10 @@ const Search = () => {
         <input
           type='text'
           // value={searchValue}
-          defaultValue={searchValue}
+          defaultValue={inputValue}
           placeholder='Search'
           className=' bg-base-200 border-none outline-neutral text-neutral searchInput input input-bordered input-lg w-full'
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
         />
       </form>
       <div className='typeSec'>

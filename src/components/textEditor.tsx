@@ -281,7 +281,7 @@ const TextEditor = ({ postItem }: EditProp) => {
                   validate: {
                     value: (value) => {
                       return (
-                        value.length < 230 ||
+                        value.length < 200 ||
                         '소개글은 공백 포함 200자 내외 (±20) 로 입력해주세요'
                       )
                     },
