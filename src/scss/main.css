@@ -575,7 +575,7 @@ form:has(.searchInput) span svg {
   display: flex;
   gap: 10px;
   justify-content: flex-start;
-  align-items: end;
+  align-items: flex-end;
 }
 @media (max-width: 767px) {
   .userInfoSec .info p.follow {
@@ -1342,14 +1342,15 @@ ul.articleWrap > li:is(.homeArticle > li) div.icon_section > p:has(span) {
 }
 ul.articleWrap > li:is(.homeArticle > li) div.icon_section > p:has(span) span {
   position: absolute;
-  font-size: 8px;
+  font-size: 9px;
   background-color: oklch(var(--bc));
   color: oklch(var(--b1));
   top: -2px;
   right: -2px;
-  border-radius: 2px;
   font-weight: bold;
   padding: 3px;
+  height: 15px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1468,6 +1469,7 @@ p.resultP {
   margin-top: 35px;
   font-size: 16px;
   font-weight: 400;
+  margin-bottom: 20px;
 }
 p.resultP span {
   font-family: "Noto Sans KR";

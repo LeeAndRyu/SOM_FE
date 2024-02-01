@@ -102,11 +102,11 @@ const Blog = () => {
                     <strong>{data?.followerCount || 0}</strong>팔로워
                   </span>
                 </p>
-                  <FollowController
-                    accountName={params.id!}
-                    followStatus={followStatus}
-                    setFollow={setFollow}
-                  />
+                <FollowController
+                  accountName={params.id!}
+                  followStatus={followStatus}
+                  setFollow={setFollow}
+                />
               </div>
             </div>
           </section>
@@ -206,35 +206,13 @@ const Blog = () => {
                     )
                   ) : (
                     <ul className='articleWrap blogArticle'>
-                      {new Array(10).fill('').map(() => (
+                      {new Array(10).fill('').map((_, idx) => (
                         <>
-                          <Skeleton height={'300px'} /> <br />
+                          <Skeleton key={idx} height={'300px'} /> <br />
                         </>
                       ))}
                     </ul>
                   )}
-                  {/*                   {isFetched && isSuccess ? (
-                    <>
-                      <p className='resultP'>
-                        🔍 총{' '}
-                        <span>{posts.pages[0].pageDto.totalElement}개</span>의
-                        포스트를 찾았습니다.
-                      </p>
-                      {posts?.pages.map((page, itemIdx: number) => (
-                        <Fragment key={itemIdx}>
-                          <ArticleWrap type='blog' list={page.postList} />
-                        </Fragment>
-                      ))}
-                    </>
-                  ) : (
-                    <ul className='articleWrap blogArticle'>
-                      {new Array(10).fill('').map(() => (
-                        <>
-                          <Skeleton height={'300px'} /> <br />
-                        </>
-                      ))}
-                    </ul>
-                  )} */}
                 </div>
               </div>
             </div>

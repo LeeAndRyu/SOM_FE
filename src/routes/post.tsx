@@ -2,7 +2,6 @@ import DOMPurify from 'dompurify'
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
-
 import { BlogMember, PostDetail } from '../types/api'
 import { useQuery } from '@tanstack/react-query'
 import { getPost } from '../lib/useQuery/getPost'

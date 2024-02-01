@@ -47,6 +47,7 @@ const formats = [
 ]
 interface EditProp {
   postItem?: {
+    postId?: number
     content?: string
     introduction?: string
     tags?: string[]
@@ -69,7 +70,9 @@ const TextEditor = ({ postItem }: EditProp) => {
     postItem.content && setContent(postItem.content)
     postItem.tags && setTags(postItem.tags)
     postItem.thumbnail && setThumb(postItem.thumbnail)
+    console.log(postItem.tags, postItem.content)
   }, [])
+
   const ImageHandler = () => {
     const input = document.createElement('input')
     input.setAttribute('type', 'file')
@@ -157,19 +160,28 @@ const TextEditor = ({ postItem }: EditProp) => {
     console.log(thumbnail)
   }, [thumbnail])
 
-  //게시글 최종 POST submit
+  //게시글 최종 POST or PUT submit
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     if (e.title === '' || !e.introduction) return
     try {
-      const res = await axiosInstance.post(`/post`, {
-        content,
-        introduction: e.introduction,
-        tags,
-        thumbnail,
-        title: e.title,
-      })
+      const res = postItem
+        ? await axiosInstance.put(`/post/${postItem.postId}`, {
+            content,
+            introduction: e.introduction,
+            tags,
+            thumbnail,
+            title: e.title,
+          })
+        : await axiosInstance.post(`/post`, {
+            content,
+            introduction: e.introduction,
+            tags,
+            thumbnail,
+            title: e.title,
+          })
+
       if (res.status === 200) {
-        toast.success('게시글 작성 성공')
+        toast.success(postItem ? '게시글 수정 성공' : '게시글 작성 성공')
         navigate(`/blog/${res.data.accountName}/${res.data.postId}`)
       }
     } catch (error) {
@@ -216,6 +228,7 @@ const TextEditor = ({ postItem }: EditProp) => {
           onChange={(value) => setContent(value)}
           theme='snow'
           formats={formats}
+          value={content}
         />
 
         <Modal btnMessage='작성 완료 📝'>

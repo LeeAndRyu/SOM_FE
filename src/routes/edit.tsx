@@ -6,15 +6,17 @@ import { getPost } from '../lib/useQuery/getPost'
 
 const Edit = () => {
   const params = useParams()
-  const { data } = useQuery<PostDetail>({
+  const { data, isFetched } = useQuery<PostDetail>({
     queryKey: ['posts', params.id, params.post],
     queryFn: getPost,
     enabled: params.post !== undefined,
   })
+  if (!isFetched) return <></>
   return (
     <>
       <TextEditor
         postItem={{
+          postId: data?.postId,
           content: data?.content,
           title: data?.title,
           introduction: data?.introduction,

@@ -71,7 +71,7 @@
       display: flex;
       gap: 10px;
       justify-content: flex-start;
-      align-items: end;
+      align-items: flex-end;
 
       @include mobile {
         justify-content: center;

@@ -1,4 +1,4 @@
-import { FollowStatus } from "./app"
+import { FollowStatus } from './app'
 
 export interface UserResponse {
   member: UserDetail
@@ -64,6 +64,7 @@ export interface PostItem {
   thumbnail: string
   title: string
   views: number
+  comments?: number
 }
 
 export interface PostDetail {

@@ -3,10 +3,9 @@ import Article from '../assets/background.png'
 import { PostItem } from '../types/api'
 import ErrorImage from '../assets/addImg.jpg'
 import Avatar from './common/avatar'
-// import { FaCommentDots } from 'react-icons/fa6'
+import { FaCommentDots } from 'react-icons/fa6'
 import { FaRegHeart } from 'react-icons/fa'
 import { IoBarChart } from 'react-icons/io5'
-
 
 const ArticleItem = ({ item }: { item: PostItem }) => {
   const navigate = useNavigate()
@@ -51,10 +50,11 @@ const ArticleItem = ({ item }: { item: PostItem }) => {
         <div className='icon_section'>
           <Avatar size={40} accountName={item.accountName} />
           <p>
-            <span>{item?.views}</span>
-            <IoBarChart />
+            <span>{item?.comments}</span>
+            <FaCommentDots />
           </p>
           <p>
+            <span>{item?.likes}</span>
             <FaRegHeart />
           </p>
         </div>

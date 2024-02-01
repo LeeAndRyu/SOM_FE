@@ -136,6 +136,7 @@ ul.articleWrap > li {
         & > * {
           background-color: oklch(var(--p));
           cursor: pointer;
+
           &:hover {
             // filter: brightness(0.96);
             background-color: oklch(var(--pc));
@@ -169,17 +170,17 @@ ul.articleWrap > li {
             position: relative;
             span {
               position: absolute;
-              font-size: 8px;
+              font-size: 9px;
               background-color: oklch(var(--bc));
               color: oklch(var(--b1));
               top: -2px;
               right: -2px;
-              border-radius: 2px;
-              // width: 15px;
+              
+              // width: 17px;
               font-weight: bold;
               padding: 3px;
-              // height: 15px;
-              // border-radius: 50%;
+              height: 15px;
+              border-radius: 2px;
               display: flex;
               align-items: center;
               justify-content: center;
