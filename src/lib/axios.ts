@@ -36,7 +36,13 @@ axiosInstance.interceptors.response.use(
       toast.error(error.response?.data.errorMessage)
     }
     // 토큰 만료 시 처리
-    if (error.response.data.errorCode === 'TOKEN_TIME_OUT') {
+    if (
+      [
+        'TOKEN_TIME_OUT',
+        'ACCESS_DENIED',
+        'JWT_REFRESH_TOKEN_NOT_FOUND',
+      ].includes(error.response.data.errorCode)
+    ) {
       await tokenRefresh()
       const TOKEN = getLocalStorage('accessToken')
       if (!!TOKEN) error.config.headers['Authorization'] = `Bearer ${TOKEN}`

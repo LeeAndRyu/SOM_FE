@@ -578,6 +578,12 @@ form:has(.searchInput) span svg {
   justify-content: center;
   padding: 7px 10px;
 }
+.userInfoSec .info .followController.followed {
+  background-color: oklch(var(--bc));
+}
+.userInfoSec .info .followController.followed span {
+  color: oklch(var(--b1));
+}
 .userInfoSec .info .followController span {
   font-size: 12px;
   font-weight: 500;
@@ -741,6 +747,13 @@ form:has(.searchInput) span svg {
   position: fixed;
   width: 100%;
   height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  z-index: 10;
 }
 
 .mypage {

@@ -211,9 +211,9 @@ const Blog = () => {
                   ) : (
                     <ul className='articleWrap blogArticle'>
                       {new Array(10).fill('').map((_, idx) => (
-                        <>
+                        <Fragment key={idx}>
                           <Skeleton key={idx} height={'300px'} /> <br />
-                        </>
+                        </Fragment>
                       ))}
                     </ul>
                   )}
