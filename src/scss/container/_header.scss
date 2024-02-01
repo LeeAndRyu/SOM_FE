@@ -1,0 +1,37 @@
+@use '../theme/theme' as *;
+header {
+  width: 100%;
+  position: sticky;
+  z-index: 10;
+  left: 0%;
+  top: 0px;
+  backdrop-filter: blur(10px);
+  // background-color: oklch(var(--b1));
+  // border-radius: 10px;
+  & > .headInner {
+    position: relative;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    padding: 0;
+    padding-top: 10px;
+    padding: 0 var(--side-padding) 0 0;
+    @include tablet {
+      padding: 0 var(--side-padding);
+    }
+    @include mobile {
+      padding: 0 var(--side-padding);
+    }
+    & > div {
+      padding: 0;
+      border-radius: 10px;
+    }
+  }
+}
+
+.test {
+  background: oklch(var(--nc));
+  p {
+    color: oklch(var(--n));
+  }
+}
