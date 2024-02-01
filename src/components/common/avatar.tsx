@@ -1,7 +1,6 @@
 import { useRecoilState } from 'recoil'
 import Image from '../../assets/avatar-1.jpg'
 import { UserInfoState } from '../../store/user'
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ErrorImage from '../../assets/error2.png'
 interface Prop {
@@ -13,9 +12,6 @@ interface Prop {
 const Avatar = ({ src, size, logged, accountName }: Prop) => {
   const [user, _] = useRecoilState(UserInfoState)
   const navigate = useNavigate()
-  useEffect(() => {
-    // logged === true && console.log(user)
-  }, [])
   return (
     <div
       onClick={() =>

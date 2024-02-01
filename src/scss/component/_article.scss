@@ -100,12 +100,12 @@ ul.articleWrap > li {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
         }
-        p.info {
+        .info {
           // border-top: 1px dashed;
           font-size: 13px;
           display: flex;
           justify-content: space-between;
-          span.infoUser + span {
+          span.infoUser + p {
             display: none;
           }
         }
@@ -175,7 +175,7 @@ ul.articleWrap > li {
               color: oklch(var(--b1));
               top: -2px;
               right: -2px;
-              
+
               // width: 17px;
               font-weight: bold;
               padding: 3px;
@@ -278,7 +278,7 @@ ul.articleWrap > li {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
         }
-        p.info {
+        .info {
           margin-top: 12px;
           .infoUser {
             display: none;
@@ -286,6 +286,14 @@ ul.articleWrap > li {
           font-size: 13px;
           display: flex;
           justify-content: space-between;
+          & > p {
+            display: flex;
+            gap: 10px;
+            span{
+              display: flex;
+              // gap: 2px;
+            }
+          }
         }
         p.tags {
           margin-top: 10px;

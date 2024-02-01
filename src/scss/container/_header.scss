@@ -26,6 +26,21 @@ header {
       padding: 0;
       border-radius: 10px;
     }
+    .navbar {
+      .navbar-start {
+        & > a {
+          @include mobile {
+            text-align: left;
+            span {
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              width: 110px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 

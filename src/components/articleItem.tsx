@@ -4,7 +4,7 @@ import { PostItem } from '../types/api'
 import ErrorImage from '../assets/addImg.jpg'
 import Avatar from './common/avatar'
 import { FaCommentDots } from 'react-icons/fa6'
-import { FaRegHeart } from 'react-icons/fa'
+import { FaRegHeart, FaComment, FaHeart } from 'react-icons/fa'
 // import { IoBarChart } from 'react-icons/io5'
 
 const ArticleItem = ({ item }: { item: PostItem }) => {
@@ -33,22 +33,34 @@ const ArticleItem = ({ item }: { item: PostItem }) => {
               if (idx > 3) return <></>
               return <span key={idx}>{tag}</span>
             })}
-            {item.tags.length > 3 && (
-              <span className='moreTags'>+{item.tags.length - 3}개</span>
+            {item.tags.length > 4 && (
+              <span className='moreTags'>+{item.tags.length - 4}개</span>
             )}
           </p>
-          <p className='info'>
+          <div className='info'>
             <span className='infoUser'>
               by <strong>{item?.accountName}</strong>{' '}
             </span>
-            <span>
-              <strong>0</strong>개의 댓글
-            </span>
+            <p>
+              <span>
+                <FaComment />
+                &nbsp;
+                <strong>0</strong>개의 댓글
+              </span>
+              <span>
+                <FaHeart />
+                &nbsp;<strong>0</strong>개의 좋아요
+              </span>
+            </p>
             <span>{new Date(item?.registeredAt).toLocaleDateString()}</span>
-          </p>
+          </div>
         </div>
         <div className='icon_section'>
-          <Avatar size={40} accountName={item.accountName} />
+          <Avatar
+            size={40}
+            accountName={item.accountName}
+            src={item.profileImage}
+          />
           <p>
             <span>{item?.comments}</span>
             <FaCommentDots />

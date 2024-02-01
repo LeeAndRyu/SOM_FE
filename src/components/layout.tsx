@@ -28,6 +28,7 @@ const Layout = () => {
     if (!location.pathname.includes('blog')) {
       resetAlink()
     }
+    window.scrollTo(0, 0)
   }, [location.pathname])
   return (
     <RQProvider>
@@ -91,7 +92,7 @@ const Layout = () => {
                 <>
                   <Link to={alink.path} className='btn btn-ghost text-xl'>
                     {alink.path !== '/' && <IoCloudSharp />}
-                    {alink.content}
+                    <span>{alink.content}</span>
                   </Link>
                 </>
               </div>

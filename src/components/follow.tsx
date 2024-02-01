@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { FollowStatus } from '../types/app'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../lib/axios'

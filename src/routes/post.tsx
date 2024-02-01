@@ -12,7 +12,8 @@ import { UserInfoState } from '../store/user'
 import PostEdit from '../components/postEdit'
 import { HeadLinkState } from '../store/app'
 import LikeAndShare from '../components/likeAndShare'
-
+import { FaCalendar, FaHeart } from 'react-icons/fa'
+import { FaComment } from 'react-icons/fa6'
 const Post = () => {
   const [user, _] = useRecoilState(UserInfoState)
   const [_link, setLink] = useRecoilState(HeadLinkState)
@@ -25,7 +26,7 @@ const Post = () => {
   const { data: member } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
     queryFn: getBlogMember,
-    // enabled: memberId !== undefined,
+    enabled: params.id !== undefined,
   })
   useEffect(() => {
     setLink({
@@ -44,10 +45,14 @@ const Post = () => {
         <div className='top_sec'>
           <p className='title text-4xl'>{data.title}</p>
           <p className='info'>
-            <span>by {data.accountName}</span>
+            <span>
+              by <strong>{data.accountName}</strong>
+            </span>
             <span className='date'>
+              <FaCalendar />
               {dayjs(data.registeredAt).format('YYYY-MM-DD')}
             </span>
+
             {user.accountName === params.id && (
               <PostEdit accountName={user.accountName} postId={params.post!} />
             )}
@@ -77,6 +82,14 @@ const Post = () => {
               }}
               className='ql-editor'
             />
+          </div>
+          <div className='postInfo'>
+            <p>
+              <FaHeart /> {data.likes}
+            </p>
+            <p>
+              <FaComment /> ?
+            </p>
           </div>
         </div>
         <div className='btm_sec userInfoSec'>
