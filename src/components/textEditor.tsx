@@ -62,9 +62,14 @@ const TextEditor = ({ postItem }: EditProp) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
   } = useForm<Formvalues>({
     mode: 'all',
+    defaultValues: {
+      title: (postItem && postItem.title) || '',
+      introduction: (postItem && postItem.introduction) || '',
+    },
   })
   const navigate = useNavigate()
   const [content, setContent] = useState('')
@@ -73,14 +78,21 @@ const TextEditor = ({ postItem }: EditProp) => {
   const [thumbnail, setThumb] = useState('')
   const [totalImageList, setTotalImageList] = useState<string[]>([])
   const quillRef = useRef<any>(null)
+  const titleInputRef = useRef<HTMLTextAreaElement | null>(null)
+  const { ref } = register('title')
   useEffect(() => {
     if (!postItem) return
+    if (titleInputRef.current !== null) {
+      titleInputRef.current.selectionStart = titleInputRef.current.value.length
+      titleInputRef.current.focus()
+    }
     postItem.content && setContent(postItem.content)
     postItem.tags && setTags(postItem.tags)
     postItem.thumbnail && setThumb(postItem.thumbnail)
     postItem.totalImageList && setTotalImageList(totalImageList)
-    console.log(postItem.tags, postItem.content)
-  }, [])
+    postItem.title && setValue('title', postItem.title)
+    postItem.introduction && setValue('introduction', postItem.introduction)
+  }, [postItem])
 
   const ImageHandler = () => {
     const input = document.createElement('input')
@@ -209,18 +221,21 @@ const TextEditor = ({ postItem }: EditProp) => {
       <TextareaAutosize
         placeholder='제목을 입력하세요'
         {...register('title', {
-          required: '제목은 필수 입력 항목입니다',
           validate: {
             value: (value) => {
               return (
-                value.length < 100 ||
+                value?.length < 100 ||
                 '제목은 공백 포함 70자 내외 (±20) 로 입력해주세요'
               )
             },
           },
         })}
         className={clsx(`input titleInput`, !!errors.title && 'text-error')}
-        defaultValue={postItem && postItem.title ? postItem.title : ''}
+        // defaultValue={postItem && postItem.title ? postItem.title : ''}
+        ref={(e) => {
+          ref(e)
+          titleInputRef.current = e
+        }}
       ></TextareaAutosize>
       {errors.title && errors.title.message && (
         <WarningMsg message={errors.title.message} />
@@ -283,9 +298,9 @@ const TextEditor = ({ postItem }: EditProp) => {
                 )}
                 required
                 placeholder='간략한 소개글을 작성해보세요 (200자 내외)'
-                defaultValue={
+                /*                 defaultValue={
                   postItem && postItem.introduction ? postItem.introduction : ''
-                }
+                } */
                 {...register('introduction', {
                   required: '소개글은 필수 입력 항목입니다',
                   validate: {

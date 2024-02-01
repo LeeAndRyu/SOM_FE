@@ -3,6 +3,7 @@ import Image from '../../assets/avatar-1.jpg'
 import { UserInfoState } from '../../store/user'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ErrorImage from '../../assets/error2.png'
 interface Prop {
   src?: string
   logged?: boolean
@@ -29,7 +30,7 @@ const Avatar = ({ src, size, logged, accountName }: Prop) => {
         width: size ? size : 100,
         height: size ? size : 100,
         borderRadius: '50%',
-        cursor:'pointer'
+        cursor: 'pointer',
       }}
     >
       <img
@@ -40,6 +41,7 @@ const Avatar = ({ src, size, logged, accountName }: Prop) => {
           objectFit: 'cover',
           display: 'block',
         }}
+        onError={(e) => (e.currentTarget.src = ErrorImage)}
         src={
           logged
             ? user.profileImage

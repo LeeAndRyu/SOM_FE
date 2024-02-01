@@ -927,6 +927,8 @@ form:has(.searchInput) span svg {
 }
 #view.ql-snow * {
   cursor: default;
+  line-height: 1.5;
+  margin: 5px 0;
 }
 #view.ql-snow .ql-editor {
   padding: 0;

@@ -44,7 +44,7 @@ const ArticleItem = ({ item }: { item: PostItem }) => {
             <span>
               <strong>0</strong>개의 댓글
             </span>
-            <span>{item?.registeredAt + ''}</span>
+            <span>{new Date(item?.registeredAt).toLocaleDateString()}</span>
           </p>
         </div>
         <div className='icon_section'>
