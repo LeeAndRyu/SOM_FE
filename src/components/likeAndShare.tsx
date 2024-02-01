@@ -4,7 +4,6 @@ const LikeAndShare = () => {
     <ul className='likeAndShare'>
       <li>
         <FaRegHeart />
-        <span>3</span>
       </li>
       <li>
         <FaShareAlt />

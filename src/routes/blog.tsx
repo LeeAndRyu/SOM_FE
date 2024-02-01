@@ -19,9 +19,11 @@ import clsx from 'clsx'
 import Skeleton from '../components/common/skeleton'
 import { FollowStatus } from '../types/app'
 import FollowController from '../components/follow'
+import { UserInfoState } from '../store/user'
 
 const Blog = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
+  const [user, _] = useRecoilState(UserInfoState)
   const params = useParams()
   const [_searchParams, setSearchParams] = useSearchParams()
   const [searchQ, setQ] = useState('')
@@ -102,11 +104,13 @@ const Blog = () => {
                     <strong>{data?.followerCount || 0}</strong>팔로워
                   </span>
                 </p>
-                <FollowController
-                  accountName={params.id!}
-                  followStatus={followStatus}
-                  setFollow={setFollow}
-                />
+                {user.accountName !== params.id && (
+                  <FollowController
+                    accountName={params.id!}
+                    followStatus={followStatus}
+                    setFollow={setFollow}
+                  />
+                )}
               </div>
             </div>
           </section>

@@ -737,6 +737,12 @@ form:has(.searchInput) span svg {
   left: 10px;
 }
 
+.fixModal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
 .mypage {
   max-width: 700px;
   margin: 0 auto;
@@ -852,9 +858,11 @@ form:has(.searchInput) span svg {
 #write_sec .tag_sec {
   margin-bottom: 16px;
   display: flex;
+  flex-wrap: wrap;
 }
 #write_sec .tag_sec ul {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }

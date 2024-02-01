@@ -55,6 +55,7 @@ interface EditProp {
     tags?: string[]
     thumbnail?: string
     title?: string
+    totalImageList?: string[]
   }
 }
 const TextEditor = ({ postItem }: EditProp) => {
@@ -70,12 +71,14 @@ const TextEditor = ({ postItem }: EditProp) => {
   const [tagInput, setTagInput] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [thumbnail, setThumb] = useState('')
+  const [totalImageList, setTotalImageList] = useState<string[]>([])
   const quillRef = useRef<any>(null)
   useEffect(() => {
     if (!postItem) return
     postItem.content && setContent(postItem.content)
     postItem.tags && setTags(postItem.tags)
     postItem.thumbnail && setThumb(postItem.thumbnail)
+    postItem.totalImageList && setTotalImageList(totalImageList)
     console.log(postItem.tags, postItem.content)
   }, [])
 
@@ -90,17 +93,22 @@ const TextEditor = ({ postItem }: EditProp) => {
       const formData = new FormData()
       formData.append('image', file)
       try {
-        const result = await axiosInstance.post('/api/s3/image', formData, {
+        const res = await axiosInstance.post('/api/s3/image', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             credentials: 'include',
           },
         })
-        const IMG_URL = result.data
-        if (!quillRef.current) return
-        const editor = quillRef.current.getEditor()
-        const range = editor.getSelection()
-        editor.insertEmbed(range.index, 'image', IMG_URL)
+        if (res.status === 200) {
+          if (!quillRef.current) return
+          setTotalImageList((prev) => {
+            return [...prev, res.data]
+          })
+          const IMG_URL = res.data
+          const editor = quillRef.current.getEditor()
+          const range = editor.getSelection()
+          editor.insertEmbed(range.index, 'image', IMG_URL)
+        }
       } catch (error) {
         console.log(error)
       }
@@ -177,6 +185,7 @@ const TextEditor = ({ postItem }: EditProp) => {
             tags,
             thumbnail,
             title: e.title,
+            totalImageList,
           })
         : await axiosInstance.post(`/post`, {
             content,
@@ -184,6 +193,7 @@ const TextEditor = ({ postItem }: EditProp) => {
             tags,
             thumbnail,
             title: e.title,
+            totalImageList,
           })
 
       if (res.status === 200) {
