@@ -5,7 +5,7 @@ import ErrorImage from '../assets/addImg.jpg'
 import Avatar from './common/avatar'
 import { FaCommentDots } from 'react-icons/fa6'
 import { FaRegHeart } from 'react-icons/fa'
-import { IoBarChart } from 'react-icons/io5'
+// import { IoBarChart } from 'react-icons/io5'
 
 const ArticleItem = ({ item }: { item: PostItem }) => {
   const navigate = useNavigate()

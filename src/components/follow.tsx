@@ -8,7 +8,7 @@ interface Prop {
 }
 const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
   useEffect(() => {
-    console.log(accountName, followStatus)
+    console.log(accountName, followStatus, setFollow)
   }, [])
   return (
     <div className='followController hoverAct'>
