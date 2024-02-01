@@ -4,7 +4,6 @@ import Quill from 'quill'
 import { ImageActions } from '@xeger/quill-image-actions'
 import { ImageFormats } from '@xeger/quill-image-formats'
 import React, { useEffect, useRef, useState } from 'react'
-import Button from './common/button'
 import Image from '../assets/addImg.jpg'
 import { axiosInstance } from '../lib/axios'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -12,6 +11,8 @@ import { toast } from 'react-toastify'
 import Modal from './common/modal'
 import { useNavigate } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize'
+import WarningMsg from './common/warningMsg'
+import clsx from 'clsx'
 Quill.register('modules/imageActions', ImageActions)
 Quill.register('modules/imageFormats', ImageFormats)
 type Formvalues = {
@@ -57,7 +58,11 @@ interface EditProp {
   }
 }
 const TextEditor = ({ postItem }: EditProp) => {
-  const { register, handleSubmit } = useForm<Formvalues>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<Formvalues>({
     mode: 'all',
   })
   const navigate = useNavigate()
@@ -163,7 +168,7 @@ const TextEditor = ({ postItem }: EditProp) => {
 
   //게시글 최종 POST or PUT submit
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
-    if (e.title === '' || !e.introduction) return
+    if (e.title === '' || e.title.length > 70 || !e.introduction) return
     try {
       const res = postItem
         ? await axiosInstance.put(`/post/${postItem.postId}`, {
@@ -194,12 +199,22 @@ const TextEditor = ({ postItem }: EditProp) => {
       <TextareaAutosize
         placeholder='제목을 입력하세요'
         {...register('title', {
-          required: '필수 입력 항목입니다',
+          required: '제목은 필수 입력 항목입니다',
+          validate: {
+            value: (value) => {
+              return (
+                value.length < 100 ||
+                '제목은 공백 포함 70자 내외 (±20) 로 입력해주세요'
+              )
+            },
+          },
         })}
-        className={`input titleInput`}
+        className={clsx(`input titleInput`, !!errors.title && 'text-error')}
         defaultValue={postItem && postItem.title ? postItem.title : ''}
-        required
       ></TextareaAutosize>
+      {errors.title && errors.title.message && (
+        <WarningMsg message={errors.title.message} />
+      )}
       <div className='tag_sec'>
         <input
           type='text'
@@ -252,20 +267,39 @@ const TextEditor = ({ postItem }: EditProp) => {
             </div>
             <div className='intro_sec'>
               <textarea
-                className='textarea textarea-bordered w-full'
+                className={clsx(
+                  'textarea textarea-bordered w-full',
+                  !!errors.introduction && 'textarea-error'
+                )}
                 required
-                placeholder='간략한 소개글을 작성해보세요'
+                placeholder='간략한 소개글을 작성해보세요 (200자 내외)'
                 defaultValue={
                   postItem && postItem.introduction ? postItem.introduction : ''
                 }
                 {...register('introduction', {
-                  required: '필수 입력 항목입니다',
+                  required: '소개글은 필수 입력 항목입니다',
+                  validate: {
+                    value: (value) => {
+                      return (
+                        value.length < 230 ||
+                        '소개글은 공백 포함 200자 내외 (±20) 로 입력해주세요'
+                      )
+                    },
+                  },
                 })}
               ></textarea>
+              {errors.introduction && errors.introduction.message && (
+                <WarningMsg message={errors.introduction.message} />
+              )}
             </div>
-            <Button type='submit' btnClass='primary'>
-              업로드하기
-            </Button>
+
+            <button
+              type='submit'
+              disabled={!isValid}
+              className={'btn btn-primary'}
+            >
+              엄로드하기
+            </button>
           </div>
         </Modal>
       </form>

@@ -11,30 +11,6 @@
   line-height: 1.2;
 }
 
-.padding0 {
-  padding: 0;
-}
-
-p.infoP {
-  text-align: center;
-  padding: 20px 0;
-  color: oklch(var(--nc));
-}
-
-.warnP {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  gap: 5px;
-  justify-content: flex-start;
-  padding: 9px 0 0;
-  color: rgb(233, 0, 0);
-}
-.warnP svg {
-  width: 15px;
-  height: 15px;
-}
-
 html,
 body,
 div,
@@ -852,15 +828,18 @@ form:has(.searchInput) span svg {
   width: 100%;
   border: none;
   outline: none;
-  margin-bottom: 20px;
   line-height: 1.3;
   border-radius: 0;
+}
+#write_sec .titleInput::placeholder {
+  font-weight: bold;
 }
 #write_sec .titleInput:focus {
   outline: none;
   border: none;
 }
 #write_sec input.tagInput {
+  margin-top: 10px;
   padding-left: 0;
   border: none;
   outline: none;
@@ -1509,6 +1488,31 @@ p.warnResultP {
 }
 .hoverAct:hover {
   transform: scale(1.06);
+}
+
+.padding0 {
+  padding: 0;
+}
+
+p.infoP {
+  text-align: center;
+  padding: 20px 0;
+  color: oklch(var(--nc));
+}
+
+.warnP {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 5px;
+  justify-content: flex-start;
+  padding: 9px 0 0;
+  font-weight: 500;
+  color: oklch(var(--er));
+}
+.warnP svg {
+  width: 15px;
+  height: 15px;
 }
 
 #title {

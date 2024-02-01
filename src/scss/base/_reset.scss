@@ -18,27 +18,7 @@
     sans-serif;
   line-height: 1.2;
 }
-.padding0 {
-  padding: 0;
-}
-p.infoP {
-  text-align: center;
-  padding: 20px 0;
-  color: oklch(var(--nc));
-}
-.warnP {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  gap: 5px;
-  justify-content: flex-start;
-  padding: 9px 0 0;
-  color: rgb(233, 0, 0);
-  svg {
-    width: 15px;
-    height: 15px;
-  }
-}
+
 html,
 body,
 div,
