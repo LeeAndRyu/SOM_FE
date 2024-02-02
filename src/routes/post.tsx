@@ -13,7 +13,6 @@ import PostEdit from '../components/postEdit'
 import { HeadLinkState } from '../store/app'
 import LikeAndShare from '../components/likeAndShare'
 import { FaCalendar, FaHeart } from 'react-icons/fa'
-import { FaComment } from 'react-icons/fa6'
 import CommentWrap from '../components/commentWrap'
 const Post = () => {
   const [user, _] = useRecoilState(UserInfoState)
@@ -87,9 +86,6 @@ const Post = () => {
           <div className='postInfo'>
             <p>
               <FaHeart /> {data.likes}
-            </p>
-            <p>
-              <FaComment /> ?
             </p>
             <div></div>
           </div>

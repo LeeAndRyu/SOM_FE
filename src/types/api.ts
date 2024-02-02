@@ -1,4 +1,4 @@
-import { FollowStatus } from './app'
+import { FollowStatus, LikeStatus } from './app'
 
 export interface UserResponse {
   member: UserDetail
@@ -85,5 +85,17 @@ export interface LikeState {
   memberId: number
   message: string
   postId: number
-  result: boolean
+  likesStatus: LikeStatus
+}
+
+export interface CommentItem {
+  commentId: number
+  content: string
+  lastModifiedAt: Date
+  postId: number
+  registeredAt: Date
+  writerAccountName: string
+  writerId: number
+  writerNickname: string
+  writerProfileImage: string
 }

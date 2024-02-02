@@ -17,8 +17,24 @@ export function getLikeStatus({ queryKey }: any) {
   const res = axiosInstance.get(`/post/${postId}/likes`).then((res) => res.data)
   return res
 }
-export function changeLikeStatus({ queryKey }: any) {
+export function changeLikeStatus(postId: string) {
+  const res = axiosInstance
+    .post(`/post/${postId}/likes`)
+    .then((res) => res.data)
+  return res
+}
+
+export function getComments({ queryKey }: any) {
   const [_1, _2, postId] = queryKey
-  const res = axiosInstance.post(`/post/${postId}/likes`).then((res) => res.data)
+  const res = axiosInstance
+    .get(`/post/${postId}/comment`)
+    .then((res) => res.data)
+  return res
+}
+
+export function postComment(postId: string, content: string) {
+  const res = axiosInstance
+    .post(`/post/${postId}/comment`, { content })
+    .then((res) => res.data)
   return res
 }
