@@ -7,8 +7,16 @@ p.resultP {
     font-family: 'Noto Sans KR';
     font-weight: 800;
   }
+  margin-bottom: 20px;
 }
+p.warnResultP {
+  font-family: 'Noto Sans KR';
 
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 60px;
+}
 .bgImg {
   display: block;
   width: 100%;
@@ -25,3 +33,33 @@ p.resultP {
   transition: all 0.1s;
 }
 
+.hoverAct {
+  transform: scale(1);
+  transition: all 0.1s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+.padding0 {
+  padding: 0;
+}
+p.infoP {
+  text-align: center;
+  padding: 20px 0;
+  color: oklch(var(--nc));
+}
+.warnP {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 5px;
+  justify-content: flex-start;
+  padding: 9px 0 0;
+  font-weight: 500;
+  color: oklch(var(--er));
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}

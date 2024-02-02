@@ -19,6 +19,7 @@ export const LogoutFun = async () => {
     if (res.status === 200) {
       localStorage.clear()
     }
+    return res
   } catch (error) {
     console.log(error)
   }
@@ -34,6 +35,8 @@ export const tokenRefresh = async () => {
     })
     if (res.status === 200) {
       setAccessToken((res.data as UserResponse).tokenResponse.accessToken)
+      setRefreshToken((res.data as UserResponse).tokenResponse.refreshToken)
+      
     }
   } catch (error) {
     console.log(error)

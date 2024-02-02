@@ -1,46 +1,58 @@
 #write_sec {
+  .titleInput {
+    padding-left: 0;
+    font-size: 30px;
+    width: 100%;
+    border: none;
+    outline: none;
+
+    line-height: 1.3;
+    border-radius: 0;
+    &::placeholder {
+      font-weight: bold;
+    }
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+  input.tagInput {
+    margin-top: 10px;
+    padding-left: 0;
+    border: none;
+    outline: none;
+    &:focus {
+      outline: none;
+      border: none;
+    }
+    width: fit-content;
+  }
+  .tag_sec {
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      li {
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 20px;
+        transition: all 0.1s;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
   form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    input.titleInput {
-      font-size: 30px;
-      width: 100%;
-      border: none;
-      outline: none;
-      &:focus {
-        outline: none;
-        border: none;
-      }
-    }
-    input.tagInput {
-      border: none;
-      outline: none;
-      &:focus {
-        outline: none;
-        border: none;
-      }
-      width: fit-content;
-    }
-    .tag_sec {
-      display: flex;
-      ul {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        li {
-          font-size: 13px;
-          font-weight: 500;
-          cursor: pointer;
-          padding: 6px 10px;
-          border-radius: 20px;
-          transition: all 0.1s;
-          &:hover {
-            opacity: 0.8;
-          }
-        }
-      }
-    }
   }
   .quill {
     .ql-container {

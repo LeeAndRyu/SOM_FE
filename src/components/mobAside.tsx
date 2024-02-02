@@ -21,15 +21,16 @@ const MobAside = ({ setMoAsideToggle }: Prop) => {
     setMoAsideToggle(false)
   }
   const LogoutHandler = async () => {
-    await LogoutFun().then(() => {
+    const res = await LogoutFun()
+    if (res?.status === 200) {
       resetUser()
       resetToken()
       toast.success('로그아웃되었습니다!')
       navigate('/')
-    })
+    }
   }
   return (
-    <div className='mobAside bg-base-200'>
+    <div className='mobAside bg-base-300'>
       <IoMdClose onClick={() => setMoAsideToggle(false)} />
       <ul onClick={LinkClickHandler}>
         {saveduser ? (

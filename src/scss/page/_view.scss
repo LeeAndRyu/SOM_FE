@@ -1,5 +1,15 @@
 #view.ql-snow {
+  cursor: default;
+  & * {
+    cursor: default;
+    line-height: 1.5;
+    margin: 5px 0;
+  }
   .ql-editor {
+    padding: 0;
+    h1,h2,h3,h4{
+      font-weight: 600;
+    }
     ul {
       list-style: initial;
       list-style-position: inside;

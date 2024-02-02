@@ -4,12 +4,14 @@ ul.articleWrap {
   &.homeArticle {
     flex-wrap: wrap;
     gap: 20px;
+    margin-bottom: 20px;
     @include mobile {
       gap: 20px 0;
     }
   }
   &.blogArticle {
     flex-direction: column;
+    margin-top: 30px;
     @include mobile {
       // gap: 30px 0;
     }
@@ -25,6 +27,13 @@ ul.articleWrap > li {
     }
     &:not(:has(.top_section img)) {
       flex-direction: column-reverse;
+      @include mobile {
+        .top_section {
+          &::after {
+            padding-bottom: 10%;
+          }
+        }
+      }
     }
     width: calc((100% - 60px) / 4);
     display: flex;
@@ -35,9 +44,11 @@ ul.articleWrap > li {
     cursor: pointer;
     transition: all 0.3s;
     background-color: oklch(var(--b2));
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px 0 #00000023;
+    @include tabAndPc {
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px 0 #00000023;
+      }
     }
     div {
       width: 100%;
@@ -91,12 +102,12 @@ ul.articleWrap > li {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
         }
-        p.info {
+        .info {
           // border-top: 1px dashed;
           font-size: 13px;
           display: flex;
           justify-content: space-between;
-          span.infoUser + span {
+          span.infoUser + p {
             display: none;
           }
         }
@@ -127,6 +138,7 @@ ul.articleWrap > li {
         & > * {
           background-color: oklch(var(--p));
           cursor: pointer;
+
           &:hover {
             // filter: brightness(0.96);
             background-color: oklch(var(--pc));
@@ -160,17 +172,17 @@ ul.articleWrap > li {
             position: relative;
             span {
               position: absolute;
-              font-size: 8px;
+              font-size: 9px;
               background-color: oklch(var(--bc));
               color: oklch(var(--b1));
               top: -2px;
               right: -2px;
-              border-radius: 2px;
-              // width: 15px;
+
+              // width: 17px;
               font-weight: bold;
               padding: 3px;
-              // height: 15px;
-              // border-radius: 50%;
+              height: 15px;
+              border-radius: 2px;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -195,17 +207,19 @@ ul.articleWrap > li {
         }
       }
     }
-    &:hover > .icon_section {
-      opacity: 1;
-      & > * {
-        transform: translateY(-15px);
+    @include tabAndPc {
+      &:hover > .icon_section {
+        opacity: 1;
+        & > * {
+          transform: translateY(-15px);
+        }
       }
     }
   }
-  &:is(.blogArticle > .articleItem) {
+  &:is(.blogArticle > *) {
     cursor: pointer;
     padding: 40px 0;
-    margin: 20px 0 0;
+    // margin: 20px 0 0;
     border-bottom: 1px solid oklch(var(--b3));
     .icon_section {
       display: none;
@@ -213,6 +227,9 @@ ul.articleWrap > li {
     &:not(:has(.top_section img)) {
       .top_section {
         display: none;
+        & ~ .middle_section {
+          padding: 0;
+        }
       }
     }
     div {
@@ -239,10 +256,10 @@ ul.articleWrap > li {
       }
       &.middle_section {
         bottom: 0;
-        padding: 20px 0px;
+        padding: 30px 0px 0;
         display: flex;
         flex-direction: column;
-        gap: 20px 0;
+        gap: 15px 0;
         transition: all 0.2s;
         p.title {
           font-size: 20px;
@@ -265,17 +282,25 @@ ul.articleWrap > li {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
         }
-        p.info {
-          margin-top: 20px;
+        .info {
+          margin-top: 12px;
           .infoUser {
             display: none;
           }
           font-size: 13px;
           display: flex;
           justify-content: space-between;
+          & > p {
+            display: flex;
+            gap: 10px;
+            span {
+              display: flex;
+              // gap: 2px;
+            }
+          }
         }
         p.tags {
-          margin-top: 17px;
+          margin-top: 10px;
           flex-wrap: wrap;
           display: flex;
           align-items: center;

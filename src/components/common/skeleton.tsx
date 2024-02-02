@@ -1,10 +1,10 @@
 
 interface Prop {
-  width: string | number
-  height: string | number
+  width?: string | number
+  height?: string | number
 }
 const Skeleton = ({ width, height }: Prop) => {
-  return <div className='skeleton' style={{ width, height }}></div>
+  return <li className='skeleton bg-base-200' style={{ width, height }}></li>
 }
 
 export default Skeleton

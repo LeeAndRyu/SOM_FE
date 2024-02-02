@@ -13,6 +13,7 @@ const errorCodes: string[] = [
   'FOLLOW_NOT_FOUND',
   'INTERNAL_SERVER_ERROR',
 ]
+const userAgent = navigator.userAgent
 export const axiosInstance = axios.create({
   baseURL: 'https://118.67.142.194.nip.io',
 })
@@ -20,6 +21,9 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken')
     if (!!accessToken) config.headers['Authorization'] = `Bearer ${accessToken}`
+    if (!!userAgent)
+      config.headers['Custom-Access-User'] = userAgent
+
     return config
   },
   (error) => {
@@ -36,7 +40,13 @@ axiosInstance.interceptors.response.use(
       toast.error(error.response?.data.errorMessage)
     }
     // 토큰 만료 시 처리
-    if (error.response.data.errorCode === 'TOKEN_TIME_OUT') {
+    if (
+      [
+        'TOKEN_TIME_OUT',
+        'ACCESS_DENIED',
+        'JWT_REFRESH_TOKEN_NOT_FOUND',
+      ].includes(error.response.data.errorCode)
+    ) {
       await tokenRefresh()
       const TOKEN = getLocalStorage('accessToken')
       if (!!TOKEN) error.config.headers['Authorization'] = `Bearer ${TOKEN}`
