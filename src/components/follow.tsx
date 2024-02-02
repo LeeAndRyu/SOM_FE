@@ -19,7 +19,7 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
         ? await axiosInstance.get(`/follow/${accountName}`)
         : await axiosInstance.delete(`/follow/${accountName}`)
       if (res.status === 200) {
-        type ? setFollow('followed') : setFollow('notFollowed')
+        type ? setFollow('FOLLOWED') : setFollow('UN_FOLLOWED')
       }
       setLoading(false)
     } catch (error) {
@@ -37,12 +37,12 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
       <div
         className={clsx(
           'followController hoverAct',
-          followStatus === 'followed' && 'followed'
+          followStatus === 'FOLLOWED' && 'followed'
         )}
       >
         {isLoading ? (
           <span className='loading loading-dots loading-md'></span>
-        ) : followStatus === 'followed' ? (
+        ) : followStatus === 'FOLLOWED' ? (
           <span onClick={() => loggedHandler(false)}>Unfollow</span>
         ) : (
           <span

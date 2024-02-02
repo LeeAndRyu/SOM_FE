@@ -3,7 +3,7 @@ import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
 import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
 import { HiMiniFire } from 'react-icons/hi2'
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import { InfiniteData, useInfiniteQuery, keepPreviousData } from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { PostRes } from '../types/api'
 import { getHomeList } from '../lib/useQuery/getHome'
@@ -44,6 +44,7 @@ const Home = () => {
       queryKey: ['home', tab],
       queryFn: getHomeList,
       initialPageParam: 1,
+      placeholderData: keepPreviousData,
       getNextPageParam: (lastPage) => {
         return lastPage.pageDto.totalPages === 0 ||
           lastPage.pageDto.totalPages === lastPage.pageDto.currentPage

@@ -4,7 +4,12 @@ import { Fragment, useEffect, useState } from 'react'
 
 import { IoSearchOutline } from 'react-icons/io5'
 import ArticleWrap from '../components/articleWrap'
-import { InfiniteData, useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  useQuery,
+  keepPreviousData,
+} from '@tanstack/react-query'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer'
 import {
@@ -29,14 +34,16 @@ const Blog = () => {
   const [searchQ, setQ] = useState('')
   const [tagList, setTagList] = useState<TagItem[]>([])
   const [sort, setSort] = useState('latest')
-  const [followStatus, setFollow] = useState<FollowStatus>(null)
+  const [followStatus, setFollow] = useState<FollowStatus>('NULL')
   const { data } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
     queryFn: getBlogMember,
+    placeholderData: keepPreviousData,
   })
   const { data: tags } = useQuery<BlogTags>({
     queryKey: ['blog', params.id, 'tags'],
     queryFn: getBlogTags,
+    placeholderData: keepPreviousData,
   })
   useEffect(() => {
     tags && setTagList(tags.tagList)
@@ -58,6 +65,7 @@ const Blog = () => {
     queryKey: ['blog', params.id!, 'posts', location.search],
     queryFn: getBlogList,
     initialPageParam: 1,
+    placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => {
       return lastPage.pageDto.totalPages === 0 ||
         lastPage.pageDto.totalPages === lastPage.pageDto.currentPage

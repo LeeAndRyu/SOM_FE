@@ -13,6 +13,7 @@ const errorCodes: string[] = [
   'FOLLOW_NOT_FOUND',
   'INTERNAL_SERVER_ERROR',
 ]
+const userAgent = navigator.userAgent
 export const axiosInstance = axios.create({
   baseURL: 'https://118.67.142.194.nip.io',
 })
@@ -20,6 +21,9 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken')
     if (!!accessToken) config.headers['Authorization'] = `Bearer ${accessToken}`
+    if (!!userAgent)
+      config.headers['Custom-Access-User'] = userAgent
+
     return config
   },
   (error) => {

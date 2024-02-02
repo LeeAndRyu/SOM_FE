@@ -346,6 +346,7 @@ a {
 #post #post_nav .likeAndShare li {
   padding: 10px;
   background-color: oklch(var(--b1));
+  cursor: pointer;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -476,6 +477,14 @@ a {
   width: 20px;
   height: 20px;
 }
+#post #post_cont .mid_sec .comment_sec {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#post #post_cont .mid_sec .comment_sec form textarea::placeholder {
+  font-size: 15px;
+}
 #post #post_cont .btm_sec {
   border-top: 1px solid oklch(var(--b3));
   padding: 10px 0;
@@ -512,14 +521,23 @@ form:has(.searchInput) span svg {
   justify-content: right;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
+}
+@media (max-width: 767px) {
+  .typeSec {
+    margin-top: 13px;
+  }
 }
 .typeSec p {
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
-  font-size: 14px;
+  font-size: 13px;
   gap: 5px;
+}
+.typeSec p input {
+  width: 15px;
+  height: 15px;
 }
 
 .search_sec {
@@ -727,9 +745,13 @@ form:has(.searchInput) span svg {
   }
   #content_sec .sec_inner .cont_left ul li {
     width: max-content;
-    padding: 7px 10px;
+    padding: 5px 7px;
+    gap: 3px !important;
     border-radius: 14px;
     background-color: oklch(var(--s));
+  }
+  #content_sec .sec_inner .cont_left ul li P {
+    font-size: 12px !important;
   }
 }
 #content_sec .sec_inner .cont_left ul li {

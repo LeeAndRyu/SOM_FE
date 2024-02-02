@@ -2,7 +2,7 @@ import { IoMdSearch } from 'react-icons/io'
 import ArticleWrap from '../components/articleWrap'
 import { FormEventHandler, Fragment, useEffect, useState } from 'react'
 import { PostRes } from '../types/api'
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import { InfiniteData, useInfiniteQuery,keepPreviousData } from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { getSearchList } from '../lib/useQuery/getSearch'
 import Skeleton from '../components/common/skeleton'
@@ -31,6 +31,7 @@ const Search = () => {
     queryKey: ['search', searchType, searchValue],
     queryFn: getSearchList,
     initialPageParam: 1,
+    placeholderData: keepPreviousData,
     getNextPageParam: (lastPage) => {
       return lastPage.pageDto.totalPages === 0 ||
         lastPage.pageDto.totalPages === lastPage.pageDto.currentPage

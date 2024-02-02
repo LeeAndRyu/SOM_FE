@@ -81,3 +81,9 @@ export interface PostDetail {
   title: string
   views: number
 }
+export interface LikeState {
+  memberId: number
+  message: string
+  postId: number
+  result: boolean
+}

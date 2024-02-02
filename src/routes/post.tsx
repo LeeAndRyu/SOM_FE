@@ -14,6 +14,7 @@ import { HeadLinkState } from '../store/app'
 import LikeAndShare from '../components/likeAndShare'
 import { FaCalendar, FaHeart } from 'react-icons/fa'
 import { FaComment } from 'react-icons/fa6'
+import CommentWrap from '../components/commentWrap'
 const Post = () => {
   const [user, _] = useRecoilState(UserInfoState)
   const [_link, setLink] = useRecoilState(HeadLinkState)
@@ -90,7 +91,9 @@ const Post = () => {
             <p>
               <FaComment /> ?
             </p>
+            <div></div>
           </div>
+          <CommentWrap />
         </div>
         <div className='btm_sec userInfoSec'>
           <Avatar src={member?.profileImage} accountName={params.id} />
