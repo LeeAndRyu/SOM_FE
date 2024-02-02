@@ -1,0 +1,46 @@
+form:has(.searchInput) {
+  position: relative;
+  .searchInput {
+    padding-left: 60px;
+  }
+  span {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+.typeSec {
+  margin-top: 20px;
+  @include  mobile{
+    margin-top: 13px;
+  }
+  justify-content: right;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  p {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    font-size: 13px;
+    gap: 5px;
+    input{
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
+
+.search_sec {
+  // margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
