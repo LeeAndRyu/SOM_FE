@@ -45,11 +45,11 @@ const ArticleItem = ({ item }: { item: PostItem }) => {
               <span>
                 <FaComment />
                 &nbsp;
-                <strong>0</strong>개의 댓글
+                <strong>{item.comments}</strong>개의 댓글
               </span>
               <span>
                 <FaHeart />
-                &nbsp;<strong>0</strong>개의 좋아요
+                &nbsp;<strong>{item.likes}</strong>개의 좋아요
               </span>
             </p>
             <span>{new Date(item?.registeredAt).toLocaleDateString()}</span>
