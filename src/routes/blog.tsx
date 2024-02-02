@@ -34,7 +34,7 @@ const Blog = () => {
   const [searchQ, setQ] = useState('')
   const [tagList, setTagList] = useState<TagItem[]>([])
   const [sort, setSort] = useState('latest')
-  const [followStatus, setFollow] = useState<FollowStatus>('NULL')
+  const [followStatus, setFollow] = useState<FollowStatus>('NOT_LOGGED_IN')
   const { data } = useQuery<BlogMember>({
     queryKey: ['blog', params.id],
     queryFn: getBlogMember,
@@ -87,7 +87,7 @@ const Blog = () => {
       path: `/blog/${params.id}`,
       content: data?.blogName || 'S ☻ M',
     })
-    setFollow(data?.loginMemberFollowStatus!)
+    setFollow(data?.followStatus!)
   }, [data])
   useEffect(() => {
     setSearchParams({ sort: sort })

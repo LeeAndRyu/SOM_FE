@@ -31,7 +31,6 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
     setModal((prev) => !prev)
   }
 
-
   return (
     <>
       <div
@@ -47,7 +46,9 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
         ) : (
           <span
             onClick={() => {
-              followStatus === null ? notLoggedHander() : loggedHandler(true)
+              followStatus === 'NOT_LOGGED_IN'
+                ? notLoggedHander()
+                : loggedHandler(true)
             }}
           >
             Follow

@@ -26,7 +26,7 @@ export interface BlogMember {
   followerCount: number
   followingCount: number
   introduction: string
-  loginMemberFollowStatus: FollowStatus
+  followStatus: FollowStatus
   nickname: string
   profileImage: string
 }
