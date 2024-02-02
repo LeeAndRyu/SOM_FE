@@ -22,7 +22,6 @@ const LoginModal = ({
   const {
     register,
     handleSubmit,
-    getFieldState,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
   const navigate = useNavigate()
