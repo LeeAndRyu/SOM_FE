@@ -44,9 +44,11 @@ ul.articleWrap > li {
     cursor: pointer;
     transition: all 0.3s;
     background-color: oklch(var(--b2));
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px 0 #00000023;
+    @include tabAndPc {
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px 0 #00000023;
+      }
     }
     div {
       width: 100%;
@@ -205,10 +207,12 @@ ul.articleWrap > li {
         }
       }
     }
-    &:hover > .icon_section {
-      opacity: 1;
-      & > * {
-        transform: translateY(-15px);
+    @include tabAndPc {
+      &:hover > .icon_section {
+        opacity: 1;
+        & > * {
+          transform: translateY(-15px);
+        }
       }
     }
   }
@@ -289,7 +293,7 @@ ul.articleWrap > li {
           & > p {
             display: flex;
             gap: 10px;
-            span{
+            span {
               display: flex;
               // gap: 2px;
             }

@@ -134,6 +134,7 @@
     padding: 30px 0;
     display: flex;
     @include mobile {
+      padding: 0px 0 30px;
       flex-direction: column;
       & > div {
         width: 100% !important;

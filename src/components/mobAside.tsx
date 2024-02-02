@@ -30,7 +30,7 @@ const MobAside = ({ setMoAsideToggle }: Prop) => {
     }
   }
   return (
-    <div className='mobAside bg-base-200'>
+    <div className='mobAside bg-base-300'>
       <IoMdClose onClick={() => setMoAsideToggle(false)} />
       <ul onClick={LinkClickHandler}>
         {saveduser ? (
