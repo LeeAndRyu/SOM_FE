@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import clsx from 'clsx'
 import WarningMsg from '../components/common/warningMsg'
 import axios from 'axios'
+import { getLocalStorage } from '../lib/localStorage'
+import { toast } from 'react-toastify'
 type Formvalues = {
   accountName: string
   nickname: string
@@ -13,6 +15,7 @@ type Formvalues = {
   verifyPwd: string
 }
 const Auth = () => {
+  const user = getLocalStorage('user')
   const [searchParams, _setSearchParams] = useSearchParams()
   const navigate = useNavigate()
   const [code, setCode] = useState<null | string>(null)
@@ -54,7 +57,13 @@ const Auth = () => {
         ? 'input-error'
         : 'input-success'
   }
+
   useEffect(() => {
+    if (!!user) {
+      toast.error('이미 로그인된 유저입니다')
+      navigate('/')
+      return
+    }
     setCode(searchParams.get('code'))
     setEmail(searchParams.get('email'))
   }, [])

@@ -33,7 +33,7 @@ const FindPwdModal = ({
           {...register('name', {
             required: '필수 입력 항목입니다',
           })}
-          className={clsx(`input input-bordered mb-1.5`)}
+          className={clsx(`input input-bordered mb-1.5`,errors.name && 'input-error', )}
         />
         {errors.name && errors.name.message && (
           <WarningMsg message={errors.name.message} />
@@ -53,7 +53,7 @@ const FindPwdModal = ({
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
-          className={clsx(`input input-bordered mb-1.5`)}
+          className={clsx(`input input-bordered mb-1.5`,errors.email && 'input-error', )}
         />
         {errors.email && errors.email.message && (
           <WarningMsg message={errors.email.message} />

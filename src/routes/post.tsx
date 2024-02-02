@@ -50,7 +50,7 @@ const Post = () => {
             </span>
             <span className='date'>
               <FaCalendar />
-              {dayjs(data.registeredAt).format('YYYY-MM-DD')}
+              {dayjs(data.registeredAt).format('YY-MM-DD')}
             </span>
 
             {user.accountName === params.id && (

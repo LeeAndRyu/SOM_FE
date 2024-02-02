@@ -57,7 +57,10 @@ const LoginModal = ({
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
-          className={clsx(`input input-bordered mb-1.5`)}
+          className={clsx(
+            `input input-bordered mb-1.5`,
+            errors.email && 'input-error'
+          )}
         />
         {errors.email && errors.email.message && (
           <WarningMsg message={errors.email.message} />
@@ -80,9 +83,7 @@ const LoginModal = ({
           })}
           className={clsx(
             `input input-bordered mb-1.5`,
-            getFieldState('password').isTouched &&
-              getFieldState('password').invalid &&
-              'input-error'
+            errors.password && 'input-error'
           )}
         />
         {errors.password && errors.password.message && (

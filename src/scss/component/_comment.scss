@@ -21,8 +21,8 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        .avatar{
-          img{
+        .avatar {
+          img {
             border: 1px solid oklch(var(--b3));
           }
         }
@@ -46,7 +46,6 @@
             span.edit {
               display: flex;
               gap: 5px;
-              // justify-content: right;
               align-items: center;
               svg {
                 width: 16px;
@@ -61,7 +60,7 @@
           margin-bottom: 25px;
         }
         flex: 1;
-        div{
+        div {
           display: flex;
           justify-content: flex-end;
           gap: 10px;
@@ -85,9 +84,8 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
-    @include mobile{
+    @include mobile {
       align-items: unset;
-
     }
   }
 }
