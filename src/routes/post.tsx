@@ -19,7 +19,7 @@ const Post = () => {
   const [_link, setLink] = useRecoilState(HeadLinkState)
   const params = useParams()
   const { data } = useQuery<PostDetail>({
-    queryKey: ['posts', params.id, params.post],
+    queryKey: ['posts', params.post, params.id],
     queryFn: getPost,
     enabled: params.post !== undefined,
   })
@@ -89,7 +89,7 @@ const Post = () => {
             </p>
             <div></div>
           </div>
-          <CommentWrap />
+          <CommentWrap loggedState={member?.followStatus!} />
         </div>
         <div className='btm_sec userInfoSec'>
           <Avatar src={member?.profileImage} accountName={params.id} />
