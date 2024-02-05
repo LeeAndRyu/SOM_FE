@@ -7,8 +7,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import MobAside from './mobAside'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
-import { UserInfoState } from '../store/user'
-import { getLocalStorage } from '../lib/localStorage'
+import { UserInfoState, UserTokenState } from '../store/user'
+import {
+  getAccessToken,
+  getLocalStorage,
+  getRefreshToken,
+} from '../lib/localStorage'
 import RQProvider from './rqProvider'
 import { HeadLinkState } from '../store/app'
 import { SseComponent } from './sseComponent'
@@ -17,13 +21,25 @@ const Layout = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const saveduser = getLocalStorage('user')
+  const savedAccessToken = getAccessToken()
+  const savedRefreshToken = getRefreshToken()
   const [alink, _] = useRecoilState(HeadLinkState)
   const resetAlink = useResetRecoilState(HeadLinkState)
   const [moAsideToggle, setMoAsideToggle] = useState(false)
   const [_2, setUser] = useRecoilState(UserInfoState)
+  const [_token, setToken] = useRecoilState(UserTokenState)
   const userInfo = JSON.parse(getLocalStorage('user')!)
   useEffect(() => {
     userInfo !== null && setUser(() => userInfo)
+    savedAccessToken !== null &&
+      savedRefreshToken !== null &&
+      setToken((prev) => {
+        return {
+          ...prev,
+          accessToken: savedAccessToken,
+          refreshToken: savedRefreshToken,
+        }
+      })
   }, [])
   useEffect(() => {
     if (!location.pathname.includes('blog')) {

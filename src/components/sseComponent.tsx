@@ -4,7 +4,7 @@ import { EventSourcePolyfill, NativeEventSource } from 'event-source-polyfill'
 import { NotificationState, UserInfoState, UserTokenState } from '../store/user'
 import { BACKEND_SERVER } from '../store/app'
 import Avatar from './common/avatar'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getNotifications } from '../lib/useQuery/getNotifications'
 import { NotificationItem } from '../types/api'
 import { useNavigate } from 'react-router-dom'
@@ -13,10 +13,11 @@ import clsx from 'clsx'
 export const SseComponent = () => {
   const [token, _] = useRecoilState(UserTokenState)
   const [user, _2] = useRecoilState(UserInfoState)
-
+  const queryClient = useQueryClient()
   const [notificatioinExist, setNtExist] = useRecoilState(NotificationState)
   const EventSource = EventSourcePolyfill || NativeEventSource
   useEffect(() => {
+    if (token.accessToken === '') return
     const eventSource = new EventSource(`${BACKEND_SERVER}/sse/subscribe`, {
       headers: {
         Authorization: `Bearer ${token.accessToken}`,
@@ -27,12 +28,15 @@ export const SseComponent = () => {
       const { data } = event
       if (!data.includes(`EventStream Created`)) {
         setNtExist({ msg: data, state: true })
+        queryClient.invalidateQueries({
+          queryKey: ['notifications', user.accountName],
+        })
       }
     })
     return () => {
       eventSource.close()
     }
-  }, [user])
+  }, [token])
   const { data } = useQuery<NotificationItem[]>({
     queryFn: getNotifications,
     queryKey: ['notifications', user.accountName],
