@@ -1799,6 +1799,7 @@ p.infoP {
   border-radius: 10px;
   border: 1px solid oklch(var(--b3));
   overflow: hidden;
+  z-index: 10;
 }
 
 #sideMenuWrapper.notificationWrap {
@@ -1820,16 +1821,18 @@ p.infoP {
   overflow-y: auto;
 }
 #sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem {
+  transition: all 0.2s;
+  cursor: pointer;
   padding: 15px;
   gap: 15px;
-  max-width: 250px;
+  max-width: 280px;
   min-width: 200px;
   width: max-content;
   display: flex;
   flex-direction: row;
 }
-#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem.readed {
-  opacity: 0.6;
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem:hover {
+  background-color: oklch(var(--b2));
 }
 #sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info {
   flex: 1;

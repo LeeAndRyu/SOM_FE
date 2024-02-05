@@ -51,7 +51,7 @@ const MobAside = ({ setMoAsideToggle }: Prop) => {
               <Link to={'/mypage'}>내 정보 수정</Link>
             </li>
             <li>
-              <Link to={'/mypage'}>알림 내역</Link>
+              <Link to={'/mypage'}>통계</Link>
             </li>
             <li>
               <a href='#none' onClick={LogoutHandler}>

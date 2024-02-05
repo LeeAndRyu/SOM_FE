@@ -44,14 +44,18 @@ export const SseComponent = () => {
   return (
     <>
       <div
-        className='dropdown '
+        className='dropdown'
         onClick={() =>
           setNtExist((prev) => {
             return { ...prev, state: false }
           })
         }
       >
-        <button className='btn btn-ghost nofocus btn-circle'>
+        <button
+          tabIndex={0}
+          role='button'
+          className='btn btn-ghost nofocus btn-circle'
+        >
           <div className='indicator'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -73,7 +77,7 @@ export const SseComponent = () => {
             )}
           </div>
         </button>
-        <div className='dropdown-content bg-base-100 menu-dropdown-show'>
+        <div className='dropdown-content z-[1] bg-base-100 menu-dropdown-show' tabIndex={0}>
           <div id='sideMenuWrapper' className='notificationWrap'>
             <h5>알림내역</h5>
             {data?.length === 0 ? (
@@ -104,7 +108,7 @@ export const SseItem = ({ item }: { item: NotificationItem }) => {
       <div className='info'>
         <ul
           onClick={() => {
-            navigate(`${import.meta.env.VITE_PUBLIC_BASE_URL}${item.url}`)
+            navigate(`${item.url}`)
           }}
         >
           <li

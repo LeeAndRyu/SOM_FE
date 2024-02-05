@@ -47,7 +47,7 @@ const SideMenu = () => {
                           <Link to={'/mypage'}>내 정보수정</Link>
                         </li>
                         <li>
-                          <Link to={'/'}>알림 내역</Link>
+                          <Link to={'/'}>통계</Link>
                         </li>
                       </ul>
                     </details>

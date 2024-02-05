@@ -4,6 +4,7 @@
   border-radius: 10px;
   border: 1px solid oklch(var(--b3));
   overflow: hidden;
+  z-index: 10;
 }
 #sideMenuWrapper.notificationWrap {
   min-width: 240px;
@@ -20,15 +21,18 @@
     padding: 20px;
   }
   ul.notificationWrap {
+    
     max-height: 350px;
     overflow-y: auto;
     li.sseItem {
-      &.readed {
-        opacity: 0.6;
+      transition: all .2s;
+      cursor: pointer;
+      &:hover{
+        background-color: oklch(var(--b2));
       }
       padding: 15px;
       gap: 15px;
-      max-width: 250px;
+      max-width: 280px;
       min-width: 200px;
       width: max-content;
       display: flex;
