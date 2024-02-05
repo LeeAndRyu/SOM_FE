@@ -3,6 +3,7 @@ import { FollowStatus } from '../types/app'
 import { axiosInstance } from '../lib/axios'
 import clsx from 'clsx'
 import NotLoggedModal from './notLoggedModal'
+import { useQueryClient } from '@tanstack/react-query'
 interface Prop {
   accountName: string
   followStatus: FollowStatus
@@ -11,6 +12,7 @@ interface Prop {
 const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
   const [openModal, setModal] = useState(false)
   const [isLoading, setLoading] = useState(false)
+  const queryClient = useQueryClient()
   const loggedHandler = async (type: boolean) => {
     setLoading(true)
     try {
@@ -19,6 +21,9 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
         : await axiosInstance.delete(`/follow/${accountName}`)
       if (res.status === 200) {
         type ? setFollow('FOLLOWED') : setFollow('UN_FOLLOWED')
+        queryClient.invalidateQueries({
+          queryKey: ['blog', accountName],
+        })
       }
       setLoading(false)
     } catch (error) {
