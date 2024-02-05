@@ -7,7 +7,7 @@ import { getPost, getPostImageList } from '../lib/useQuery/getPost'
 const Edit = () => {
   const params = useParams()
   const { data, isFetched } = useQuery<PostDetail>({
-    queryKey: ['posts', params.id, params.post],
+    queryKey: ['posts', params.post, params.id],
     queryFn: getPost,
     enabled: params.post !== undefined,
   })
