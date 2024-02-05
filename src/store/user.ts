@@ -22,3 +22,11 @@ export const UserTokenState = atom({
     tokenType: '',
   },
 })
+
+export const NotificationState = atom({
+  key: 'notificationState',
+  default: {
+    msg: '',
+    state: false,
+  },
+})

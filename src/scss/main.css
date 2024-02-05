@@ -1792,3 +1792,61 @@ p.infoP {
     align-items: unset;
   }
 }
+
+.dropdown-content:has(.notificationWrap) {
+  right: -30px;
+  padding-top: 10px;
+}
+
+#sideMenuWrapper.notificationWrap {
+  border-radius: 10px;
+  border: 1px solid oklch(var(--b3));
+  overflow: hidden;
+  min-width: 240px;
+}
+#sideMenuWrapper.notificationWrap h5 {
+  padding: 13px;
+  font-size: 14px;
+  border-bottom: 1px solid oklch(var(--b3));
+}
+#sideMenuWrapper.notificationWrap > p {
+  opacity: 0.5;
+  font-size: 14px;
+  width: max-content;
+  padding: 20px;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap {
+  max-height: 400px;
+  overflow-y: auto;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem {
+  padding: 15px;
+  gap: 15px;
+  max-width: 300px;
+  min-width: 200px;
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info {
+  flex: 1;
+  font-size: 13px;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info ul li.titleLi {
+  font-size: 13px;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info ul li.thirdLi {
+  font-size: 11px;
+  opacity: 0.8;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info ul li strong {
+  color: oklch(var(--a));
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .date p {
+  font-size: 10px;
+}

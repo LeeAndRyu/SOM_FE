@@ -52,7 +52,6 @@ const Post = () => {
               <FaCalendar />
               {dayjs(data.registeredAt).format('YY-MM-DD')}
             </span>
-
             {user.accountName === params.id && (
               <PostEdit accountName={user.accountName} postId={params.post!} />
             )}

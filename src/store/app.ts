@@ -10,3 +10,6 @@ export const HeadLinkState = atom({
     content: `S ☻ M`,
   },
 })
+
+export const BACKEND_SERVER = 'https://118.67.142.194.nip.io'
+

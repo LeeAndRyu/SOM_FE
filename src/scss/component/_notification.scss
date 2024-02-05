@@ -1,0 +1,62 @@
+.dropdown-content:has(.notificationWrap) {
+  right: -30px;
+  padding-top: 10px;
+}
+#sideMenuWrapper.notificationWrap {
+  border-radius: 10px;
+  border: 1px solid oklch(var(--b3));
+  overflow: hidden;
+  min-width: 240px;
+  h5 {
+    padding: 13px;
+    font-size: 14px;
+    border-bottom: 1px solid oklch(var(--b3));
+  }
+  & > p {
+    opacity: 0.5;
+    font-size: 14px;
+    width: max-content;
+    // text-align: center;
+    padding: 20px;
+  }
+  ul.notificationWrap {
+    max-height: 400px;
+    overflow-y: auto;
+    li.sseItem {
+      padding: 15px;
+      gap: 15px;
+      max-width: 300px;
+      min-width: 200px;
+      width: max-content;
+      display: flex;
+      flex-direction: row;
+
+      .info {
+        flex: 1;
+        font-size: 13px;
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          li {
+            &.titleLi{
+              font-size: 13px;
+            }
+            &.thirdLi {
+              font-size: 11px;
+              opacity: 0.8;
+            }
+            strong {
+              color: oklch(var(--a));
+            }
+          }
+        }
+      }
+      .date {
+        p {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { tokenRefresh } from './auth'
 import { getLocalStorage } from './localStorage'
+import { BACKEND_SERVER } from '../store/app'
 const msgErrorCodes: string[] = [
   'EMAIL_ALREADY_EXISTS',
   'MEMBER_PASSWORD_INCORRECT',
@@ -21,7 +22,7 @@ const redirectError: string[] = [
 ]
 const userAgent = navigator.userAgent
 export const axiosInstance = axios.create({
-  baseURL: 'https://118.67.142.194.nip.io',
+  baseURL: BACKEND_SERVER,
 })
 axiosInstance.interceptors.request.use(
   (config) => {
