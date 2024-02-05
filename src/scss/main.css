@@ -1795,13 +1795,13 @@ p.infoP {
 
 .dropdown-content:has(.notificationWrap) {
   right: -30px;
-  padding-top: 10px;
-}
-
-#sideMenuWrapper.notificationWrap {
+  margin-top: 10px;
   border-radius: 10px;
   border: 1px solid oklch(var(--b3));
   overflow: hidden;
+}
+
+#sideMenuWrapper.notificationWrap {
   min-width: 240px;
 }
 #sideMenuWrapper.notificationWrap h5 {
@@ -1816,17 +1816,20 @@ p.infoP {
   padding: 20px;
 }
 #sideMenuWrapper.notificationWrap ul.notificationWrap {
-  max-height: 400px;
+  max-height: 350px;
   overflow-y: auto;
 }
 #sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem {
   padding: 15px;
   gap: 15px;
-  max-width: 300px;
+  max-width: 250px;
   min-width: 200px;
   width: max-content;
   display: flex;
   flex-direction: row;
+}
+#sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem.readed {
+  opacity: 0.6;
 }
 #sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .info {
   flex: 1;
@@ -1849,4 +1852,5 @@ p.infoP {
 }
 #sideMenuWrapper.notificationWrap ul.notificationWrap li.sseItem .date p {
   font-size: 10px;
+  text-align: right;
 }

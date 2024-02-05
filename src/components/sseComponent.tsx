@@ -9,6 +9,7 @@ import { getNotifications } from '../lib/useQuery/getNotifications'
 import { NotificationItem } from '../types/api'
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
+import clsx from 'clsx'
 export const SseComponent = () => {
   const [token, _] = useRecoilState(UserTokenState)
   const [user, _2] = useRecoilState(UserInfoState)
@@ -39,7 +40,7 @@ export const SseComponent = () => {
   return (
     <>
       <div
-        className='dropdown'
+        className='dropdown '
         onClick={() =>
           setNtExist((prev) => {
             return { ...prev, state: false }
@@ -68,7 +69,7 @@ export const SseComponent = () => {
             )}
           </div>
         </button>
-        <div className='dropdown-content bg-base-100'>
+        <div className='dropdown-content bg-base-100 menu-dropdown-show'>
           <div id='sideMenuWrapper' className='notificationWrap'>
             <h5>알림내역</h5>
             {data?.length === 0 ? (
@@ -90,7 +91,7 @@ export const SseComponent = () => {
 export const SseItem = ({ item }: { item: NotificationItem }) => {
   const navigate = useNavigate()
   return (
-    <li className='sseItem bg-base-100'>
+    <li className={clsx('sseItem bg-base-100')}>
       <Avatar
         size={20}
         src={item.writerProfileImage}
@@ -102,15 +103,22 @@ export const SseItem = ({ item }: { item: NotificationItem }) => {
             navigate(`${import.meta.env.VITE_PUBLIC_BASE_URL}${item.url}`)
           }}
         >
-          <li className='titleLi' dangerouslySetInnerHTML={{__html : item.title}}></li>
-          <li className='secondLi' dangerouslySetInnerHTML={{__html : item.message1}}></li>
-          <li className='thirdLi' dangerouslySetInnerHTML={{__html : item.message2}}></li>
+          <li
+            className='titleLi'
+            dangerouslySetInnerHTML={{ __html: item.title }}
+          ></li>
+          <li
+            className='secondLi'
+            dangerouslySetInnerHTML={{ __html: item.message1 }}
+          ></li>
+          <li
+            className='thirdLi'
+            dangerouslySetInnerHTML={{ __html: item.message2 }}
+          ></li>
         </ul>
       </div>
       <div className='date'>
-        <p>
-        {dayjs(item.createdAt).format('YY-MM-DD')}
-        </p>
+        <p>{dayjs(item.createdAt).format('YY-MM-DD')}</p>
       </div>
     </li>
   )

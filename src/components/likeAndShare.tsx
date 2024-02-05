@@ -6,10 +6,12 @@ import { changeLikeStatus, getLikeStatus } from '../lib/useQuery/getPost'
 import { useEffect, useState } from 'react'
 import { LikeState } from '../types/api'
 import NotLoggedModal from './notLoggedModal'
+
 const LikeAndShare = () => {
   const location = useLocation()
   const params = useParams()
   const [openModal, setModal] = useState<boolean>(false)
+
   const queryClient = useQueryClient()
   const { data } = useQuery<LikeState>({
     queryKey: ['posts', params.post, 'like'],

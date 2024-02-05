@@ -1,11 +1,11 @@
 .dropdown-content:has(.notificationWrap) {
   right: -30px;
-  padding-top: 10px;
-}
-#sideMenuWrapper.notificationWrap {
+  margin-top: 10px;
   border-radius: 10px;
   border: 1px solid oklch(var(--b3));
   overflow: hidden;
+}
+#sideMenuWrapper.notificationWrap {
   min-width: 240px;
   h5 {
     padding: 13px;
@@ -20,12 +20,15 @@
     padding: 20px;
   }
   ul.notificationWrap {
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
     li.sseItem {
+      &.readed {
+        opacity: 0.6;
+      }
       padding: 15px;
       gap: 15px;
-      max-width: 300px;
+      max-width: 250px;
       min-width: 200px;
       width: max-content;
       display: flex;
@@ -39,7 +42,7 @@
           flex-direction: column;
           gap: 5px;
           li {
-            &.titleLi{
+            &.titleLi {
               font-size: 13px;
             }
             &.thirdLi {
@@ -55,6 +58,7 @@
       .date {
         p {
           font-size: 10px;
+          text-align: right;
         }
       }
     }
