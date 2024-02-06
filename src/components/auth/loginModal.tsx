@@ -6,7 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../../lib/axios'
 import { LoginSuccess } from '../../lib/auth'
 import { useRecoilState } from 'recoil'
-import { UserInfoState, UserTokenState } from '../../store/user'
+import {
+  NotificationState,
+  UserInfoState,
+  UserTokenState,
+} from '../../store/user'
 type Formvalues = {
   email: string
   password: string
@@ -19,10 +23,10 @@ const LoginModal = ({
 }) => {
   const [_1, setUser] = useRecoilState(UserInfoState)
   const [_2, setToken] = useRecoilState(UserTokenState)
+  const [_3, setNtExist] = useRecoilState(NotificationState)
   const {
     register,
     handleSubmit,
-    getFieldState,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
   const navigate = useNavigate()
@@ -33,8 +37,29 @@ const LoginModal = ({
       if (res.status === 200) {
         setToken(res.data.tokenResponse)
         setUser(res.data.member)
+        checkUnreadMsg(res.data.tokenResponse.accessToken)
         await LoginSuccess(res.data)
         navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const checkUnreadMsg = async (TOKEN: any) => {
+    try {
+      const res = await axiosInstance.get(`/notification/unread`, {
+        headers: {
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      })
+      if (res.status === 200) {
+        res.data === true &&
+          setNtExist((prev) => {
+            return {
+              ...prev,
+              state: true,
+            }
+          })
       }
     } catch (error) {
       console.log(error)
@@ -57,7 +82,10 @@ const LoginModal = ({
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
-          className={clsx(`input input-bordered mb-1.5`)}
+          className={clsx(
+            `input input-bordered mb-1.5`,
+            errors.email && 'input-error'
+          )}
         />
         {errors.email && errors.email.message && (
           <WarningMsg message={errors.email.message} />
@@ -80,9 +108,7 @@ const LoginModal = ({
           })}
           className={clsx(
             `input input-bordered mb-1.5`,
-            getFieldState('password').isTouched &&
-              getFieldState('password').invalid &&
-              'input-error'
+            errors.password && 'input-error'
           )}
         />
         {errors.password && errors.password.message && (

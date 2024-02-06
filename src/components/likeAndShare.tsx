@@ -3,21 +3,25 @@ import { useLocation, useParams } from 'react-router-dom'
 import { handleCopyClipBoard } from '../lib/lib'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { changeLikeStatus, getLikeStatus } from '../lib/useQuery/getPost'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { LikeState } from '../types/api'
+import NotLoggedModal from './notLoggedModal'
+
 const LikeAndShare = () => {
   const location = useLocation()
   const params = useParams()
+  const [openModal, setModal] = useState<boolean>(false)
+
   const queryClient = useQueryClient()
   const { data } = useQuery<LikeState>({
-    queryKey: ['post', 'like', params.post],
+    queryKey: ['posts', params.post, 'like'],
     queryFn: getLikeStatus,
   })
   const { mutate } = useMutation({
     mutationFn: changeLikeStatus,
     onError: (e) => console.log(e),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['post', params.post] })
+      queryClient.invalidateQueries({ queryKey: ['posts', params.post] })
     },
   })
   useEffect(() => {
@@ -25,7 +29,13 @@ const LikeAndShare = () => {
   }, [])
   return (
     <ul className='likeAndShare'>
-      <li onClick={() => mutate(params.post!)}>
+      <li
+        onClick={() => {
+          data?.likesStatus === 'NOT_LOGGED_IN'
+            ? setModal(() => true)
+            : mutate(params.post!)
+        }}
+      >
         {data?.likesStatus === 'LIKES' ? (
           <FaHeart className='hoverAct fill-primary' />
         ) : (
@@ -42,6 +52,7 @@ const LikeAndShare = () => {
           }
         />
       </li>
+      {openModal && <NotLoggedModal setModal={setModal} />}
     </ul>
   )
 }

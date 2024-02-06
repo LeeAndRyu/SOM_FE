@@ -1,9 +1,13 @@
 import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
 import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
-import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
+import { MdOutlineRssFeed } from 'react-icons/md'
 import { HiMiniFire } from 'react-icons/hi2'
-import { InfiniteData, useInfiniteQuery, keepPreviousData } from '@tanstack/react-query'
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  keepPreviousData,
+} from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { PostRes } from '../types/api'
 import { getHomeList } from '../lib/useQuery/getHome'
@@ -21,11 +25,7 @@ const Home = () => {
       title: 'New',
       icon: <MdOutlineRssFeed />,
     },
-    {
-      id: 2,
-      title: 'Feed',
-      icon: <MdPerson />,
-    },
+
   ]
   const [tab, setTab] = useState<number>(0)
   const tabClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -88,7 +88,7 @@ const Home = () => {
       {isFetched && isSuccess ? (
         <div>
           {data?.pages.map((page, itemIdx: number) => (
-            <Fragment key={itemIdx}>
+            <Fragment key={page.pageDto.currentPage + itemIdx}>
               {page.postList.length < 1 ? (
                 <p className='resultP'>❌</p>
               ) : (
@@ -103,8 +103,8 @@ const Home = () => {
       ) : (
         <>
           <ul className='articleWrap homeArticle'>
-            {new Array(12).fill('').map(() => (
-              <Skeleton height={'300px'} />
+            {new Array(12).fill('').map((idx) => (
+              <Skeleton key={idx} height={'300px'} />
             ))}
           </ul>{' '}
         </>

@@ -49,7 +49,11 @@ const SendEmail = ({
                   message: '유효한 이메일 형식이 아닙니다',
                 },
               })}
-              className={clsx(`input input-bordered mb-1.5`)}
+              className={clsx(
+                `input input-bordered mb-1.5`,
+                errors.email && 'input-error', 
+                isValid && 'input-success'
+              )}
             />
             {errors.email && errors.email.message && (
               <WarningMsg message={errors.email.message} />

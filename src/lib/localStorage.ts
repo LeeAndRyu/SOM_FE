@@ -7,6 +7,12 @@ export const setLocalStorage = (key: string, value: any) => {
 export const setAccessToken = (value: any) => {
   localStorage.setItem('accessToken', value)
 }
+export const getAccessToken = () => {
+  return localStorage.getItem('accessToken')
+}
+export const getRefreshToken = () => {
+  return localStorage.getItem('refreshToken')
+}
 export const setRefreshToken = (value: any) => {
   localStorage.setItem('refreshToken', value)
 }

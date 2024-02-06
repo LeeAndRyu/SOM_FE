@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { FollowStatus } from '../types/app'
-import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../lib/axios'
 import clsx from 'clsx'
+import NotLoggedModal from './notLoggedModal'
+import { useQueryClient } from '@tanstack/react-query'
 interface Prop {
   accountName: string
   followStatus: FollowStatus
@@ -11,7 +12,7 @@ interface Prop {
 const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
   const [openModal, setModal] = useState(false)
   const [isLoading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const loggedHandler = async (type: boolean) => {
     setLoading(true)
     try {
@@ -20,6 +21,9 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
         : await axiosInstance.delete(`/follow/${accountName}`)
       if (res.status === 200) {
         type ? setFollow('FOLLOWED') : setFollow('UN_FOLLOWED')
+        queryClient.invalidateQueries({
+          queryKey: ['blog', accountName],
+        })
       }
       setLoading(false)
     } catch (error) {
@@ -55,30 +59,7 @@ const FollowController = ({ accountName, followStatus, setFollow }: Prop) => {
           </span>
         )}
       </div>
-      {openModal && (
-        <div className='fixModal'>
-          <div className='card w-96 bg-neutral text-neutral-content'>
-            <div className='card-body items-center text-center'>
-              <h2 className='card-title mb-2'>로그인이 필요한 기능입니다</h2>
-              <p className='mb-5'>해당 페이지로 이동하시겠습니까?</p>
-              <div className='card-actions justify-end '>
-                <button
-                  className='btn btn-primary'
-                  onClick={() => navigate('/login')}
-                >
-                  이동
-                </button>
-                <button
-                  className='btn btn-ghost'
-                  onClick={() => setModal((prev) => !prev)}
-                >
-                  취소
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {openModal && <NotLoggedModal setModal={setModal}/>}
     </>
   )
 }

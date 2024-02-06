@@ -105,3 +105,20 @@ export interface CommentItem {
   writerNickname: string
   writerProfileImage: string
 }
+
+export interface NotificationItem {
+  createdAt: Date
+  memberId: number
+  message1: string
+  message2: string
+  notificationId: number
+  notificationSituation: string
+  readAt: Date
+  targetEntityId: number
+  title: string
+  url: string
+  writerAccountName: string
+  writerId: number
+  writerProfileImage: string
+}
+

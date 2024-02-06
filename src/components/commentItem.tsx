@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 import { axiosInstance } from '../lib/axios'
 import { useRecoilState } from 'recoil'
 import { UserInfoState } from '../store/user'
+import { FollowStatus } from '../types/app'
 interface Prop {
   item: ItemType
 }
@@ -54,7 +55,11 @@ export const CommentItem = ({ item }: Prop) => {
   return (
     <li>
       <div className='userInfo'>
-        <Avatar size={50} src={item.writerProfileImage} accountName={item.writerAccountName} />
+        <Avatar
+          size={50}
+          src={item.writerProfileImage}
+          accountName={item.writerAccountName}
+        />
         <p className='username'>
           <span className='userNick'>{item.writerNickname}</span>
           <p className='info'>
@@ -103,7 +108,11 @@ export const CommentItem = ({ item }: Prop) => {
   )
 }
 
-export const CommentInput = () => {
+export const CommentInput = ({
+  loggedState,
+}: {
+  loggedState: FollowStatus
+}) => {
   const params = useParams()
   const [text, setText] = useState('')
   const queryClient = useQueryClient()
@@ -134,14 +143,21 @@ export const CommentInput = () => {
       }}
     >
       <textarea
-        placeholder='댓글을 입력해주세요!'
+        placeholder={
+          loggedState === 'NOT_LOGGED_IN'
+            ? '로그인이 필요합니다'
+            : '댓글을 입력해주세요!'
+        }
         className='textarea textarea-bordered textarea-lg w-full'
         value={text}
         onChange={(e) => setText(e.target.value)}
+        disabled={loggedState === 'NOT_LOGGED_IN'}
       ></textarea>
-      <Button type='submit' btnClass='primary'>
-        댓글 작성
-      </Button>
+      {loggedState !== 'NOT_LOGGED_IN' && (
+        <Button type='submit' btnClass='primary'>
+          댓글 작성
+        </Button>
+      )}
     </form>
   )
 }
