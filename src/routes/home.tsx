@@ -1,7 +1,7 @@
 import { Fragment, MouseEventHandler, useEffect, useState } from 'react'
 import ArticleWrap from '../components/articleWrap'
 import clsx from 'clsx'
-import { MdOutlineRssFeed, MdPerson } from 'react-icons/md'
+import { MdOutlineRssFeed } from 'react-icons/md'
 import { HiMiniFire } from 'react-icons/hi2'
 import {
   InfiniteData,
@@ -25,11 +25,7 @@ const Home = () => {
       title: 'New',
       icon: <MdOutlineRssFeed />,
     },
-    {
-      id: 2,
-      title: 'Feed',
-      icon: <MdPerson />,
-    },
+
   ]
   const [tab, setTab] = useState<number>(0)
   const tabClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
