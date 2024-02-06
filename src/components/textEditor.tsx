@@ -317,13 +317,12 @@ const TextEditor = ({ postItem }: EditProp) => {
                 <WarningMsg message={errors.introduction.message} />
               )}
             </div>
-
             <button
               type='submit'
               disabled={!isValid}
               className={'btn btn-primary'}
             >
-              엄로드하기
+              업로드하기
             </button>
           </div>
         </Modal>
