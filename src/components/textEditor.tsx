@@ -44,8 +44,8 @@ const formats = [
   'code-block',
   'link',
   'blockquote',
-  'h1',
   'h2',
+  'h1',
 ]
 interface EditProp {
   postItem?: {
