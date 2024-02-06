@@ -1,0 +1,11 @@
+#loadingWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100vw;
+  span {
+    font-size: 7rem;
+  }
+}
