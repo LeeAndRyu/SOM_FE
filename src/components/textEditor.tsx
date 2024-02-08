@@ -151,7 +151,6 @@ const TextEditor = ({ postItem }: EditProp) => {
     []
   )
   const deleteTag = (e: any) => {
-    console.log(e.target.innerHTML)
     const newTags = tags.filter((tag) => tag !== e.target.innerHTML)
     setTags(newTags)
   }
@@ -182,9 +181,7 @@ const TextEditor = ({ postItem }: EditProp) => {
       console.log(error)
     }
   }
-  useEffect(() => {
-    console.log(thumbnail)
-  }, [thumbnail])
+
 
   //게시글 최종 POST or PUT submit
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {

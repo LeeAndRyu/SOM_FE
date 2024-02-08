@@ -115,19 +115,12 @@ const LoginModal = ({
           <WarningMsg message={errors.password.message} />
         )}
         <label className='label'>
-          <a
-            onClick={() => setShowModal('findPwd')}
-            className='label-text-alt link link-hover'
-          >
-            Forgot password? ➤
-          </a>
-          {/* </label> */}
-          {/* <label> */}
+
           <a
             onClick={() => setShowModal('signUp')}
             className='label-text-alt link link-hover'
           >
-            Don't hava an accout? ➤
+            Don't have an accout? ➤
           </a>
         </label>
       </div>

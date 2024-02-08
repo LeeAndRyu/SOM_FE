@@ -18,7 +18,6 @@ const EditPwd = () => {
     mode: 'all',
   })
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
-    console.log(e)
     try {
       const res = await axiosInstance.put(`/member/edit-password`, e)
       if (res.status === 200) {

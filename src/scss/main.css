@@ -397,7 +397,7 @@ a {
 }
 @media (max-width: 767px) {
   #post #post_cont .top_sec p.title {
-    font-size: 2rem;
+    font-size: 1.6rem;
     margin-bottom: 0px;
   }
 }
@@ -408,6 +408,7 @@ a {
 #post #post_cont .top_sec p.info span:first-child {
   position: relative;
   padding-right: 10px;
+  cursor: pointer;
 }
 #post #post_cont .top_sec p.info span:first-child::after {
   content: "";
@@ -482,6 +483,11 @@ a {
   flex-direction: column;
   gap: 20px;
 }
+@media (max-width: 767px) {
+  #post #post_cont .mid_sec .comment_sec {
+    gap: 10px;
+  }
+}
 #post #post_cont .mid_sec .comment_sec form textarea::placeholder {
   font-size: 15px;
 }
@@ -497,6 +503,12 @@ a {
   #post #post_cont .btm_sec .avatar {
     width: 90px !important;
     height: 90px !important;
+  }
+}
+@media (max-width: 767px) and (max-width: 767px) {
+  #post #post_cont .btm_sec .avatar {
+    width: 75px !important;
+    height: 75px !important;
   }
 }
 
@@ -938,6 +950,21 @@ form:has(.searchInput) span svg {
   width: fit-content;
 }
 
+:root {
+  --side-padding: 1rem;
+  --max-width: 1400px;
+  --max-inner-width: 1400px;
+  --padding-1: 1.6rem;
+  --padding-2: 1.2rem;
+  --padding-3: 0.8rem;
+  --padding-4: 0.4rem;
+  --margin-1: 1.6rem;
+  --margin-2: 1.2rem;
+  --margin-3: 0.8rem;
+  --margin-4: 0.4rem;
+  --main-color1: rgb(80, 80, 80);
+}
+
 #write_sec .titleInput {
   padding-left: 0;
   font-size: 30px;
@@ -1039,11 +1066,26 @@ form:has(.searchInput) span svg {
 .ql-editor h1 {
   font-size: 2.6em;
 }
+@media (max-width: 767px) {
+  .ql-editor h1 {
+    font-size: 1.7em !important;
+  }
+}
 .ql-editor h2 {
   font-size: 2em;
 }
+@media (max-width: 767px) {
+  .ql-editor h2 {
+    font-size: 1.5em !important;
+  }
+}
 .ql-editor h3 {
   font-size: 1.5em;
+}
+@media (max-width: 767px) {
+  .ql-editor h3 {
+    font-size: 1.3em !important;
+  }
 }
 .ql-editor a {
   color: oklch(var(--in));
@@ -1191,7 +1233,7 @@ body {
 }
 @media (max-width: 767px) {
   #wrap #main {
-    padding: 0 10px;
+    padding: 0 15px;
   }
 }
 #wrap #main .inner {
@@ -1314,6 +1356,12 @@ ul.articleWrap.blogArticle {
   flex-direction: column;
   margin-top: 30px;
 }
+@media (max-width: 767px) {
+  ul.articleWrap.blogArticle {
+    margin-top: 0px;
+  }
+}
+
 ul.articleWrap > li:is(.homeArticle > li) {
   width: calc((100% - 60px) / 4);
   display: flex;
@@ -1549,6 +1597,15 @@ ul.articleWrap > li:is(.blogArticle > *) div.middle_section {
   gap: 15px 0;
   transition: all 0.2s;
 }
+@media (max-width: 767px) {
+  ul.articleWrap > li:is(.blogArticle > *) div.middle_section {
+    padding: 15px 0px 0;
+    gap: 11px 0;
+  }
+  ul.articleWrap > li:is(.blogArticle > *) div.middle_section p.title {
+    font-size: 16px !important;
+  }
+}
 ul.articleWrap > li:is(.blogArticle > *) div.middle_section p.title {
   font-size: 20px;
   font-weight: 600;
@@ -1702,12 +1759,32 @@ p.infoP {
   transform: translateY(50%);
 }
 
+:root {
+  --side-padding: 1rem;
+  --max-width: 1400px;
+  --max-inner-width: 1400px;
+  --padding-1: 1.6rem;
+  --padding-2: 1.2rem;
+  --padding-3: 0.8rem;
+  --padding-4: 0.4rem;
+  --margin-1: 1.6rem;
+  --margin-2: 1.2rem;
+  --margin-3: 0.8rem;
+  --margin-4: 0.4rem;
+  --main-color1: rgb(80, 80, 80);
+}
+
 .comment_sec {
   margin-top: 50px;
 }
 .comment_sec h5 {
   font-size: 25px;
   margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  .comment_sec h5 {
+    font-size: 20px;
+  }
 }
 .comment_sec ul.commentWrap {
   display: flex;
@@ -1764,6 +1841,11 @@ p.infoP {
 }
 .comment_sec ul.commentWrap li .cont p {
   margin-bottom: 25px;
+}
+@media (max-width: 767px) {
+  .comment_sec ul.commentWrap li .cont p {
+    margin-bottom: 20px;
+  }
 }
 .comment_sec ul.commentWrap li .cont div {
   display: flex;

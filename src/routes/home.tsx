@@ -30,7 +30,6 @@ const Home = () => {
   const [tab, setTab] = useState<number>(0)
   const tabClickHandler: MouseEventHandler<HTMLDivElement> = (e) => {
     if ((e.target as HTMLElement).nodeName !== 'A') return
-    console.log((e.target as HTMLElement).dataset.idx)
     setTab(+(e.target as HTMLElement).dataset.idx!)
   }
   const { data, fetchNextPage, hasNextPage, isSuccess, isFetching, isFetched } =

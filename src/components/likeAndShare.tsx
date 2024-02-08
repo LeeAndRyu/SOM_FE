@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom'
 import { handleCopyClipBoard } from '../lib/lib'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { changeLikeStatus, getLikeStatus } from '../lib/useQuery/getPost'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { LikeState } from '../types/api'
 import NotLoggedModal from './notLoggedModal'
 
@@ -24,9 +24,7 @@ const LikeAndShare = () => {
       queryClient.invalidateQueries({ queryKey: ['posts', params.post] })
     },
   })
-  useEffect(() => {
-    console.log(data)
-  }, [])
+
   return (
     <ul className='likeAndShare'>
       <li
