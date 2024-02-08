@@ -55,6 +55,7 @@ axiosInstance.interceptors.response.use(
         'TOKEN_TIME_OUT',
         'ACCESS_DENIED',
         'JWT_REFRESH_TOKEN_NOT_FOUND',
+        'MEMBER_NOT_FOUND',
       ].includes(error.response.data.errorCode)
     ) {
       await tokenRefresh()

@@ -26,8 +26,8 @@ const Layout = () => {
   const [alink, _] = useRecoilState(HeadLinkState)
   const resetAlink = useResetRecoilState(HeadLinkState)
   const [moAsideToggle, setMoAsideToggle] = useState(false)
-  const [_2, setUser] = useRecoilState(UserInfoState)
-  const [_token, setToken] = useRecoilState(UserTokenState)
+  const [user, setUser] = useRecoilState(UserInfoState)
+  const [token, setToken] = useRecoilState(UserTokenState)
   const userInfo = JSON.parse(getLocalStorage('user')!)
   useEffect(() => {
     userInfo !== null && setUser(() => userInfo)
@@ -40,6 +40,7 @@ const Layout = () => {
           refreshToken: savedRefreshToken,
         }
       })
+    console.log(user,token)
   }, [])
   useEffect(() => {
     if (!location.pathname.includes('blog')) {

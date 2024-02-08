@@ -2,7 +2,7 @@
 
 <img src='https://github.com/LeeAndRyu/SOM_FE/assets/94340943/e8f14d30-5bef-4be2-a744-1833df786386' width='100%'>
 
-### 📝 [SOM (Service app)](https://som-fe.vercel.app/)
+### 📝 [SOM (Service app)](https://storyofme.vercel.app/)
 
 ### 📎 [Github Link](https://github.com/LeeAndRyu)
 
