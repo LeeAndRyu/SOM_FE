@@ -17,9 +17,7 @@ const FindPwdModal = ({
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
-  const onSubmitHandler: SubmitHandler<Formvalues> = (e: any) => {
-    console.log(e)
-  }
+  const onSubmitHandler: SubmitHandler<Formvalues> = () => {}
   return (
     <form className='card-body' onSubmit={handleSubmit(onSubmitHandler)}>
       <h2 className='text-center text-xl'>비밀번호 찾기</h2>
@@ -33,7 +31,10 @@ const FindPwdModal = ({
           {...register('name', {
             required: '필수 입력 항목입니다',
           })}
-          className={clsx(`input input-bordered mb-1.5`,errors.name && 'input-error', )}
+          className={clsx(
+            `input input-bordered mb-1.5`,
+            errors.name && 'input-error'
+          )}
         />
         {errors.name && errors.name.message && (
           <WarningMsg message={errors.name.message} />
@@ -53,7 +54,10 @@ const FindPwdModal = ({
               message: '유효한 이메일 형식이 아닙니다',
             },
           })}
-          className={clsx(`input input-bordered mb-1.5`,errors.email && 'input-error', )}
+          className={clsx(
+            `input input-bordered mb-1.5`,
+            errors.email && 'input-error'
+          )}
         />
         {errors.email && errors.email.message && (
           <WarningMsg message={errors.email.message} />

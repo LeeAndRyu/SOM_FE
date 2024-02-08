@@ -1,4 +1,4 @@
-import { FormEventHandler, useEffect, useRef, useState } from 'react'
+import { FormEventHandler, useRef, useState } from 'react'
 import Image from '../assets/avatar-1.jpg'
 import Button from '../components/common/button'
 import { toast } from 'react-toastify'
@@ -28,9 +28,7 @@ const Mypage = () => {
       nickname: user.nickname,
     },
   })
-  useEffect(() => {
-    console.log(user)
-  }, [])
+
   const profileOnChangeHander = (e: any) => {
     setImageFile(Array.from(e.target.files))
   }
@@ -48,7 +46,6 @@ const Mypage = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
           credentials: 'include',
-          // Authorization: `Bearer ${userToken.accessToken}`,
         },
       })
       if (res.status === 200) {
@@ -72,7 +69,6 @@ const Mypage = () => {
     }
   }
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
-    console.log(e)
     try {
       const res = await axiosInstance.put(`/member`, e)
       if (res.status === 200) {

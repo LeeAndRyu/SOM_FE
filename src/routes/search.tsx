@@ -2,7 +2,11 @@ import { IoMdSearch } from 'react-icons/io'
 import ArticleWrap from '../components/articleWrap'
 import { FormEventHandler, Fragment, useEffect, useState } from 'react'
 import { PostRes } from '../types/api'
-import { InfiniteData, useInfiniteQuery,keepPreviousData } from '@tanstack/react-query'
+import {
+  InfiniteData,
+  useInfiniteQuery,
+  keepPreviousData,
+} from '@tanstack/react-query'
 import { useInView } from 'react-intersection-observer'
 import { getSearchList } from '../lib/useQuery/getSearch'
 import Skeleton from '../components/common/skeleton'
@@ -66,7 +70,6 @@ const Search = () => {
         </span>
         <input
           type='text'
-          // value={searchValue}
           defaultValue={inputValue}
           placeholder='Search'
           className=' bg-base-200 border-none outline-neutral text-neutral searchInput input input-bordered input-lg w-full'
@@ -82,7 +85,6 @@ const Search = () => {
             id='inputTitle'
             className='radio radio-accent'
             onChange={(e) => e.target.checked && setType('title')}
-            // checked
             checked={searchType === 'title'}
           />
         </p>
@@ -143,15 +145,10 @@ const Search = () => {
         // 아직 fetching 중이거나 에러 발생 시
         <>
           <ul className='articleWrap homeArticle'>
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-            <Skeleton height={'300px'} />
-          </ul>{' '}
+            {new Array(8).fill('').map((_, idx) => (
+              <Skeleton key={idx} height={'300px'} />
+            ))}
+          </ul>
         </>
       ) : (
         // fetching 전
