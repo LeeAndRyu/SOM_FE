@@ -19,7 +19,7 @@ export const UserTokenState = atom({
   default: {
     accessToken: '',
     refreshToken: '',
-    tokenType: '',
+    tokenType: 'Bearer ',
   },
 })
 

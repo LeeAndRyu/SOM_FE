@@ -80,7 +80,7 @@ export const SseComponent = () => {
         <div className='dropdown-content z-[1] bg-base-100 menu-dropdown-show' tabIndex={0}>
           <div id='sideMenuWrapper' className='notificationWrap'>
             <h5>알림내역</h5>
-            {data?.length === 0 ? (
+            {!data || data?.length === 0 ? (
               <p>알림 내역이 없습니다</p>
             ) : (
               <ul className='notificationWrap'>
