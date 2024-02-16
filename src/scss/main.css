@@ -1097,17 +1097,21 @@ form:has(.searchInput) span svg {
 #view.ql-snow * {
   cursor: default;
   line-height: 1.5;
-  margin: 5px 0;
+  margin: 7px 0;
 }
 #view.ql-snow .ql-editor {
   padding: 0;
 }
-#view.ql-snow .ql-editor h1, #view.ql-snow .ql-editor h2, #view.ql-snow .ql-editor h3, #view.ql-snow .ql-editor h4 {
+#view.ql-snow .ql-editor h1,
+#view.ql-snow .ql-editor h2,
+#view.ql-snow .ql-editor h3,
+#view.ql-snow .ql-editor h4 {
   font-weight: 600;
 }
 #view.ql-snow .ql-editor ul {
   list-style: initial;
   list-style-position: inside;
+  padding-left: 0 !important;
 }
 #view.ql-snow .ql-editor ol {
   list-style: auto;
@@ -1120,6 +1124,9 @@ form:has(.searchInput) span svg {
 #view.ql-snow .ql-editor blockquote {
   margin: 0;
   border-color: oklch(var(--a));
+}
+#view.ql-snow .ql-editor a {
+  cursor: pointer;
 }
 
 :root {
