@@ -19,7 +19,6 @@ const SendEmail = ({
     formState: { errors, isValid },
   } = useForm<Formvalues>({ mode: 'all' })
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
-    console.log(e)
     try {
       const res = await axiosInstance.post(`/register/check-email`, e)
       if (res.status === 200) {
@@ -28,7 +27,6 @@ const SendEmail = ({
     } catch (error) {
       console.log(error)
     }
-    // setError('email',{message:'중복된 이메일입니다'})
   }
   return (
     <>
@@ -51,7 +49,7 @@ const SendEmail = ({
               })}
               className={clsx(
                 `input input-bordered mb-1.5`,
-                errors.email && 'input-error', 
+                errors.email && 'input-error',
                 isValid && 'input-success'
               )}
             />
@@ -73,7 +71,7 @@ const SendEmail = ({
               disabled={!isValid}
               className='btn btn-primary'
             >
-              Send
+              Send Email
             </button>
           </div>
         </form>

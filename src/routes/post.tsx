@@ -1,6 +1,6 @@
 import DOMPurify from 'dompurify'
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
 import { BlogMember, PostDetail } from '../types/api'
 import { useQuery } from '@tanstack/react-query'
@@ -18,6 +18,7 @@ const Post = () => {
   const [user, _] = useRecoilState(UserInfoState)
   const [_link, setLink] = useRecoilState(HeadLinkState)
   const params = useParams()
+  const navigator = useNavigate()
   const { data } = useQuery<PostDetail>({
     queryKey: ['posts', params.post, params.id],
     queryFn: getPost,
@@ -45,7 +46,7 @@ const Post = () => {
         <div className='top_sec'>
           <p className='title text-4xl'>{data.title}</p>
           <p className='info'>
-            <span>
+            <span onClick={() => navigator(`/blog/${params.id}`)}>
               by <strong>{data.accountName}</strong>
             </span>
             <span className='date'>

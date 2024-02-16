@@ -102,7 +102,7 @@ const LoginModal = ({
             required: '필수 입력 항목입니다',
             pattern: {
               value:
-                /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/,
+                /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!?@#$%^&+=]).*$/,
               message: '8-16자 이내, 영문, 숫자, 특수 문자를 포함해주세요',
             },
           })}
@@ -115,19 +115,12 @@ const LoginModal = ({
           <WarningMsg message={errors.password.message} />
         )}
         <label className='label'>
-          <a
-            onClick={() => setShowModal('findPwd')}
-            className='label-text-alt link link-hover'
-          >
-            Forgot password? ➤
-          </a>
-          {/* </label> */}
-          {/* <label> */}
+
           <a
             onClick={() => setShowModal('signUp')}
             className='label-text-alt link link-hover'
           >
-            Don't hava an accout? ➤
+            Don't have an accout? ➤
           </a>
         </label>
       </div>

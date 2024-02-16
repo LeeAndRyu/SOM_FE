@@ -29,7 +29,6 @@ const Auth = () => {
   } = useForm<Formvalues>({ mode: 'all' })
   const onSubmitHandler: SubmitHandler<Formvalues> = async (e: any) => {
     if (!code) return
-    console.log(e)
     try {
       const res = await axios.post(
         `https://118.67.142.194.nip.io/register?code=${code}`,
@@ -80,7 +79,7 @@ const Auth = () => {
               </label>
               <input
                 type='text'
-                placeholder='accountName'
+                placeholder='계정명을 입력하세요'
                 {...register('accountName', {
                   required: '필수 입력 항목입니다',
                 })}
@@ -100,7 +99,7 @@ const Auth = () => {
               </label>
               <input
                 type='text'
-                placeholder='nickname'
+                placeholder='닉네임을 입력하세요'
                 {...register('nickname', {
                   required: '필수 입력 항목입니다',
                 })}
@@ -120,7 +119,7 @@ const Auth = () => {
               </label>
               <input
                 type='text'
-                placeholder='introduction'
+                placeholder='소개글을 입력하세요'
                 {...register('introduction', {
                   required: '필수 입력 항목입니다',
                 })}
@@ -140,7 +139,7 @@ const Auth = () => {
               </label>
               <input
                 type='email'
-                placeholder='email'
+                placeholder='이메일'
                 value={email!}
                 disabled
                 className={`input input-bordered mb-1.5`}
@@ -152,12 +151,12 @@ const Auth = () => {
               </label>
               <input
                 type='password'
-                placeholder='password'
+                placeholder='비밀번호'
                 {...register('password', {
                   required: '필수 입력 항목입니다',
                   pattern: {
                     value:
-                      /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/,
+                      /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!?@#$%^&+=]).*$/,
                     message:
                       '8-16자 이내, 영문, 숫자, 특수 문자를 포함해주세요',
                   },
@@ -173,11 +172,11 @@ const Auth = () => {
             </div>
             <div className='form-control'>
               <label className='label'>
-                <span className='label-text'>비밀번호 확인</span>
+                <span className='label-text'>비밀번호 재확인</span>
               </label>
               <input
                 type='password'
-                placeholder='verify password'
+                placeholder='비밀번호 재확인'
                 {...register('verifyPwd', {
                   required: '필수 입력 항목입니다',
                   validate: {

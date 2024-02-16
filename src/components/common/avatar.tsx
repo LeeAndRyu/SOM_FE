@@ -36,6 +36,7 @@ const Avatar = ({ src, size, logged, accountName }: Prop) => {
           borderRadius: '50%',
           objectFit: 'cover',
           display: 'block',
+          border:'1px solid oklch(var(--b3))'
         }}
         onError={(e) => (e.currentTarget.src = ErrorImage)}
         src={
